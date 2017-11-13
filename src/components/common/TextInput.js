@@ -1,0 +1,27 @@
+import React, {PropTypes} from 'react';
+
+const TextInput = ({name, label, onChange, required, value, error}) => {
+    return(
+        <div className="input-field col s12">
+            <label htmlFor={name}>{label}</label>
+            <input
+                type="text"
+                name={name}
+                required={required}
+                value={value}
+                onChange={onChange} />
+            {error && <div className="alert alert-danger">{error}</div>}
+        </div>
+    );
+};
+
+TextInput.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    required: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    error: PropTypes.string
+};
+
+export default TextInput;
