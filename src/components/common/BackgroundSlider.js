@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-class BackgroundSlider extends React.Component {
+class BackgroundSlider extends Component {
     render() {
         return(
             <div>

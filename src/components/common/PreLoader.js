@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-class Preloader extends React.Component {
+class Preloader extends Component {
     render() {
         return (
             <div className="preloaderBackground">

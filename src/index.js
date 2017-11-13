@@ -10,7 +10,6 @@ import './styles/css/style.css';
 import 'jquery/dist/jquery.min';
 import 'materialize-css/dist/js/materialize.min';
 import 'wowjs/dist/wow';
-import './styles/js/custom';
 
 const store = configureStore();
 
