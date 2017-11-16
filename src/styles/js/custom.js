@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import WOW from 'wowjs';
 
 export function customJs() {
     //Preloader background timeout
@@ -11,9 +12,7 @@ export function customJs() {
     //$('.slider').slider({ indicators: false });
 
     //Initialize wow js
-    const WOW = require('wowjs').WOW;
-
-    let wow = new WOW({
+    let wow = new WOW.WOW({
         scrollContainer: '#pageContent' // optional scroll container selector, otherwise use window
     });
 

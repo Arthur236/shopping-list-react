@@ -103,8 +103,17 @@ function validate(values) {
     if (!values.password) {
         errors.password = "Enter a password";
     }
+    if (values.password) {
+        if (values.password.length < 6) {
+            errors.password = "Password should be at least 6 characters";
+        }
+    }
     if (!values.c_password) {
         errors.c_password = "Confirm your password";
+    }
+    if (values.password !== values.c_password) {
+        errors.password = "Passwords do not match";
+        errors.c_password = "Passwords do not match";
     }
 
     // If errors is empty, the form can be submitted
