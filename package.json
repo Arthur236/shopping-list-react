@@ -6,6 +6,7 @@
     "animate.css": "^3.5.2",
     "axios": "^0.17.1",
     "jquery": "^3.2.1",
+    "loadjs": "^3.5.1",
     "lodash": "^4.17.4",
     "materialize-css": "^0.100.2",
     "react": "^16.1.0",

@@ -66,11 +66,13 @@ html, body {
 }
 
 .formsContainer {
-    margin-top: 15px;
-    min-height: 430px;
     border-radius: 8px;
-    overflow: hidden;
     background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    width: 50%;
+    height: 550px;
+    margin: auto;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
     -vendor-animation-delay: 1s;
     animation-delay: 1s;
@@ -90,11 +92,7 @@ html, body {
     padding: 40px 40px;
 }
 
-.landingForm form div .btn {
-    width: 100%;
-}
-
-.carousel-cell {
+.formBtn {
     width: 100%;
 }
 

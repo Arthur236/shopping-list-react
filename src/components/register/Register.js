@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { customJs } from "../../styles/js/custom";
 import BackgroundSlider from '../common/BackgroundSlider';
 import PreLoader from "../common/PreLoader";
-import LandingContent from "./LandingContent";
+import RegistrationForm from "./RegistrationForm";
 
-class Home extends Component {
+class Register extends Component {
     componentDidMount() {
         customJs();
     }
@@ -14,10 +14,10 @@ class Home extends Component {
             <div>
                 <PreLoader />
                 <BackgroundSlider />
-                <LandingContent />
+                <RegistrationForm />
             </div>
         );
     }
 }
 
-export default Home;
+export default Register;
