@@ -20,9 +20,11 @@ export default function validate(values) {
             errors.password = "Password should be at least 6 characters";
         }
     }
-    if (values.password !== values.c_password) {
-        errors.password = "Passwords do not match";
-        errors.c_password = "Passwords do not match";
+    if (values.password && values.c_password) {
+        if (values.password !== values.c_password) {
+            errors.password = "Passwords do not match";
+            errors.c_password = "Passwords do not match";
+        }
     }
     if (!mailFormat.test(values.email)) {
         errors.email = "Email is not valid";

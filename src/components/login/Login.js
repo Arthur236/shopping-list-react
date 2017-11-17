@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { customJs } from "../../styles/js/custom";
 import BackgroundSlider from '../common/BackgroundSlider';
-import RegistrationForm from "./RegistrationForm";
+import LoginForm from "./LoginForm";
 import Banner from "../common/Banner";
 
-class Register extends Component {
+class Login extends Component {
     componentDidMount() {
         customJs();
     }
@@ -18,10 +18,10 @@ class Register extends Component {
                         <Banner />
                     </div>
                 </div>
-                <RegistrationForm />
+                <LoginForm />
             </div>
         );
     }
 }
 
-export default Register;
+export default Login;

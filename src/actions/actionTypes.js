@@ -1,1 +1,2 @@
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';

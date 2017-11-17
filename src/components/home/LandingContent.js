@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import Footer from "../common/Footer";
 import { Link } from 'react-router-dom';
+import Banner from "../common/Banner";
 
 class LandingContent extends Component {
     render() {
         return (
             <div className="landingContent" id="pageContent">
                 <div className="container">
-                    <div className="row">
-                        <div className="col s12 m12 l12">
-                            <div className="brand">
-                                <img src={require('../../styles/img/logo_white.png')} alt="Logo" height="90px"/>
-                            </div>
-                        </div>
-                    </div>
+                    <Banner />
 
                     <div className="row landingContent">
                         <div className="col s12 m12">
@@ -31,8 +26,8 @@ class LandingContent extends Component {
                             </div>
 
                             <div className="col s12 m12 btnsContainer center-align wow fadeInLeft">
-                                <Link to="/login" className="btn btn-large waves-effect waves-dark deep-purple">Sign In</Link>
-                                <Link to="/register" className="btn btn-large waves-effect waves-dark deep-purple">Sign Up</Link>
+                                <Link to="/auth/login" className="btn btn-large waves-effect waves-dark deep-purple">Sign In</Link>
+                                <Link to="/auth/register" className="btn btn-large waves-effect waves-dark deep-purple">Sign Up</Link>
                             </div>
                         </div>
                     </div>

@@ -17,9 +17,7 @@ class RegistrationForm extends Component {
     }
 
     onSubmit(values) {
-        this.props.register(values, () => {
-            this.setState({ redirect: true });
-        });
+        console.log(values);
     }
 
     render() {
@@ -30,19 +28,13 @@ class RegistrationForm extends Component {
         }
 
         return(
-            <div className="row container formsContainer wow fadeInRight">
+            <div className="row container formsContainer loginContainer wow fadeInRight">
                 <div className="col s8 offset-s2 landingForm">
                     <div className="col s12">
-                        <h3>Register</h3>
+                        <h3>Log In</h3>
                     </div>
 
                     <form onSubmit={handleSubmit(this.onSubmit)}>
-                        <FormInput
-                            type="text"
-                            label="Username"
-                            name="username"
-                            required="required"/>
-
                         <FormInput
                             type="email"
                             label="Email"
@@ -55,20 +47,14 @@ class RegistrationForm extends Component {
                             name="password"
                             required="required"/>
 
-                        <FormInput
-                            type="password"
-                            label="Confirm Password"
-                            name="c_password"
-                            required="required"/>
-
                         <div className="input-field col s12">
-                            <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Register</button>
+                            <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Log In</button>
                         </div>
                     </form>
 
                     <div className="col s12">
                         <p className="center-align ">
-                            Already have an account? <Link to="/auth/login" className="formLink">Sign In</Link>
+                            Already have an account? <Link to="/auth/register" className="formLink">Sign Up</Link>
                         </p>
                     </div>
                 </div>
@@ -79,5 +65,5 @@ class RegistrationForm extends Component {
 
 export default reduxForm({
     validate,
-    form: 'SignUpForm'
+    form: 'SignInForm'
 })(connect(null, { register })(RegistrationForm));
