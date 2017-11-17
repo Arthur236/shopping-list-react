@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { register } from "../../actions/index";
+import { Redirect } from 'react-router';
+import { register } from "../../actions/authActions";
+import validate from '../../utils/formValidator'
 
 class RegistrationForm extends Component {
     constructor(props) {
         super(props);
 
+        this.state = { redirect: false };
+
         this.renderField = this.renderField.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(values) {
         this.props.register(values, () => {
-            this.props.history.push("/login");
+            this.setState({ redirect: true });
         });
     }
 
@@ -23,20 +28,24 @@ class RegistrationForm extends Component {
         return(
             <div className="input-field col s12">
                 <input type={ field.type }
-                       className="validate"
                        required={ field.required }
                        { ...field.input } />
-                <label htmlFor={ field.name }
-                       data-error={ meta.error }
-                       data-success={"" + field.label + " ok"}>
+                <label htmlFor={ field.name }>
                     { field.label }
                 </label>
+                <span className="errorText">
+                    { meta.touched ? meta.error : "" }
+                </span>
             </div>
         );
     }
 
     render() {
         const { handleSubmit } = this.props;
+
+        if (this.state.redirect) {
+            return <Redirect to="/" />
+        }
 
         return(
             <div className="row container formsContainer wow fadeInRight">
@@ -45,7 +54,7 @@ class RegistrationForm extends Component {
                         <h3>Register</h3>
                     </div>
 
-                    <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <form onSubmit={handleSubmit(this.onSubmit)}>
                         <Field
                             type="text"
                             label="Username"
@@ -88,37 +97,6 @@ class RegistrationForm extends Component {
             </div>
         );
     }
-}
-
-function validate(values) {
-    const errors = {};
-
-    // Validate inputs from 'values' object
-    if (!values.username) {
-        errors.username = "Enter a username";
-    }
-    if (!values.email) {
-        errors.email = "Enter an email";
-    }
-    if (!values.password) {
-        errors.password = "Enter a password";
-    }
-    if (values.password) {
-        if (values.password.length < 6) {
-            errors.password = "Password should be at least 6 characters";
-        }
-    }
-    if (!values.c_password) {
-        errors.c_password = "Confirm your password";
-    }
-    if (values.password !== values.c_password) {
-        errors.password = "Passwords do not match";
-        errors.c_password = "Passwords do not match";
-    }
-
-    // If errors is empty, the form can be submitted
-    // If errors  has any properties, redux-form assumes form is invalid
-    return errors;
 }
 
 export default reduxForm({

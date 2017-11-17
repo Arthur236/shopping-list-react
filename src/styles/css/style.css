@@ -7,6 +7,10 @@ html, body {
     overflow: auto;
 }
 
+input {
+    margin-bottom: 10px !important;
+}
+
 .preloaderBackground {
     display: flex;
     align-items: center;
@@ -72,7 +76,7 @@ html, body {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     width: 50%;
-    height: 550px;
+    height: 600px;
     margin: auto;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
 }
@@ -93,6 +97,11 @@ html, body {
 
 .formBtn {
     width: 100%;
+}
+
+.errorText {
+    font-size: 0.8rem;
+    color: #d32f2f;
 }
 
 /***************************** dashboard *****************************/
