@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { register } from "../../actions/authActions";
+import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
 
 class RegistrationForm extends Component {
@@ -12,7 +13,6 @@ class RegistrationForm extends Component {
 
         this.state = { redirect: false };
 
-        this.renderField = this.renderField.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -20,24 +20,6 @@ class RegistrationForm extends Component {
         this.props.register(values, () => {
             this.setState({ redirect: true });
         });
-    }
-
-    renderField(field) {
-        const { meta } = field;
-
-        return(
-            <div className="input-field col s12">
-                <input type={ field.type }
-                       required={ field.required }
-                       { ...field.input } />
-                <label htmlFor={ field.name }>
-                    { field.label }
-                </label>
-                <span className="errorText">
-                    { meta.touched ? meta.error : "" }
-                </span>
-            </div>
-        );
     }
 
     render() {
@@ -55,33 +37,29 @@ class RegistrationForm extends Component {
                     </div>
 
                     <form onSubmit={handleSubmit(this.onSubmit)}>
-                        <Field
+                        <FormInput
                             type="text"
                             label="Username"
                             name="username"
-                            required="required"
-                            component={this.renderField}/>
+                            required="required"/>
 
-                        <Field
+                        <FormInput
                             type="email"
                             label="Email"
                             name="email"
-                            required="required"
-                            component={this.renderField}/>
+                            required="required"/>
 
-                        <Field
+                        <FormInput
                             type="password"
                             label="Password"
                             name="password"
-                            required="required"
-                            component={this.renderField}/>
+                            required="required"/>
 
-                        <Field
+                        <FormInput
                             type="password"
                             label="Confirm Password"
                             name="c_password"
-                            required="required"
-                            component={this.renderField}/>
+                            required="required"/>
 
                         <div className="input-field col s12">
                             <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Register</button>
