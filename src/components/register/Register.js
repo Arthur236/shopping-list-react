@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { customJs } from "../../styles/js/custom";
+import loadjs from 'loadjs';
 import BackgroundSlider from '../common/BackgroundSlider';
 import RegistrationForm from "./RegistrationForm";
 import Banner from "../common/Banner";
 
 class Register extends Component {
     componentDidMount() {
-        customJs();
+        loadjs(process.env.PUBLIC_URL + '/js/custom.js');
     }
 
     render() {

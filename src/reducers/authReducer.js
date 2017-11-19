@@ -7,7 +7,7 @@ export default function(state = initialState.activeUser, action) {
         case actionTypes.LOGIN_REQUEST:
             return [
                 ...state,
-                Object.assign({}, { token: `action.payload.response.access-token` })
+                Object.assign({}, { token: action.payload.response.access_token })
             ];
 
         default:

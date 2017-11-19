@@ -1,3 +1,3 @@
 export default {
-    activeUser: {}
+    activeUser: { email: '', token: '' }
 };

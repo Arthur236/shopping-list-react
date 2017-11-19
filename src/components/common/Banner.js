@@ -6,7 +6,7 @@ class Banner extends Component {
             <div className="row">
                 <div className="col s12 m12 l12">
                     <div className="brand">
-                        <img src={require('../../styles/img/logo_white.png')} alt="Logo" height="90px"/>
+                        <img src={process.env.PUBLIC_URL + '/img/logo_white.png'} alt="Logo" height="90px"/>
                     </div>
                 </div>
             </div>

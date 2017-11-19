@@ -15,7 +15,6 @@ export function register(values, callback) {
         data: values
     }).then(response => {
         Materialize.toast(response.data.message, 6000, 'rounded');
-        console.log(`response.data.access-token`);
         callback();
     }).catch(error => {
         errorHandling.catchError(error);
@@ -35,6 +34,7 @@ export function login(values, callback) {
         data: values
     }).then(response => {
         Materialize.toast(response.data.message, 6000, 'rounded');
+        sessionStorage.setItem('token', response.data.access_token);
         callback();
     }).catch(error => {
         errorHandling.catchError(error);

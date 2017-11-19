@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { customJs } from "../../styles/js/custom";
+import loadjs from 'loadjs';
 import BackgroundSlider from '../common/BackgroundSlider';
 import PreLoader from "../common/PreLoader";
 import LandingContent from "./LandingContent";
 
 class Home extends Component {
     componentDidMount() {
-        customJs();
+        loadjs(process.env.PUBLIC_URL + '/js/custom.js');
     }
 
     render() {
-        console.log(this.state);
         return(
             <div>
                 <PreLoader />
