@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Field } from 'redux-form';
 
 function renderField(field) {

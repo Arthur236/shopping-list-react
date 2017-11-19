@@ -3,27 +3,40 @@ import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { register } from "../../actions/authActions";
+import { login } from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
 
-class RegistrationForm extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { redirect: false };
+        this.state = {
+            email: '',
+            token: '',
+            loggedIn: false
+        };
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     onSubmit(values) {
-        console.log(values);
+        this.props.login(values, () => {
+            this.setState({ loggedIn: true });
+        });
+    }
+
+    onChange(event) {
+        let fields = {};
+        fields[event.target.name] = event.target.value;
+        this.setState(fields);
     }
 
     render() {
         const { handleSubmit } = this.props;
 
-        if (this.state.redirect) {
+        if (this.state.loggedIn) {
             return <Redirect to="/" />
         }
 
@@ -34,7 +47,7 @@ class RegistrationForm extends Component {
                         <h3>Log In</h3>
                     </div>
 
-                    <form onSubmit={handleSubmit(this.onSubmit)}>
+                    <form onSubmit={handleSubmit(this.onSubmit)} onChange={this.onChange}>
                         <FormInput
                             type="email"
                             label="Email"
@@ -66,4 +79,4 @@ class RegistrationForm extends Component {
 export default reduxForm({
     validate,
     form: 'SignInForm'
-})(connect(null, { register })(RegistrationForm));
+})(connect(null, { login })(LoginForm));
