@@ -15,8 +15,6 @@ export function getShoppingLists() {
         method: "get",
         url: ROOT_URL + "/shopping_lists",
         headers: headers
-    }).then(response => {
-        console.log(response.data);
     }).catch(error => {
         errorHandling.catchError(error);
     });

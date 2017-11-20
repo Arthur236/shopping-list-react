@@ -33,8 +33,8 @@ export function login(values, callback) {
         headers: headers,
         data: values
     }).then(response => {
-        Materialize.toast(response.data.message, 6000, 'rounded');
         sessionStorage.setItem('token', response.data.access_token);
+        Materialize.toast(response.data.message, 6000, 'rounded');
         callback();
     }).catch(error => {
         errorHandling.catchError(error);
