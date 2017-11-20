@@ -31,9 +31,9 @@ class LandingContent extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <Footer/>
+                    <Footer/>
+                </div>
             </div>
         );
     }

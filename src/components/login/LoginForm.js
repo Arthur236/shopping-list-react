@@ -13,7 +13,7 @@ class LoginForm extends Component {
 
         this.state = {
             email: '',
-            token: '',
+            password: '',
             loggedIn: false
         };
 
@@ -37,7 +37,7 @@ class LoginForm extends Component {
         const { handleSubmit } = this.props;
 
         if (this.state.loggedIn) {
-            return <Redirect to="/" />
+            return <Redirect to="/dashboard" />
         }
 
         return(

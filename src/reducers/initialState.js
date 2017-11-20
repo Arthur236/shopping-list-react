@@ -1,3 +1,4 @@
 export default {
-    activeUser: { email: '', token: '' }
+    session: !!sessionStorage.token,
+    shoppingLists: []
 };

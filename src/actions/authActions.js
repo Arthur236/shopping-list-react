@@ -11,7 +11,7 @@ export function register(values, callback) {
     const request = axios({
         method: "post",
         url: ROOT_URL + "/auth/register",
-        headers,
+        headers: headers,
         data: values
     }).then(response => {
         Materialize.toast(response.data.message, 6000, 'rounded');
@@ -30,7 +30,7 @@ export function login(values, callback) {
     const request = axios({
         method: "post",
         url: ROOT_URL + "/auth/login",
-        headers,
+        headers: headers,
         data: values
     }).then(response => {
         Materialize.toast(response.data.message, 6000, 'rounded');
