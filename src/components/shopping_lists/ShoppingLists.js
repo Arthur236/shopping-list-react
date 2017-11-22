@@ -5,8 +5,9 @@ import loadjs from 'loadjs';
 import { getShoppingLists } from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
-import SLDeleteModal from "./SLDeleteModal";
 import ShoppingList from "./ShoppingList";
+import SLFab from "./SLFab";
+import SLCreateModal from "./SLCreateModal";
 
 class ShoppingLists extends Component {
     componentDidMount() {
@@ -16,7 +17,7 @@ class ShoppingLists extends Component {
     }
 
     renderShoppingLists() {
-        if(this.props.shoppingLists === '') {
+        if(!this.props.shoppingLists) {
             return(
                 <blockquote>
                     <h3 className="grey-text">You currently have no shopping lists in your account.</h3>
@@ -30,8 +31,6 @@ class ShoppingLists extends Component {
             return(
                 <div key={shoppingList.id}>
                     <ShoppingList shoppingList={ shoppingList } />
-
-                    <SLDeleteModal shoppingList={ shoppingList }/>
                 </div>
             );
         });
@@ -39,7 +38,11 @@ class ShoppingLists extends Component {
 
     render() {
         if(!this.props.shoppingLists) {
-            return(<div>Loading...</div>);
+            return(
+                <div>
+                    LOADING...
+                </div>
+            );
         }
 
         return(
@@ -47,12 +50,18 @@ class ShoppingLists extends Component {
                 <Sidebar />
                 <Navigation />
 
-                <div className="dashboard">
-                    <div className="container wow fadeInRight">
-                        <div className="row">
-                            { this.renderShoppingLists() }
+                <div className="content">
+                    <SLFab />
+
+                    <div className="dashboard">
+                        <div className="container wow fadeInRight">
+                            <div className="row">
+                                { this.renderShoppingLists() }
+                            </div>
                         </div>
                     </div>
+
+                    <SLCreateModal />
                 </div>
             </div>
         );

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Materialize from 'materialize-css/dist/js/materialize.min';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
@@ -15,12 +14,33 @@ export function getShoppingLists() {
         method: "get",
         url: ROOT_URL + "/shopping_lists",
         headers: headers
+    }).then(response => {
+        console.log(response);
+        if (!response) {
+            throw Error(response.statusText);
+        }
+        return response;
     }).catch(error => {
         errorHandling.catchError(error);
     });
 
     return {
         type: actionTypes.GET_SHOPPING_LISTS,
+        payload: request
+    };
+}
+
+export function getShoppingList(id) {
+    const request = axios({
+        method: "get",
+        url: ROOT_URL + "/shopping_lists/" + id,
+        headers: headers
+    }).catch(error => {
+        errorHandling.catchError(error);
+    });
+
+    return {
+        type: actionTypes.GET_SHOPPING_LIST,
         payload: request
     };
 }

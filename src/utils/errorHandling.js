@@ -14,4 +14,5 @@ export function catchError(error) {
         // Something happened in setting up the request that triggered an Error
         Materialize.toast(error.message, 6000, 'rounded');
     }
+    Materialize.toast(error.message, 6000, 'rounded');
 }

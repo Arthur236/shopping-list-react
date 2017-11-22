@@ -17,4 +17,7 @@ $(document).ready(function() {
 
     //Initialize modal
     $('.modal').modal();
+
+    //Initialize tooltip
+    $('.tooltipped').tooltip({delay: 50});
 });

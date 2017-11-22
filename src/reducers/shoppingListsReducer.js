@@ -11,6 +11,15 @@ export default function(state = initialState.shoppingLists, action) {
                posts later on like so: { 1: list } */
             return _.mapKeys(action.payload.data, 'id');
 
+        case actionTypes.GET_SHOPPING_LIST:
+            // const post = action.payload.data;
+            // const newState = { ...state  };
+            // newState[list.id] = list;
+            // return newState;
+
+            // This is identical to the above 4 lines of code
+            return { ...state, [action.payload.data.id]: action.payload.data };
+
         default:
             return state;
     }
