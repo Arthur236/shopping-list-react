@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 import { register } from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
@@ -11,23 +10,26 @@ class RegistrationForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { redirect: false };
+        this.state = {
+            isLoading: false
+        };
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(values) {
-        this.props.register(values, () => {
-            this.setState({ redirect: true });
-        });
+        this.setState({ isLoading: true });
+
+        this.props.register(values)
+            .then(() => {
+                this.props.history.push('/auth/login');
+            },
+            error => this.setState({ isLoading: false })
+        );
     }
 
     render() {
         const { handleSubmit } = this.props;
-
-        if (this.state.redirect) {
-            return <Redirect to="/" />
-        }
 
         return(
             <div className="row container formsContainer wow fadeInRight">

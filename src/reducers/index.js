@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import authReducer from "./authReducer";
-import shoppingListsReducer from "./shoppingListsReducer";
+import auth from "./authReducer";
+import shoppingLists from "./shoppingListsReducer";
 
 const rootReducer = combineReducers({
     form: formReducer,
-    auth: authReducer,
-    shoppingLists: shoppingListsReducer
+    auth,
+    shoppingLists
 });
 
 export default rootReducer;

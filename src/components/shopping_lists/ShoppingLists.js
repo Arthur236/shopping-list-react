@@ -1,49 +1,29 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import loadjs from 'loadjs';
-import { getShoppingLists } from '../../actions/shoppingListActions';
+import * as shoppingListActions from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
-import ShoppingList from "./ShoppingList";
 import SLFab from "./SLFab";
 import SLCreateModal from "./SLCreateModal";
+import SList from "./SList";
 
 class ShoppingLists extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { activePage: 1, limit: 10, next_page: '', previous_page: '' };
+    }
+
     componentDidMount() {
         loadjs(process.env.PUBLIC_URL + '/js/custom.js');
 
-        this.props.getShoppingLists();
-    }
-
-    renderShoppingLists() {
-        if(!this.props.shoppingLists) {
-            return(
-                <blockquote>
-                    <h3 className="grey-text">You currently have no shopping lists in your account.</h3>
-                    <br/>
-                    <h4 className="grey-text">Add some by pressing the + button</h4>
-                </blockquote>
-            );
-        }
-
-        return _.map(this.props.shoppingLists, shoppingList => {
-            return(
-                <div key={shoppingList.id}>
-                    <ShoppingList shoppingList={ shoppingList } />
-                </div>
-            );
-        });
+        this.props.actions.getShoppingLists();
     }
 
     render() {
-        if(!this.props.shoppingLists) {
-            return(
-                <div>
-                    LOADING...
-                </div>
-            );
-        }
+        const { shoppingLists } = this.props;
 
         return(
             <div>
@@ -55,9 +35,7 @@ class ShoppingLists extends Component {
 
                     <div className="dashboard">
                         <div className="container wow fadeInRight">
-                            <div className="row">
-                                { this.renderShoppingLists() }
-                            </div>
+                            <SList shoppingLists={shoppingLists}/>
                         </div>
                     </div>
 
@@ -72,4 +50,10 @@ function mapStateToProps(state) {
     return { shoppingLists: state.shoppingLists };
 }
 
-export default connect(mapStateToProps, { getShoppingLists })(ShoppingLists);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(shoppingListActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingLists);

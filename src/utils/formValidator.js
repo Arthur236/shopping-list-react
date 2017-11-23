@@ -29,6 +29,9 @@ export default function validate(values) {
     if (!mailFormat.test(values.email)) {
         errors.email = "Email is not valid";
     }
+    if (!values.name) {
+        errors.name = "Enter a name";
+    }
 
     // If errors is empty, the form can be submitted
     // If errors  has any properties, redux-form assumes form is invalid

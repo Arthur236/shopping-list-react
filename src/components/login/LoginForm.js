@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 import { login } from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
             email: '',
             password: '',
-            loggedIn: false
+            isLoading: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,9 +22,14 @@ class LoginForm extends Component {
     }
 
     onSubmit(values) {
-        this.props.login(values, () => {
-            this.setState({ loggedIn: true });
-        });
+        this.setState({ isLoading: true });
+
+        this.props.login(values)
+            .then(() => {
+                    this.context.router.history.push('/dashboard');
+                },
+                error => this.setState({ isLoading: false })
+            );
     }
 
     onChange(event) {
@@ -35,10 +40,6 @@ class LoginForm extends Component {
 
     render() {
         const { handleSubmit } = this.props;
-
-        if (this.state.loggedIn) {
-            return <Redirect to="/dashboard" />
-        }
 
         return(
             <div className="row container formsContainer loginContainer wow fadeInRight">
@@ -75,6 +76,11 @@ class LoginForm extends Component {
         );
     }
 }
+
+// Pull in the React Router context so router is available on this.context.router.
+LoginForm.contextTypes = {
+    router: PropTypes.object
+};
 
 export default reduxForm({
     validate,

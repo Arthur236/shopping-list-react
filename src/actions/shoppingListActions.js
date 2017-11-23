@@ -9,25 +9,25 @@ const headers = {
     'x-access-token': sessionStorage.token
 };
 
-export function getShoppingLists() {
-    const request = axios({
-        method: "get",
-        url: ROOT_URL + "/shopping_lists",
-        headers: headers
-    }).then(response => {
-        console.log(response);
-        if (!response) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }).catch(error => {
-        errorHandling.catchError(error);
-    });
-
+export function getShoppingListsSuccess(response) {
     return {
         type: actionTypes.GET_SHOPPING_LISTS,
-        payload: request
+        response
     };
+}
+
+export function getShoppingLists() {
+    return function (dispatch) {
+        return axios({
+            method: "get",
+            url: ROOT_URL + "/shopping_lists?page=1&limit=3",
+            headers: headers
+        }).then(response => {
+            dispatch(getShoppingListsSuccess(response));
+        }).catch(error => {
+            errorHandling.catchError(error);
+        });
+    }
 }
 
 export function getShoppingList(id) {
@@ -41,6 +41,22 @@ export function getShoppingList(id) {
 
     return {
         type: actionTypes.GET_SHOPPING_LIST,
+        payload: request
+    };
+}
+
+export function createShoppingList(values) {
+    const request = axios({
+        method: "post",
+        url: ROOT_URL + "/shopping_lists",
+        headers: headers,
+        data: values
+    }).catch(error => {
+        errorHandling.catchError(error);
+    });
+
+    return {
+        type: actionTypes.CREATE_SHOPPING_LIST,
         payload: request
     };
 }
