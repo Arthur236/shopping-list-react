@@ -17,7 +17,8 @@ class ShoppingLists extends Component {
             activePage: 2,
             limit: 3,
             next_page: '',
-            previous_page: ''
+            previous_page: '',
+            total_lists: null
         };
     }
 
@@ -29,6 +30,8 @@ class ShoppingLists extends Component {
 
     render() {
         const { shoppingLists } = this.props;
+        let totalPages = Math.ceil(this.state.total_lists / this.state.limit);
+
         return(
             <div>
                 <Sidebar />
