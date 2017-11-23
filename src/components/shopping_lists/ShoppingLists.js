@@ -13,18 +13,22 @@ class ShoppingLists extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { activePage: 1, limit: 10, next_page: '', previous_page: '' };
+        this.state = {
+            activePage: 2,
+            limit: 3,
+            next_page: '',
+            previous_page: ''
+        };
     }
 
     componentDidMount() {
         loadjs(process.env.PUBLIC_URL + '/js/custom.js');
 
-        this.props.actions.getShoppingLists();
+        this.props.actions.getShoppingLists(this.state.activePage, this.state.limit);
     }
 
     render() {
         const { shoppingLists } = this.props;
-
         return(
             <div>
                 <Sidebar />

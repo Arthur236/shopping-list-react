@@ -4,13 +4,8 @@ import initialState from './initialState';
 export default function(state = initialState.shoppingLists, action) {
     switch(action.type) {
         case actionTypes.GET_SHOPPING_LISTS:
-            console.log(action.response.data.shopping_lists);
 
-            return [
-                ...state,
-                Object.assign({}, action.response.data.shopping_lists)
-            ];
-            // return action.response.data;
+            return action.response.data;
 
         case actionTypes.GET_SHOPPING_LIST:
             // const post = action.payload.data;

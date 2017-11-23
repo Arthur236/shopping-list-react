@@ -16,11 +16,11 @@ export function getShoppingListsSuccess(response) {
     };
 }
 
-export function getShoppingLists() {
+export function getShoppingLists(page, limit) {
     return function (dispatch) {
         return axios({
             method: "get",
-            url: ROOT_URL + "/shopping_lists?page=1&limit=3",
+            url: ROOT_URL + "/shopping_lists?page=" + page +"&limit=" + limit,
             headers: headers
         }).then(response => {
             dispatch(getShoppingListsSuccess(response));

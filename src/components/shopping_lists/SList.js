@@ -2,12 +2,15 @@ import React from 'react';
 import SListCol from "./SListCol";
 
 const SList = ({ shoppingLists }) => {
+    const shopping_lists = shoppingLists.shopping_lists;
 
     return (
         <div className="row">
             {
-                shoppingLists.map(shoppingList =>
-                <SListCol key={shoppingList.id} shoppingList={shoppingList}/>)
+                shopping_lists !== undefined &&
+                shopping_lists.map(shoppingList =>
+                <SListCol key={shoppingList.id} shoppingList={shoppingList}/>
+                )
             }
         </div>
     );
