@@ -33,7 +33,7 @@ export function register(values) {
 
 export function loginSuccess(response) {
     Materialize.toast(response.data.message, 6000, 'rounded');
-    sessionStorage.setItem('token', response.data.access_token);
+    window.localStorage.setItem('token', response.data.access_token);
 
     return {
         type: actionTypes.LOGIN_REQUEST,
@@ -49,7 +49,11 @@ export function login(values) {
             headers: headers,
             data: values
         }).then(response => {
-            dispatch(loginSuccess(response));
+            window.localStorage.removeItem('token');
+
+            if (response.status === 200) {
+                dispatch(loginSuccess(response));
+            }
         }).catch(error => {
             errorHandling.catchError(error);
         });

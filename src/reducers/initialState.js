@@ -1,4 +1,6 @@
 export default {
-    session: !!sessionStorage.token,
-    shoppingLists: {}
+    loggedIn: false,
+    shoppingLists: {},
+    shoppingListItems: {}
 };
+

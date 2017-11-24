@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SListCol from "./SListCol";
 
 const SList = ({ shoppingLists }) => {
+    console.log(shoppingLists);
+
     const shopping_lists = shoppingLists.shopping_lists;
 
     return (
@@ -17,7 +20,7 @@ const SList = ({ shoppingLists }) => {
 };
 
 SList.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    shoppingLists: PropTypes.object.isRequired
 };
 
 export default SList;

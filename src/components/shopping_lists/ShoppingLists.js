@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import loadjs from 'loadjs';
@@ -30,7 +31,6 @@ class ShoppingLists extends Component {
 
     render() {
         const { shoppingLists } = this.props;
-        let totalPages = Math.ceil(this.state.total_lists / this.state.limit);
 
         return(
             <div>
@@ -52,6 +52,11 @@ class ShoppingLists extends Component {
         );
     }
 }
+
+ShoppingLists.PropTypes = {
+    shoppingLists: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
     return { shoppingLists: state.shoppingLists };

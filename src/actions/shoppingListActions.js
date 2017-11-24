@@ -6,7 +6,7 @@ import * as errorHandling from '../utils/errorHandling';
 const ROOT_URL = 'http://localhost:5000/v1';
 const headers = {
     'Content-Type': 'application/json',
-    'x-access-token': sessionStorage.token
+    'x-access-token': localStorage.getItem('token')
 };
 
 export function getShoppingListsSuccess(response) {
@@ -23,26 +23,36 @@ export function getShoppingLists(page, limit) {
             url: ROOT_URL + "/shopping_lists?page=" + page +"&limit=" + limit,
             headers: headers
         }).then(response => {
-            dispatch(getShoppingListsSuccess(response));
+            if (response.status === 200) {
+                dispatch(getShoppingListsSuccess(response));
+            }
         }).catch(error => {
             errorHandling.catchError(error);
         });
     }
 }
 
-export function getShoppingList(id) {
-    const request = axios({
-        method: "get",
-        url: ROOT_URL + "/shopping_lists/" + id,
-        headers: headers
-    }).catch(error => {
-        errorHandling.catchError(error);
-    });
-
+export function getShoppingListSuccess(response) {
     return {
         type: actionTypes.GET_SHOPPING_LIST,
-        payload: request
+        response
     };
+}
+
+export function getShoppingList(id) {
+    return function (dispatch) {
+        return axios({
+            method: "get",
+            url: ROOT_URL + "/shopping_lists/" + id,
+            headers: headers
+        }).then(response => {
+            if (response.status === 200) {
+                dispatch(getShoppingListSuccess(response));
+            }
+        }).catch(error => {
+            errorHandling.catchError(error);
+        });
+    }
 }
 
 export function createShoppingList(values) {
