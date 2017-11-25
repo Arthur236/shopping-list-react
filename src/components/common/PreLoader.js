@@ -1,49 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Loader from './Loader';
 
-class Preloader extends Component {
-    render() {
-        return (
-            <div className="preloaderBackground">
-                <div className="preloader-wrapper big active">
-                    <div className="spinner-layer spinner-blue">
-                        <div className="circle-clipper left">
-                            <div className="circle"></div>
-                        </div>
-                        <div className="gap-patch">
-                            <div className="circle"></div>
-                        </div>
-                        <div className="circle-clipper right">
-                            <div className="circle"></div>
-                        </div>
-                    </div>
+const PreLoader = () => {
+    return (
+        <div className="preloaderBackground">
+            <Loader size="large" />
+        </div>
+    );
+};
 
-                    <div className="spinner-layer spinner-red">
-                        <div className="circle-clipper left">
-                            <div className="circle"></div>
-                        </div>
-                        <div className="gap-patch">
-                            <div className="circle"></div>
-                        </div>
-                        <div className="circle-clipper right">
-                            <div className="circle"></div>
-                        </div>
-                    </div>
-
-                    <div className="spinner-layer spinner-yellow">
-                        <div className="circle-clipper left">
-                            <div className="circle"></div>
-                        </div>
-                        <div className="gap-patch">
-                            <div className="circle"></div>
-                        </div>
-                        <div className="circle-clipper right">
-                            <div className="circle"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default Preloader;
+export default PreLoader;

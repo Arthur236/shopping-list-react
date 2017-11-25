@@ -6,15 +6,16 @@ import { connect } from 'react-redux';
 import { login } from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
+import Loader from '../common/Loader';
 
 class LoginForm extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
 
         this.state = {
             email: '',
             password: '',
-            isLoading: false
+            loading: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,14 +23,14 @@ class LoginForm extends Component {
     }
 
     onSubmit(values) {
-        this.setState({ isLoading: true });
-
+        this.setState({ loading: true });
         this.props.login(values)
-            .then(() => {
-                    this.context.router.history.push('/dashboard');
-                },
-                error => this.setState({ isLoading: false })
-            );
+            .then(res => {
+                if (res.status !== 200) {
+                    this.setState({ loading: false });
+                }
+            })
+            .catch(err => this.setState({ loading: false }));
     }
 
     onChange(event) {
@@ -40,6 +41,13 @@ class LoginForm extends Component {
 
     render() {
         const { handleSubmit } = this.props;
+        let button = '';
+
+        if (this.state.loading) {
+            button = <div className="center-align"><Loader size="small"/></div>;
+        } else {
+            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Log In</button>;
+        }
 
         return(
             <div className="row container formsContainer loginContainer wow fadeInRight">
@@ -62,7 +70,7 @@ class LoginForm extends Component {
                             required="required"/>
 
                         <div className="input-field col s12">
-                            <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Log In</button>
+                            { button }
                         </div>
                     </form>
 
@@ -76,11 +84,6 @@ class LoginForm extends Component {
         );
     }
 }
-
-// Pull in the React Router context so router is available on this.context.router.
-LoginForm.contextTypes = {
-    router: PropTypes.object
-};
 
 export default reduxForm({
     validate,

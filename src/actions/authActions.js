@@ -31,12 +31,22 @@ export function register(values) {
     }
 }
 
+export function loginFail(response) {
+    Materialize.toast(response.data.message, 6000, 'rounded');
+
+    return {
+        type: actionTypes.LOGIN_FAIL,
+        response
+    };
+}
+
 export function loginSuccess(response) {
     Materialize.toast(response.data.message, 6000, 'rounded');
     window.localStorage.setItem('token', response.data.access_token);
+    this.context.router.history.push('/dashboard');
 
     return {
-        type: actionTypes.LOGIN_REQUEST,
+        type: actionTypes.LOGIN_SUCCESS,
         response
     };
 }
@@ -53,6 +63,8 @@ export function login(values) {
 
             if (response.status === 200) {
                 dispatch(loginSuccess(response));
+            } else {
+                dispatch(loginFail(response));
             }
         }).catch(error => {
             errorHandling.catchError(error);
