@@ -9,8 +9,8 @@ import validate from '../../utils/formValidator'
 import Loader from '../common/Loader';
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
             email: '',
@@ -25,12 +25,13 @@ class LoginForm extends Component {
     onSubmit(values) {
         this.setState({ loading: true });
         this.props.login(values)
-            .then(res => {
-                if (res.status !== 200) {
-                    this.setState({ loading: false });
-                }
+            .then(() => {
+                this.setState({ loading: false });
+                this.context.router.history.push('/dashboard');
             })
-            .catch(err => this.setState({ loading: false }));
+            .catch(() => {
+                this.setState({ loading: false })
+            });
     }
 
     onChange(event) {
@@ -84,6 +85,11 @@ class LoginForm extends Component {
         );
     }
 }
+
+// Pull in the React Router context so router is available on this.context.router.
+LoginForm.contextTypes = {
+    router: PropTypes.object
+};
 
 export default reduxForm({
     validate,

@@ -1,35 +1,46 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { register } from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
+import Loader from '../common/Loader';
 
 class RegistrationForm extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
-            isLoading: false
+            loading: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(values) {
-        this.setState({ isLoading: true });
+        this.setState({ loading: true });
 
         this.props.register(values)
             .then(() => {
-                this.props.history.push('/auth/login');
-            },
-            error => this.setState({ isLoading: false })
-        );
+                this.setState({ loading: false });
+                this.context.router.history.push('/auth/login');
+            })
+            .catch(() => {
+                this.setState({ loading: false })
+            });
     }
 
     render() {
         const { handleSubmit } = this.props;
+        let button = '';
+
+        if (this.state.loading) {
+            button = <div className="center-align"><Loader size="small"/></div>;
+        } else {
+            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Register</button>;
+        }
 
         return(
             <div className="row container formsContainer wow fadeInRight">
@@ -64,7 +75,7 @@ class RegistrationForm extends Component {
                             required="required"/>
 
                         <div className="input-field col s12">
-                            <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Register</button>
+                            { button }
                         </div>
                     </form>
 
@@ -78,6 +89,11 @@ class RegistrationForm extends Component {
         );
     }
 }
+
+// Pull in the React Router context so router is available on this.context.router.
+RegistrationForm.contextTypes = {
+    router: PropTypes.object
+};
 
 export default reduxForm({
     validate,

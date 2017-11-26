@@ -17,7 +17,7 @@ export default (
 );
 
 function requireAuth(nextState, replace) {
-    if (!sessionStorage.token) {
+    if (!localStorage.getItem('token')) {
         replace({
             pathname: '/auth/login',
             state: { nextPathname: nextState.location.pathname }

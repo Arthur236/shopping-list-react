@@ -11,7 +11,16 @@ export function registerSuccess(response) {
     Materialize.toast(response.data.message, 6000, 'rounded');
 
     return {
-        type: actionTypes.REGISTER_REQUEST,
+        type: actionTypes.REGISTER_SUCCESS,
+        response
+    };
+}
+
+export function registerFail(response) {
+    Materialize.toast(response.data.message, 6000, 'rounded');
+
+    return {
+        type: actionTypes.REGISTER_FAIL,
         response
     };
 }
@@ -24,7 +33,11 @@ export function register(values) {
             headers: headers,
             data: values
         }).then(response => {
-            dispatch(registerSuccess(response));
+            if (response.status === 201) {
+                dispatch(registerSuccess(response));
+            } else {
+                dispatch(registerFail(response));
+            }
         }).catch(error => {
             errorHandling.catchError(error);
         });
@@ -43,7 +56,6 @@ export function loginFail(response) {
 export function loginSuccess(response) {
     Materialize.toast(response.data.message, 6000, 'rounded');
     window.localStorage.setItem('token', response.data.access_token);
-    this.context.router.history.push('/dashboard');
 
     return {
         type: actionTypes.LOGIN_SUCCESS,
