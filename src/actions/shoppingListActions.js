@@ -9,9 +9,16 @@ const headers = {
     'x-access-token': localStorage.getItem('token')
 };
 
-export function getShoppingListsSuccess(response) {
+export function getListsSuccess(response) {
     return {
-        type: actionTypes.GET_SHOPPING_LISTS,
+        type: actionTypes.GET_LISTS_SUCCESS,
+        response
+    };
+}
+
+export function getListsFail(response) {
+    return {
+        type: actionTypes.GET_LISTS_FAIL,
         response
     };
 }
@@ -24,7 +31,9 @@ export function getShoppingLists(page, limit) {
             headers: headers
         }).then(response => {
             if (response.status === 200) {
-                dispatch(getShoppingListsSuccess(response));
+                dispatch(getListsSuccess(response));
+            } else {
+                dispatch(getListsFail(response));
             }
         }).catch(error => {
             errorHandling.catchError(error);
@@ -34,7 +43,7 @@ export function getShoppingLists(page, limit) {
 
 export function getShoppingListSuccess(response) {
     return {
-        type: actionTypes.GET_SHOPPING_LIST,
+        type: actionTypes.GET_LIST_REQUEST,
         response
     };
 }
@@ -66,7 +75,7 @@ export function createShoppingList(values) {
     });
 
     return {
-        type: actionTypes.CREATE_SHOPPING_LIST,
+        type: actionTypes.CREATE_LIST_REQUEST,
         payload: request
     };
 }

@@ -14,11 +14,10 @@ class ViewShoppingList extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.shoppingList.id !== nextProps.shoppingList.id) {
-            // Necessary to populate form when existing list is loaded directly.
-            this.setState({ shoppingList: Object.assign({}, nextProps.shoppingList) });
-        }
+    componentWillMount() {
+        const id = this.props.match.params.id;
+
+        this.props.actions.getShoppingList(id);
     }
 
     render() {
@@ -54,22 +53,12 @@ ViewShoppingList.propTypes = {
     actions: PropTypes.object.isRequired
 };
 
-function getShoppingListById(shoppingLists, id) {
-    const shoppingList = shoppingLists.shoppingLists.filter(shoppingList => shoppingList.id === id);
-    if (shoppingList) return shoppingList[0]; //since filter returns an array, have to grab the first.
-    return null;
-}
-
 function mapStateToProps(state, ownProps) {
     const shoppingListId = ownProps.match.params.id;
 
-    let shoppingList = {id: '', name: '', description: '', date_created: '', date_modified: ''};
+    let shoppingList = state.shoppingLists.shopping_lists.find(obj => obj.id === shoppingListId);
 
-    console.log(state.shoppingLists);
-
-    if (shoppingListId && state.shoppingLists.length > 0) {
-        shoppingList = getShoppingListById(state.shoppingLists, shoppingListId);
-    }
+    console.log("s_lists -----> ", state.shoppingLists);
 
     return { shoppingList: shoppingList };
 }

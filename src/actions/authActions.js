@@ -8,8 +8,6 @@ const ROOT_URL = 'http://localhost:5000/v1';
 const headers = { 'Content-Type': 'application/json' };
 
 export function registerSuccess(response) {
-    Materialize.toast(response.data.message, 6000, 'rounded');
-
     return {
         type: actionTypes.REGISTER_SUCCESS,
         response
@@ -17,8 +15,6 @@ export function registerSuccess(response) {
 }
 
 export function registerFail(response) {
-    Materialize.toast(response.data.message, 6000, 'rounded');
-
     return {
         type: actionTypes.REGISTER_FAIL,
         response
@@ -34,8 +30,12 @@ export function register(values) {
             data: values
         }).then(response => {
             if (response.status === 201) {
+                Materialize.toast(response.data.message, 6000, 'rounded');
+
                 dispatch(registerSuccess(response));
             } else {
+                Materialize.toast(response.data.message, 6000, 'rounded');
+
                 dispatch(registerFail(response));
             }
         }).catch(error => {
@@ -45,8 +45,6 @@ export function register(values) {
 }
 
 export function loginFail(response) {
-    Materialize.toast(response.data.message, 6000, 'rounded');
-
     return {
         type: actionTypes.LOGIN_FAIL,
         response
@@ -54,9 +52,6 @@ export function loginFail(response) {
 }
 
 export function loginSuccess(response) {
-    Materialize.toast(response.data.message, 6000, 'rounded');
-    window.localStorage.setItem('token', response.data.access_token);
-
     return {
         type: actionTypes.LOGIN_SUCCESS,
         response
@@ -74,8 +69,13 @@ export function login(values) {
             window.localStorage.removeItem('token');
 
             if (response.status === 200) {
+                Materialize.toast(response.data.message, 6000, 'rounded');
+                window.localStorage.setItem('token', response.data.access_token);
+
                 dispatch(loginSuccess(response));
             } else {
+                Materialize.toast(response.data.message, 6000, 'rounded');
+
                 dispatch(loginFail(response));
             }
         }).catch(error => {

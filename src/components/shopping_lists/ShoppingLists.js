@@ -15,7 +15,7 @@ class ShoppingLists extends Component {
         super(props);
 
         this.state = {
-            activePage: 2,
+            activePage: 1,
             limit: 3,
             next_page: '',
             previous_page: '',
@@ -23,10 +23,12 @@ class ShoppingLists extends Component {
         };
     }
 
+    componentWillMount() {
+        this.props.actions.getShoppingLists(this.state.activePage, this.state.limit);
+    }
+
     componentDidMount() {
         loadjs(process.env.PUBLIC_URL + '/js/custom.js');
-
-        this.props.actions.getShoppingLists(this.state.activePage, this.state.limit);
     }
 
     render() {
