@@ -1,20 +1,22 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import SListCol from "./SListCol";
 
 const SList = ({ shoppingLists }) => {
-    console.log(shoppingLists);
+    const { shopping_lists } = shoppingLists
 
-    const shopping_lists = shoppingLists.shopping_lists;
+    console.log(shoppingLists.shopping_lists);
+
+    if (!shoppingLists) {
+        return(
+            <div>LOADING...</div>
+        );
+    }
 
     return (
         <div className="row">
-            {
-                shopping_lists !== undefined &&
-                shopping_lists.map(shoppingList =>
-                <SListCol key={shoppingList.id} shoppingList={shoppingList}/>
-                )
-            }
+            { _.map(shopping_lists, shoppingList => <SListCol key={shoppingList.id} shoppingList={shoppingList}/>) }
         </div>
     );
 };

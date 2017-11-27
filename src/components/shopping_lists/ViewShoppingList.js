@@ -6,14 +6,6 @@ import SLItems from "../shopping_list_items/SLItems";
 import * as shoppingListActions from '../../actions/shoppingListActions';
 
 class ViewShoppingList extends Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.state = {
-            shoppingList: Object.assign({}, props.shoppingList)
-        }
-    }
-
     componentWillMount() {
         const id = this.props.match.params.id;
 
@@ -21,24 +13,24 @@ class ViewShoppingList extends Component {
     }
 
     render() {
-        console.log(this.state);
-        const { shoppingList } = this.state;
+        const { activeList } = this.props;
+        console.log(">>>>>    >>>>>> ", this.props)
 
         let description = '';
 
-        if(!shoppingList) {
+        if(!activeList) {
             return(<div>Loading...</div>);
         }
 
-        if (!shoppingList.description) {
+        if (!activeList.description) {
             description = 'No description added';
         } else {
-            description = shoppingList.description;
+            description = activeList.description;
         }
 
         return(
             <div className="container">
-                <h2>{ shoppingList.name }</h2>
+                <h2>{ activeList.name }</h2>
                 <div className="divider" />
                 <h3>{ description }</h3>
 
@@ -49,18 +41,13 @@ class ViewShoppingList extends Component {
 }
 
 ViewShoppingList.propTypes = {
-    shoppingList: PropTypes.object.isRequired,
+    activeList: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
-    const shoppingListId = ownProps.match.params.id;
-
-    let shoppingList = state.shoppingLists.shopping_lists.find(obj => obj.id === shoppingListId);
-
-    console.log("s_lists -----> ", state.shoppingLists);
-
-    return { shoppingList: shoppingList };
+function mapStateToProps(state) {
+    console.log("<>?<>?<>?<>?<>?<>?   ", state)
+    return { activeList: state.shoppingLists.activeList };
 }
 
 function mapDispatchToProps(dispatch) {

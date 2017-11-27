@@ -43,7 +43,7 @@ export function getShoppingLists(page, limit) {
 
 export function getShoppingListSuccess(response) {
     return {
-        type: actionTypes.GET_LIST_REQUEST,
+        type: actionTypes.GET_LIST_SUCCESS,
         response
     };
 }

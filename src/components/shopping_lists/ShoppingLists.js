@@ -23,12 +23,10 @@ class ShoppingLists extends Component {
         };
     }
 
-    componentWillMount() {
-        this.props.actions.getShoppingLists(this.state.activePage, this.state.limit);
-    }
-
     componentDidMount() {
         loadjs(process.env.PUBLIC_URL + '/js/custom.js');
+
+        this.props.actions.getShoppingLists(this.state.activePage, this.state.limit);
     }
 
     render() {
