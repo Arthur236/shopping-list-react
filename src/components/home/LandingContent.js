@@ -26,8 +26,8 @@ class LandingContent extends Component {
                             </div>
 
                             <div className="col s12 m12 btnsContainer center-align wow fadeInLeft">
-                                <Link to="/auth/login" className="btn btn-large waves-effect waves-dark deep-purple">Sign In</Link>
-                                <Link to="/auth/register" className="btn btn-large waves-effect waves-dark deep-purple">Sign Up</Link>
+                                <Link to="/login" className="btn btn-large waves-effect waves-dark deep-purple">Sign In</Link>
+                                <Link to="/register" className="btn btn-large waves-effect waves-dark deep-purple">Sign Up</Link>
                             </div>
                         </div>
                     </div>

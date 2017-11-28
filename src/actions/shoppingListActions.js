@@ -9,22 +9,12 @@ const headers = {
     'x-access-token': localStorage.getItem('token')
 };
 
-export function getListsSuccess(response) {
-    return {
-        type: actionTypes.GET_LISTS_SUCCESS,
-        response
-    };
-}
+// Fetch all shopping lists
 
-export function getListsFail(response) {
-    return {
-        type: actionTypes.GET_LISTS_FAIL,
-        response
-    };
-}
-
-export function getShoppingLists(page, limit) {
+export function getLists(page, limit) {
     return function (dispatch) {
+        dispatch(getListsRequest());
+
         return axios({
             method: "get",
             url: ROOT_URL + "/shopping_lists?page=" + page +"&limit=" + limit,
@@ -41,27 +31,66 @@ export function getShoppingLists(page, limit) {
     }
 }
 
-export function getShoppingListSuccess(response) {
+export function getListsRequest() {
     return {
-        type: actionTypes.GET_LIST_SUCCESS,
+        type: actionTypes.GET_LISTS_REQUEST,
+    };
+}
+
+export function getListsSuccess(response) {
+    return {
+        type: actionTypes.GET_LISTS_SUCCESS,
         response
     };
 }
 
-export function getShoppingList(id) {
+export function getListsFail(response) {
+    return {
+        type: actionTypes.GET_LISTS_FAIL,
+        response
+    };
+}
+
+// Fetch a single shopping list
+
+export function getSingleList(id) {
     return function (dispatch) {
+        dispatch(getSingleListRequest());
+
         return axios({
             method: "get",
             url: ROOT_URL + "/shopping_lists/" + id,
             headers: headers
         }).then(response => {
             if (response.status === 200) {
-                dispatch(getShoppingListSuccess(response));
+                dispatch(getSingleListSuccess(response));
+            } else {
+                dispatch(getSingleListFail(response));
             }
         }).catch(error => {
             errorHandling.catchError(error);
         });
     }
+}
+
+export function getSingleListRequest() {
+    return {
+        type: actionTypes.GET_SINGLE_LIST_REQUEST,
+    };
+}
+
+export function getSingleListSuccess(response) {
+    return {
+        type: actionTypes.GET_SINGLE_LIST_SUCCESS,
+        response
+    };
+}
+
+export function getSingleListFail(response) {
+    return {
+        type: actionTypes.GET_SINGLE_LIST_FAIL,
+        response
+    };
 }
 
 export function createShoppingList(values) {

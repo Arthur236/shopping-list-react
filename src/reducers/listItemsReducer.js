@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function(state = initialState.shoppingListItems, action) {
+export default function listItems(state = initialState.shoppingListItems, action) {
     switch(action.type) {
         case actionTypes.GET_ITEMS_SUCCESS:
 

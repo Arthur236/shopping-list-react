@@ -6,6 +6,7 @@ import loadjs from 'loadjs';
 import * as shoppingListActions from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
+import Loader from '../common/Loader';
 import SLFab from "./SLFab";
 import SLCreateModal from "./SLCreateModal";
 import SList from "./SList";
@@ -26,11 +27,17 @@ class ShoppingLists extends Component {
     componentDidMount() {
         loadjs(process.env.PUBLIC_URL + '/js/custom.js');
 
-        this.props.actions.getShoppingLists(this.state.activePage, this.state.limit);
+        this.props.actions.getLists(this.state.activePage, this.state.limit);
     }
 
     render() {
-        const { shoppingLists } = this.props;
+        const { shoppingLists, loading } = this.props;
+
+        if (!shoppingLists || loading) {
+            return(
+                <div className="center-align"><Loader size="small"/></div>
+            );
+        }
 
         return(
             <div>
@@ -59,7 +66,7 @@ ShoppingLists.PropTypes = {
 };
 
 function mapStateToProps(state) {
-    return { shoppingLists: state.shoppingLists };
+    return { shoppingLists: state.shoppingLists.shoppingLists, loading: state.shoppingLists.loading };
 }
 
 function mapDispatchToProps(dispatch) {

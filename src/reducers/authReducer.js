@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function(state = initialState, action) {
+export default function auth(state = initialState, action) {
     switch(action.type) {
         case actionTypes.REGISTER_REQUEST:
             return {
@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading: true,
-                user: action.user
+                user: action.user.email
             };
 
         case actionTypes.LOGIN_SUCCESS:
