@@ -1,0 +1,15 @@
+/************** Home **************/
+.landingContent {
+    height: 100vh;
+    background-color: rgba(27, 23, 34, 0.9);
+}
+.landingContent .ui.text.container {
+    margin: auto;
+}
+.landingContent .footer {
+    height: 80px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: gray;
+}

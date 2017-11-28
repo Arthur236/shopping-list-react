@@ -1,42 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Footer from "../common/Footer";
 import { Link } from 'react-router-dom';
 import Banner from "../common/Banner";
 
-class LandingContent extends Component {
-    render() {
+const LandingContent = () => {
         return (
-            <div className="landingContent" id="pageContent">
-                <div className="container">
-                    <Banner />
-
-                    <div className="row landingContent">
-                        <div className="col s12 m12">
-                            <div className="quote">
-                                <ul id="quoteItems">
-                                    <li>
-                                        <h1 className="line1 wow fadeInLeft">Welcome To The Ultimate Shopping List
-                                            Helper</h1>
-                                    </li>
-                                    <li>
-                                        <h3 className="line2 wow fadeInLeft">Get organized and never forget items of
-                                            interest</h3>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="col s12 m12 btnsContainer center-align wow fadeInLeft">
-                                <Link to="/login" className="btn btn-large waves-effect waves-dark deep-purple">Sign In</Link>
-                                <Link to="/register" className="btn btn-large waves-effect waves-dark deep-purple">Sign Up</Link>
-                            </div>
-                        </div>
+            <div className="ui inverted vertical center aligned segment landingContent">
+                <div className="ui container">
+                    <div className="ui massive borderless inverted menu">
+                        <h1 className="header item">Shopping List App</h1>
                     </div>
+                </div>
 
-                    <Footer/>
+                <div className="ui text container">
+                    <h1 className="ui inverted header">Welcome To The Ultimate Shopping List Helper</h1>
+                    <h3>Get organized and never forget items of interest</h3>
+                    <Link to='/register' className='ui purple huge icon left labeled button'>
+                        <i aria-hidden="true" className="user circle icon" />
+                        Sign Up
+                    </Link>
+                    <Link to='/login' className='ui purple huge icon left labeled button'>
+                        <i aria-hidden="true" className="sign in icon" />
+                        Sign In
+                    </Link>
+                </div>
+
+                <div className="ui inverted vertical footer segment">
+                    <p>©2017 Shopping List Application. A project by Arthur Thungu</p>
                 </div>
             </div>
         );
-    }
-}
+};
 
 export default LandingContent;
