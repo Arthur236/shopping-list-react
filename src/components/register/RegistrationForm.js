@@ -12,31 +12,24 @@ class RegistrationForm extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            loading: false
-        };
-
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(values) {
-        this.setState({ loading: true });
-
         this.props.register(values)
             .then(() => {
-                this.setState({ loading: false });
-                this.context.router.history.push('/auth/login');
-            })
-            .catch(() => {
-                this.setState({ loading: false })
+            console.log(this.props);
+                if (this.props.registered) {
+                    this.context.router.history.push('/login');
+                }
             });
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, loading } = this.props;
         let button = '';
 
-        if (this.state.loading) {
+        if (loading) {
             button = <div className="center-align"><Loader size="small"/></div>;
         } else {
             button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Register</button>;
@@ -81,7 +74,7 @@ class RegistrationForm extends Component {
 
                     <div className="col s12">
                         <p className="center-align ">
-                            Already have an account? <Link to="/auth/login" className="formLink">Sign In</Link>
+                            Already have an account? <Link to="/login" className="formLink">Sign In</Link>
                         </p>
                     </div>
                 </div>
@@ -95,7 +88,11 @@ RegistrationForm.contextTypes = {
     router: PropTypes.object
 };
 
+function mapStateToProps(state) {
+    return { loading: state.auth.loading, registered: state.auth.registered }
+}
+
 export default reduxForm({
     validate,
     form: 'SignUpForm'
-})(connect(null, { register })(RegistrationForm));
+})(connect(mapStateToProps, { register })(RegistrationForm));

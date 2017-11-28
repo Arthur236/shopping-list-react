@@ -14,8 +14,7 @@ class LoginForm extends Component {
 
         this.state = {
             email: '',
-            password: '',
-            loading: false
+            password: ''
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -23,14 +22,11 @@ class LoginForm extends Component {
     }
 
     onSubmit(values) {
-        this.setState({ loading: true });
         this.props.login(values)
             .then(() => {
-                this.setState({ loading: false });
-                this.context.router.history.push('/dashboard');
-            })
-            .catch(() => {
-                this.setState({ loading: false })
+                if(this.props.loggedIn) {
+                    this.context.router.history.push('/dashboard');
+                }
             });
     }
 
@@ -41,10 +37,10 @@ class LoginForm extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, loading } = this.props;
         let button = '';
 
-        if (this.state.loading) {
+        if (loading) {
             button = <div className="center-align"><Loader size="small"/></div>;
         } else {
             button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Log In</button>;
@@ -77,7 +73,7 @@ class LoginForm extends Component {
 
                     <div className="col s12">
                         <p className="center-align ">
-                            Already have an account? <Link to="/auth/register" className="formLink">Sign Up</Link>
+                            Already have an account? <Link to="/register" className="formLink">Sign Up</Link>
                         </p>
                     </div>
                 </div>
@@ -91,7 +87,11 @@ LoginForm.contextTypes = {
     router: PropTypes.object
 };
 
+function mapStateToProps(state) {
+    return { loading: state.auth.loading, loggedIn: state.auth.loggedIn }
+}
+
 export default reduxForm({
     validate,
     form: 'SignInForm'
-})(connect(null, { login })(LoginForm));
+})(connect(mapStateToProps, { login })(LoginForm));

@@ -7,22 +7,10 @@ import * as errorHandling from '../utils/errorHandling';
 const ROOT_URL = 'http://localhost:5000/v1';
 const headers = { 'Content-Type': 'application/json' };
 
-export function registerSuccess(response) {
-    return {
-        type: actionTypes.REGISTER_SUCCESS,
-        response
-    };
-}
-
-export function registerFail(response) {
-    return {
-        type: actionTypes.REGISTER_FAIL,
-        response
-    };
-}
-
 export function register(values) {
     return function (dispatch) {
+        dispatch(registerRequest(values));
+
         return axios({
             method: "post",
             url: ROOT_URL + "/auth/register",
@@ -44,22 +32,31 @@ export function register(values) {
     }
 }
 
-export function loginFail(response) {
+export function registerRequest(user) {
     return {
-        type: actionTypes.LOGIN_FAIL,
+        type: actionTypes.REGISTER_REQUEST,
+        user
+    };
+}
+
+export function registerSuccess(response) {
+    return {
+        type: actionTypes.REGISTER_SUCCESS,
         response
     };
 }
 
-export function loginSuccess(response) {
+export function registerFail(response) {
     return {
-        type: actionTypes.LOGIN_SUCCESS,
+        type: actionTypes.REGISTER_FAIL,
         response
     };
 }
 
 export function login(values) {
     return function (dispatch) {
+        dispatch(loginRequest(values));
+
         return axios({
             method: "post",
             url: ROOT_URL + "/auth/login",
@@ -82,4 +79,25 @@ export function login(values) {
             errorHandling.catchError(error);
         });
     }
+}
+
+export function loginRequest(user) {
+    return {
+        type: actionTypes.LOGIN_REQUEST,
+        user
+    };
+}
+
+export function loginFail(response) {
+    return {
+        type: actionTypes.LOGIN_FAIL,
+        response
+    };
+}
+
+export function loginSuccess(response) {
+    return {
+        type: actionTypes.LOGIN_SUCCESS,
+        response
+    };
 }
