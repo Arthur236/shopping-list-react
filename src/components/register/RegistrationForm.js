@@ -36,7 +36,7 @@ class RegistrationForm extends Component {
         }
 
         return(
-            <div className="row container formsContainer wow fadeInRight">
+            <div className="row container formsContainer wow fadeInDown">
                 <div className="col s8 offset-s2 landingForm">
                     <div className="col s12">
                         <h3>Register</h3>

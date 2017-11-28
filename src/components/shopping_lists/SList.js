@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import SListCol from "./SListCol";
 
 const SList = ({ shoppingLists }) => {
-    const { shopping_lists } = shoppingLists
-
-    console.log(shoppingLists.shopping_lists);
+    const { shopping_lists } = shoppingLists;
 
     if (!shoppingLists) {
         return(

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import loadjs from 'loadjs';
+import customJs from '../../static/js/custom';
 import * as shoppingListActions from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import Loader from '../common/Loader';
 import SLFab from "./SLFab";
-import SLCreateModal from "./SLCreateModal";
 import SList from "./SList";
+import SLCreateModal from "./SLCreateModal";
 
 class ShoppingLists extends Component {
     constructor(props) {
@@ -25,13 +25,9 @@ class ShoppingLists extends Component {
     }
 
     componentDidMount() {
-        loadjs(process.env.PUBLIC_URL + '/js/custom.js');
+        customJs();
 
         this.props.actions.getLists(this.state.activePage, this.state.limit);
-    }
-
-    componentDidUpdate() {
-        loadjs(process.env.PUBLIC_URL + '/js/custom.js');
     }
 
     render() {

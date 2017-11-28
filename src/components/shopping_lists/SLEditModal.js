@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createList } from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
 
-class SLCreateModal extends Component {
+class SLEditModal extends Component {
     constructor(props) {
         super(props);
 
@@ -13,33 +14,35 @@ class SLCreateModal extends Component {
     }
 
     onSubmit(values) {
-        this.props.createShoppingList(values);
+
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, shoppingList } = this.props;
 
         return(
-            <div id="create_modal" className="modal">
+            <div id={`md_edit_${ shoppingList.id }`} className="modal">
                 <div className="modal-content">
-                    <h4>Create Shopping List</h4>
+                    <h4>Edit { shoppingList.name }</h4>
                     <form onSubmit={handleSubmit(this.onSubmit)}>
                         <FormInput
                             type="text"
                             label="Name"
                             name="name"
-                            required="required" />
+                            required="required"
+                            value={shoppingList.name}/>
 
                         <FormInput
                             type="text"
                             label="Description"
                             name="description"
-                            required="required" />
+                            required="required"
+                            value={shoppingList.description}/>
 
                         <div className="modal-footer">
                             <button type="submit" name="add"
                                     className="modal-action modal-close waves-effect waves-green btn-flat left">
-                                Create
+                                Edit
                             </button>
                             <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                         </div>
@@ -50,7 +53,11 @@ class SLCreateModal extends Component {
     }
 }
 
+SLEditModal.propTypes = {
+    shoppingList: PropTypes.object.isRequired
+};
+
 export default reduxForm({
     validate,
-    form: 'SLCreationForm'
-})(connect(null, { createShoppingList: createList })(SLCreateModal));
+    form: 'SLEditForm'
+})(connect(null, { createShoppingList: createList })(SLEditModal));

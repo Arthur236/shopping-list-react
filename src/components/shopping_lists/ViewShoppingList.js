@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import loadjs from 'loadjs';
+import customJs from '../../static/js/custom';
 import SLItems from "../shopping_list_items/SLItems";
 import * as shoppingListActions from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
@@ -10,8 +10,8 @@ import Navigation from "../common/Navigation";
 import Loader from '../common/Loader';
 
 class ViewShoppingList extends Component {
-    componentWillMount() {
-        loadjs(process.env.PUBLIC_URL + '/js/custom.js');
+    componentDidMount() {
+        customJs();
 
         const id = this.props.match.params.id;
         this.props.actions.getSingleList(id);

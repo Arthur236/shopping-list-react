@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import loadjs from 'loadjs';
+import customJs from '../../static/js/custom';
 import BackgroundSlider from '../common/BackgroundSlider';
 import LoginForm from "./LoginForm";
 import Banner from "../common/Banner";
 
 class Login extends Component {
     componentDidMount() {
-        loadjs(process.env.PUBLIC_URL + '/js/custom.js');
+        customJs();
     }
 
     render() {

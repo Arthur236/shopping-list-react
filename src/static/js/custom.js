@@ -1,5 +1,7 @@
-//Preloader background timeout
-$(document).ready(function() {
+import { WOW } from 'wowjs/dist/wow';
+
+export default function customJs() {
+    //Preloader background timeout
     $('.preloaderBackground').delay(1000).fadeOut('slow');
 
     $('.preloaderWrapper')
@@ -20,4 +22,4 @@ $(document).ready(function() {
 
     //Initialize tooltip
     $('.tooltipped').tooltip({delay: 50});
-});
+}
