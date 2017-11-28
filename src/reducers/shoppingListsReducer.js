@@ -40,6 +40,25 @@ export default function shoppingLists(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.CREATE_LIST_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.CREATE_LIST_SUCCESS:
+            return {
+                ...state,
+                shoppingLists: Object.assign({}, action.response.data),
+                loading: false
+            };
+
+        case actionTypes.CREATE_LIST_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
         default:
             return state;
     }

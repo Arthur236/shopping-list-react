@@ -93,18 +93,46 @@ export function getSingleListFail(response) {
     };
 }
 
-export function createShoppingList(values) {
-    const request = axios({
-        method: "post",
-        url: ROOT_URL + "/shopping_lists",
-        headers: headers,
-        data: values
-    }).catch(error => {
-        errorHandling.catchError(error);
-    });
+// Shopping list creation
 
+export function createList(values) {
+    return function (dispatch) {
+        dispatch(createListRequest());
+
+        return axios({
+            method: "post",
+            url: ROOT_URL + "/shopping_lists",
+            headers: headers,
+            data: values
+
+        }).then(response => {
+            if (response.status === 201) {
+                dispatch(createListSuccess(response));
+            } else {
+                dispatch(createListFail(response));
+            }
+        }).catch(error => {
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function createListRequest() {
     return {
         type: actionTypes.CREATE_LIST_REQUEST,
-        payload: request
+    };
+}
+
+export function createListSuccess(response) {
+    return {
+        type: actionTypes.CREATE_LIST_SUCCESS,
+        response
+    };
+}
+
+export function createListFail(response) {
+    return {
+        type: actionTypes.CREATE_LIST_FAIL,
+        response
     };
 }

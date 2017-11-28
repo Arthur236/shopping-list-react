@@ -17,7 +17,7 @@ class ShoppingLists extends Component {
 
         this.state = {
             activePage: 1,
-            limit: 3,
+            limit: 30,
             next_page: '',
             previous_page: '',
             total_lists: null
@@ -28,6 +28,10 @@ class ShoppingLists extends Component {
         loadjs(process.env.PUBLIC_URL + '/js/custom.js');
 
         this.props.actions.getLists(this.state.activePage, this.state.limit);
+    }
+
+    componentDidUpdate() {
+        loadjs(process.env.PUBLIC_URL + '/js/custom.js');
     }
 
     render() {

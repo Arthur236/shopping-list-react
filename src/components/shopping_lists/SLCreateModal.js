@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createShoppingList } from "../../actions/shoppingListActions";
+import { createList } from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
 
@@ -57,4 +57,4 @@ SLCreateModal.propTypes = {
 export default reduxForm({
     validate,
     form: 'SLCreationForm'
-})(connect(null, { createShoppingList })(SLCreateModal));
+})(connect(null, { createShoppingList: createList })(SLCreateModal));
