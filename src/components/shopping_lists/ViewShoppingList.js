@@ -37,7 +37,7 @@ class ViewShoppingList extends Component {
         return(
             <div>
                 <Sidebar />
-                <Navigation />
+                <Navigation header={ activeList.name } />
 
                 <div className="content">
                     <div className="container shoppingListCont wow fadeInRight">

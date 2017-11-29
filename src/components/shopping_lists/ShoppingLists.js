@@ -39,7 +39,7 @@ class ShoppingLists extends Component {
         return(
             <div>
                 <Sidebar />
-                <Navigation />
+                <Navigation header="Shopping Lists" />
 
                 <div className="content">
                     <SLFab />

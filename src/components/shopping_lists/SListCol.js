@@ -26,7 +26,7 @@ const SListCol = ({ shoppingList }) => {
                         </a>
                         <ul>
                             <li>
-                                <a href={`#modal_${shoppingList.name}`}
+                                <a href={`#md_delete_${shoppingList.id}`}
                                    className="btn-floating modal-trigger tooltipped" data-position="top"
                                    data-delay="100" data-tooltip="Delete">
                                     <i className="material-icons">delete</i>

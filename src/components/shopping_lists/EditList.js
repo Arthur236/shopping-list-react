@@ -38,7 +38,7 @@ class EditList extends Component {
         return(
             <div>
                 <Sidebar />
-                <Navigation />
+                <Navigation header={`Edit ${activeList.name}`} />
 
                 <div className="content">
                     <div className="dashboard">
@@ -81,7 +81,10 @@ function mapStateToProps(state) {
     return {
         activeList: state.shoppingLists.activeList,
         loading: state.shoppingLists.loading,
-        initialValues: state.shoppingLists.activeList
+        initialValues: {
+            'name': state.shoppingLists.activeList.name,
+            'description': state.shoppingLists.activeList.description
+        }
     };
 }
 
@@ -93,5 +96,5 @@ function mapDispatchToProps(dispatch) {
 
 export default reduxForm({
     validate,
-    form: 'CreateListForm'
+    form: 'EditListForm'
 })(connect(mapStateToProps, mapDispatchToProps)(EditList));

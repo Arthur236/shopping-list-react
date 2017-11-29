@@ -154,7 +154,7 @@ export function editList(id, values, callback) {
 
         }).then(response => {
             if (response.status === 200) {
-                Materialize.toast("List edited successfully", 6000, 'rounded');
+                Materialize.toast(response.data.message, 6000, 'rounded');
 
                 dispatch(editListSuccess(response));
                 callback();
@@ -183,6 +183,52 @@ export function editListSuccess(response) {
 export function editListFail(response) {
     return {
         type: actionTypes.EDIT_LIST_FAIL,
+        response
+    };
+}
+
+// Delete list
+
+export function deleteList(id, callback) {
+    return function (dispatch) {
+        dispatch(deleteListRequest());
+
+        return axios({
+            method: "delete",
+            url: helpers.ROOT_URL + "/shopping_lists/" + id,
+            headers: headers
+
+        }).then(response => {
+            if (response.status === 200) {
+                Materialize.toast(response.data.message, 6000, 'rounded');
+
+                dispatch(deleteListSuccess(response));
+                callback();
+            } else {
+                dispatch(deleteListFail(response));
+            }
+        }).catch(error => {
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function deleteListRequest() {
+    return {
+        type: actionTypes.DELETE_LIST_REQUEST,
+    };
+}
+
+export function deleteListSuccess(response) {
+    return {
+        type: actionTypes.DELETE_LIST_SUCCESS,
+        response
+    };
+}
+
+export function deleteListFail(response) {
+    return {
+        type: actionTypes.DELETE_LIST_FAIL,
         response
     };
 }

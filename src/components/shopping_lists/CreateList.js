@@ -32,7 +32,7 @@ class CreateList extends Component {
         return(
             <div>
                 <Sidebar />
-                <Navigation />
+                <Navigation header="Create List" />
 
                 <div className="content">
                     <div className="dashboard">

@@ -59,6 +59,42 @@ export default function shoppingLists(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.EDIT_LIST_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.EDIT_LIST_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.EDIT_LIST_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.DELETE_LIST_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.DELETE_LIST_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.DELETE_LIST_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
         default:
             return state;
     }

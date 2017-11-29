@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { deleteList } from '../../actions/shoppingListActions';
 
 class SLDeleteModal extends Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onSubmit() {
+        this.props.deleteList(this.props.shoppingList.id);
+    }
 
     render() {
         const { shoppingList } = this.props;
@@ -12,7 +23,7 @@ class SLDeleteModal extends Component {
                     <p>Are you sure you want to delete this shopping list?</p>
                 </div>
                 <div className="modal-footer">
-                    <form className="left">
+                    <form className="left" onSubmit={this.onSubmit}>
                         <button className="modal-action modal-close waves-effect waves-green btn-flat"  type="submit" name="add">
                             Delete
                         </button>
@@ -28,4 +39,4 @@ SLDeleteModal.propTypes = {
     //myProp: PropTypes.string.isRequired
 };
 
-export default SLDeleteModal;
+export default connect(null, { deleteList })(SLDeleteModal);
