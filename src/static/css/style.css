@@ -17,7 +17,7 @@ input {
     justify-content: center;
     background-color: rgba(27, 23, 34, 1);
     position: fixed;
-    z-index: 100;
+    z-index: 15;
     top: 0;
     left: 0;
     right: 0;

@@ -32,7 +32,12 @@ class ShoppingLists extends Component {
 
         if (!shoppingLists || loading) {
             return(
-                <div className="center-align"><Loader size="small"/></div>
+                <div>
+                    <div className="preloaderBackground">
+                        <Loader size="medium"/>
+                    </div>
+                    <div className="overlay" />
+                </div>
             );
         }
 

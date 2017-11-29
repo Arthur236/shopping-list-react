@@ -5,6 +5,6 @@ export default {
     user: {},
     activeList: {},
     shoppingLists: {},
-    shoppingListItems: {}
+    listItems: {}
 };
 

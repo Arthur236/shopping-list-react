@@ -2,13 +2,19 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import SListCol from "./SListCol";
+import Loader from '../common/Loader';
 
 const SList = ({ shoppingLists }) => {
     const { shopping_lists } = shoppingLists;
 
     if (!shoppingLists) {
         return(
-            <div>LOADING...</div>
+            <div>
+                <div className="preloaderBackground">
+                    <Loader size="medium"/>
+                </div>
+                <div className="overlay" />
+            </div>
         );
     }
 

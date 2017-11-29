@@ -25,7 +25,12 @@ class ViewShoppingList extends Component {
 
         if (!activeList || loading) {
             return(
-                <div className="center-align"><Loader size="small"/></div>
+                <div>
+                    <div className="preloaderBackground">
+                        <Loader size="medium"/>
+                    </div>
+                    <div className="overlay" />
+                </div>
             );
         }
 

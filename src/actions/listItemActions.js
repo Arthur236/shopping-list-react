@@ -8,6 +8,12 @@ const headers = {
     'x-access-token': localStorage.getItem('token')
 };
 
+export function getItemsRequest() {
+    return {
+        type: actionTypes.GET_ITEMS_REQUEST
+    };
+}
+
 export function getItemsSuccess(response) {
     return {
         type: actionTypes.GET_ITEMS_SUCCESS,
@@ -22,11 +28,13 @@ export function getItemsFail(response) {
     };
 }
 
-export function getListItems(list, page, limit) {
+export function getListItems(id, page, limit) {
     return function (dispatch) {
+        dispatch(getItemsRequest());
+
         return axios({
             method: "get",
-            url: helpers.ROOT_URL + "/shopping_lists/" + list + "/items?page=" + page +"&limit=" + limit,
+            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items?page=" + page +"&limit=" + limit,
             headers: headers
         }).then(response => {
             if (response.status === 200) {

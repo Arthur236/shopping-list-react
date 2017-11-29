@@ -16,23 +16,23 @@ class SLItems extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getListItems(this.props.id, this.state.activePage, this.state.limit);
     }
 
     render() {
-        const { shoppingListItems } = this.props;
+        const { listItems } = this.props;
 
         return(
             <div>
-                <SLItemList shoppingListItems={shoppingListItems} />
+                <SLItemList listItems={listItems.listItems.shopping_list_items} />
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return { shoppingListItems: state.shoppingListItems };
+    return { listItems: state.listItems };
 }
 
 export default connect(mapStateToProps, { getListItems })(SLItems);

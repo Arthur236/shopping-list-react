@@ -14,7 +14,7 @@ const BackgroundSlider = () => {
                 </ul>
             </div>
 
-            <div className="overlay"></div>
+            <div className="overlay" />
         </div>
     );
 };
