@@ -13,8 +13,10 @@ const SList = ({ shoppingLists }) => {
     }
 
     return (
-        <div className="row">
-            { _.map(shopping_lists, shoppingList => <SListCol key={shoppingList.id} shoppingList={shoppingList}/>) }
+        <div className="container wow fadeInRight">
+            <div className="row">
+                { _.map(shopping_lists, shoppingList => <SListCol key={shoppingList.id} shoppingList={shoppingList}/>) }
+            </div>
         </div>
     );
 };

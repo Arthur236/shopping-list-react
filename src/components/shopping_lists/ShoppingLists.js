@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import customJs from '../../static/js/custom';
-import * as shoppingListActions from '../../actions/shoppingListActions';
+import { getLists } from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import Loader from '../common/Loader';
 import SLFab from "./SLFab";
 import SList from "./SList";
-import SLCreateModal from "./CreateList";
 
 class ShoppingLists extends Component {
     constructor(props) {
@@ -25,9 +23,8 @@ class ShoppingLists extends Component {
     }
 
     componentDidMount() {
+        this.props.getLists(this.state.activePage, this.state.limit);
         customJs();
-
-        this.props.actions.getLists(this.state.activePage, this.state.limit);
     }
 
     render() {
@@ -48,9 +45,7 @@ class ShoppingLists extends Component {
                     <SLFab />
 
                     <div className="dashboard">
-                        <div className="container wow fadeInRight">
-                            <SList shoppingLists={shoppingLists}/>
-                        </div>
+                        <SList shoppingLists={shoppingLists}/>
                     </div>
                 </div>
             </div>
@@ -67,10 +62,4 @@ function mapStateToProps(state) {
     return { shoppingLists: state.shoppingLists.shoppingLists, loading: state.shoppingLists.loading };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(shoppingListActions, dispatch)
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingLists);
+export default connect(mapStateToProps, { getLists })(ShoppingLists);

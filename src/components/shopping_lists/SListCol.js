@@ -34,8 +34,7 @@ const SListCol = ({ shoppingList }) => {
                             </li>
 
                             <li>
-                                <Link to={`/shopping_lists/edit/${shoppingList.id}`} className="btn-floating tooltipped"
-                                      data-position="top" data-delay="100" data-tooltip="Edit">
+                                <Link to={`/shopping_lists/edit/${shoppingList.id}`} className="btn-floating tooltipped" data-position="top" data-delay="100" data-tooltip="Edit">
                                     <i className="material-icons">edit</i>
                                 </Link>
                             </li>

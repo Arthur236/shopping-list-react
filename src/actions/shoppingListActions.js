@@ -1,10 +1,9 @@
 import axios from 'axios';
 import Materialize from 'materialize-css/dist/js/materialize.min';
+import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
-// const ROOT_URL = 'https://awesome-shopping-list-api.herokuapp.com/v1';
-const ROOT_URL = 'http://localhost:5000/v1';
 const headers = {
     'Content-Type': 'application/json',
     'x-access-token': localStorage.getItem('token')
@@ -18,7 +17,7 @@ export function getLists(page, limit) {
 
         return axios({
             method: "get",
-            url: ROOT_URL + "/shopping_lists?page=" + page +"&limit=" + limit,
+            url: helpers.ROOT_URL + "/shopping_lists?page=" + page +"&limit=" + limit,
             headers: headers
         }).then(response => {
             if (response.status === 200) {
@@ -60,7 +59,7 @@ export function getSingleList(id) {
 
         return axios({
             method: "get",
-            url: ROOT_URL + "/shopping_lists/" + id,
+            url: helpers.ROOT_URL + "/shopping_lists/" + id,
             headers: headers
         }).then(response => {
             if (response.status === 200) {
@@ -102,7 +101,7 @@ export function createList(values, callback) {
 
         return axios({
             method: "post",
-            url: ROOT_URL + "/shopping_lists",
+            url: helpers.ROOT_URL + "/shopping_lists",
             headers: headers,
             data: values
 
@@ -137,6 +136,53 @@ export function createListSuccess(response) {
 export function createListFail(response) {
     return {
         type: actionTypes.CREATE_LIST_FAIL,
+        response
+    };
+}
+
+// Shopping list edit
+
+export function editList(id, values, callback) {
+    return function (dispatch) {
+        dispatch(editListRequest());
+
+        return axios({
+            method: "put",
+            url: helpers.ROOT_URL + "/shopping_lists/" + id,
+            headers: headers,
+            data: values
+
+        }).then(response => {
+            if (response.status === 200) {
+                Materialize.toast("List edited successfully", 6000, 'rounded');
+
+                dispatch(editListSuccess(response));
+                callback();
+            } else {
+                dispatch(editListFail(response));
+            }
+        }).catch(error => {
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function editListRequest() {
+    return {
+        type: actionTypes.EDIT_LIST_REQUEST,
+    };
+}
+
+export function editListSuccess(response) {
+    return {
+        type: actionTypes.EDIT_LIST_SUCCESS,
+        response
+    };
+}
+
+export function editListFail(response) {
+    return {
+        type: actionTypes.EDIT_LIST_FAIL,
         response
     };
 }

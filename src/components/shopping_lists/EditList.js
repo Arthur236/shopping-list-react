@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import customJs from '../../static/js/custom';
+import * as shoppingListActions from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
-import { createList } from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
 
 class EditList extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(values) {
+    componentDidMount() {
+        customJs();
 
+        const id = this.props.match.params.id;
+        this.props.actions.getSingleList(id);
+    }
+
+    onSubmit(values) {
+        const id = this.props.match.params.id;
+
+        this.props.actions.editList(id, values, () => {
+            this.context.router.history.push('/dashboard');
+        });
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, activeList } = this.props;
 
         return(
             <div>
@@ -53,11 +67,31 @@ class EditList extends Component {
     }
 }
 
-EditList.propTypes = {
-    //myProp: PropTypes.string.isRequired
+// Pull in the React Router context so router is available on this.context.router.
+EditList.contextTypes = {
+    router: PropTypes.object
 };
+
+EditList.propTypes = {
+    activeList: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
+};
+
+function mapStateToProps(state) {
+    return {
+        activeList: state.shoppingLists.activeList,
+        loading: state.shoppingLists.loading,
+        initialValues: state.shoppingLists.activeList
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(shoppingListActions, dispatch)
+    };
+}
 
 export default reduxForm({
     validate,
     form: 'CreateListForm'
-})(connect(null, null)(EditList));
+})(connect(mapStateToProps, mapDispatchToProps)(EditList));

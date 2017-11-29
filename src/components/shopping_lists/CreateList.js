@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import customJs from '../../static/js/custom';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import { createList } from "../../actions/shoppingListActions";
@@ -13,6 +14,10 @@ class CreateList extends Component {
         super(props, context);
 
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        customJs();
     }
 
     onSubmit(values) {
