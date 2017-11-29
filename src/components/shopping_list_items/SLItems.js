@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import SLItemsFab from './SLItemsFab';
 import SLItemList from "./SLItemList";
 import { getListItems } from "../../actions/listItemActions";
 
@@ -9,27 +8,23 @@ class SLItems extends Component {
         super(props);
 
         this.state = {
-            activePage: 2,
-            limit: 3,
+            activePage: 1,
+            limit: 20,
             next_page: '',
             previous_page: '',
             total_items: null
         };
     }
 
-    // componentDidMount() {
-    //     const { id } = this.props.match.params;
-    //
-    //     this.props.getListItems(id, this.state.activePage, this.state.limit);
-    // }
+    componentDidMount() {
+        this.props.getListItems(this.props.id, this.state.activePage, this.state.limit);
+    }
 
     render() {
         const { shoppingListItems } = this.props;
 
         return(
             <div>
-                <SLItemsFab />
-
                 <SLItemList shoppingListItems={shoppingListItems} />
             </div>
         );

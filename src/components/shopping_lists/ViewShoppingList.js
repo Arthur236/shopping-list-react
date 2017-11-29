@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import customJs from '../../static/js/custom';
-import SLItems from "../shopping_list_items/SLItems";
 import * as shoppingListActions from '../../actions/shoppingListActions';
+import SLItems from "../shopping_list_items/SLItems";
+import SLItemsFab from '../shopping_list_items/SLItemsFab';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import Loader from '../common/Loader';
@@ -40,12 +41,14 @@ class ViewShoppingList extends Component {
                 <Navigation header={ activeList.name } />
 
                 <div className="content">
+                    <SLItemsFab />
+
                     <div className="container shoppingListCont wow fadeInRight">
                         <h4>{ activeList.name }</h4>
                         <div className="divider" />
                         <p>{ description }</p>
 
-                        <SLItems />
+                        <SLItems id={activeList.id} />
                     </div>
                 </div>
             </div>

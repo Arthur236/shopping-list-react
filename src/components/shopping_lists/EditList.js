@@ -17,11 +17,24 @@ class EditList extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         customJs();
 
         const id = this.props.match.params.id;
         this.props.actions.getSingleList(id);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { change, initialValues } = this.props
+        const values = nextProps.initialValues;
+
+        if(initialValues !== values){
+            for (var key in values) {
+                if (values.hasOwnProperty(key)) {
+                    change(key,values[key]);
+                }
+            }
+        }
     }
 
     onSubmit(values) {
@@ -81,10 +94,7 @@ function mapStateToProps(state) {
     return {
         activeList: state.shoppingLists.activeList,
         loading: state.shoppingLists.loading,
-        initialValues: {
-            'name': state.shoppingLists.activeList.name,
-            'description': state.shoppingLists.activeList.description
-        }
+        initialValues: state.shoppingLists.activeList
     };
 }
 
@@ -96,5 +106,6 @@ function mapDispatchToProps(dispatch) {
 
 export default reduxForm({
     validate,
-    form: 'EditListForm'
+    form: 'EditListForm',
+    enableReinitialize : true
 })(connect(mapStateToProps, mapDispatchToProps)(EditList));

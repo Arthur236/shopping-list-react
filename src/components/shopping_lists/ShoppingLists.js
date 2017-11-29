@@ -23,8 +23,8 @@ class ShoppingLists extends Component {
     }
 
     componentDidMount() {
-        this.props.getLists(this.state.activePage, this.state.limit);
         customJs();
+        this.props.getLists(this.state.activePage, this.state.limit);
     }
 
     render() {
