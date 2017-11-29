@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Materialize from 'materialize-css/dist/js/materialize.min';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
@@ -95,7 +96,7 @@ export function getSingleListFail(response) {
 
 // Shopping list creation
 
-export function createList(values) {
+export function createList(values, callback) {
     return function (dispatch) {
         dispatch(createListRequest());
 
@@ -107,7 +108,10 @@ export function createList(values) {
 
         }).then(response => {
             if (response.status === 201) {
+                Materialize.toast("List created successfully", 6000, 'rounded');
+
                 dispatch(createListSuccess(response));
+                callback();
             } else {
                 dispatch(createListFail(response));
             }

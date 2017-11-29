@@ -9,7 +9,7 @@ import Navigation from "../common/Navigation";
 import Loader from '../common/Loader';
 import SLFab from "./SLFab";
 import SList from "./SList";
-import SLCreateModal from "./SLCreateModal";
+import SLCreateModal from "./CreateList";
 
 class ShoppingLists extends Component {
     constructor(props) {
@@ -52,8 +52,6 @@ class ShoppingLists extends Component {
                             <SList shoppingLists={shoppingLists}/>
                         </div>
                     </div>
-
-                    <SLCreateModal />
                 </div>
             </div>
         );

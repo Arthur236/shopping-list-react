@@ -5,6 +5,8 @@ import Register from './components/register/Register';
 import Login from "./components/login/Login";
 import ShoppingLists from "./components/shopping_lists/ShoppingLists";
 import ViewShoppingList from "./components/shopping_lists/ViewShoppingList";
+import CreateList from "./components/shopping_lists/CreateList";
+import EditList from "./components/shopping_lists/EditList";
 
 export default (
     <Switch>
@@ -12,7 +14,9 @@ export default (
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={ShoppingLists} onEnter={requireAuth} />
-        <Route path="/shopping_lists/:id" component={ViewShoppingList} onEnter={requireAuth} />
+        <Route exact path="/shopping_lists/create" component={CreateList} onEnter={requireAuth} />
+        <Route exact path="/shopping_lists/edit/:id" component={EditList} onEnter={requireAuth} />
+        <Route exact path="/shopping_lists/:id" component={ViewShoppingList} onEnter={requireAuth} />
     </Switch>
 );
 

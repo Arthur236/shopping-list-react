@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { WOW } from 'wowjs/dist/wow';
 
 export default function customJs() {
@@ -15,7 +16,7 @@ export default function customJs() {
     wow.init();
 
     // Initialize collapse button
-    $(".button-collapse").sideNav();
+    $('.button-collapse').sideNav();
 
     //Initialize modal
     $('.modal').modal();

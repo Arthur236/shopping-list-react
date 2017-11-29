@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import Sidebar from "../common/Sidebar";
@@ -8,17 +7,15 @@ import { createList } from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
 
-class CreateList extends Component {
-    constructor(props, context) {
-        super(props, context);
+class EditList extends Component {
+    constructor(props) {
+        super(props);
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(values) {
-        this.props.createList(values, () => {
-            this.context.router.history.push('/dashboard');
-        });
+
     }
 
     render() {
@@ -32,7 +29,7 @@ class CreateList extends Component {
                 <div className="content">
                     <div className="dashboard">
                         <div className="container wow fadeInRight">
-                            <h4>Create Shopping List</h4>
+                            <h4>Edit Shopping List</h4>
                             <form onSubmit={handleSubmit(this.onSubmit)}>
                                 <FormInput
                                     type="text"
@@ -46,7 +43,7 @@ class CreateList extends Component {
                                     name="description"
                                     required="required" />
 
-                                <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Create</button>
+                                <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Edit</button>
                             </form>
                         </div>
                     </div>
@@ -56,16 +53,11 @@ class CreateList extends Component {
     }
 }
 
-// Pull in the React Router context so router is available on this.context.router.
-CreateList.contextTypes = {
-    router: PropTypes.object
-};
-
-CreateList.propTypes = {
+EditList.propTypes = {
     //myProp: PropTypes.string.isRequired
 };
 
 export default reduxForm({
     validate,
     form: 'CreateListForm'
-})(connect(null, { createList })(CreateList));
+})(connect(null, null)(EditList));
