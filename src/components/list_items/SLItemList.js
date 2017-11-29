@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const SLItemList = ({ listItems }) => {
+const SLItemList = ({ id, listItems }) => {
     let items = '';
 
     if(listItems) {
@@ -12,6 +13,17 @@ const SLItemList = ({ listItems }) => {
                 <td>{ listItem.quantity }</td>
                 <td>{ listItem.unit_price }</td>
                 <td>{ listItem.quantity * listItem.unit_price }</td>
+                <td>
+                    <Link to={`/shopping_lists/${id}/items/${listItem.id}`} class="btn-floating tooltipped orange"
+                       data-position="top" data-delay="100" data-tooltip="Edit"><i
+                        className="material-icons">edit</i></Link>
+                </td>
+                <td>
+                    <a href={`#md_delete_${listItem.id}`} className="btn-floating modal-trigger tooltipped red" data-position="top"
+                       data-delay="100" data-tooltip="Delete">
+                        <i className="material-icons">delete</i>
+                    </a>
+                </td>
             </tr>
         )
     } else {
@@ -41,7 +53,7 @@ const SLItemList = ({ listItems }) => {
 };
 
 SLItemList.propTypes = {
-    shoppingListItems: PropTypes.object.isRequired
+    listItems: PropTypes.object.isRequired
 };
 
 export default SLItemList;

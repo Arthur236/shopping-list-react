@@ -25,7 +25,7 @@ class SLItems extends Component {
 
         return(
             <div>
-                <SLItemList listItems={listItems.listItems.shopping_list_items} />
+                <SLItemList id={this.props.id} listItems={listItems.listItems.shopping_list_items} />
             </div>
         );
     }

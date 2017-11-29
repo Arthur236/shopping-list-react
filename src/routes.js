@@ -16,6 +16,8 @@ export default (
         <Route exact path="/dashboard" component={ShoppingLists} onEnter={requireAuth} />
         <Route exact path="/shopping_lists/create" component={CreateList} onEnter={requireAuth} />
         <Route exact path="/shopping_lists/edit/:id" component={EditList} onEnter={requireAuth} />
+        <Route exact path="/shopping_lists/:id/items" component={ViewShoppingList} onEnter={requireAuth} />
+        <Route exact path="/shopping_lists/:id/items/:id" component={ViewShoppingList} onEnter={requireAuth} />
         <Route exact path="/shopping_lists/:id" component={ViewShoppingList} onEnter={requireAuth} />
     </Switch>
 );
