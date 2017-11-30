@@ -7,7 +7,8 @@ import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import { createList } from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
-import validate from '../../utils/formValidator'
+import validate from '../../utils/formValidator';
+import Loader from '../common/Loader';
 
 class CreateList extends Component {
     constructor(props, context) {
@@ -27,7 +28,15 @@ class CreateList extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, loading } = this.props;
+
+        let button = '';
+
+        if (loading) {
+            button = <div className="center-align"><Loader size="small"/></div>;
+        } else {
+            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Create</button>;
+        }
 
         return(
             <div>
@@ -48,10 +57,11 @@ class CreateList extends Component {
                                 <FormInput
                                     type="text"
                                     label="Description"
-                                    name="description"
-                                    required="required" />
+                                    name="description" />
 
-                                <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Create</button>
+                                <div className="input-field col s12">
+                                    { button }
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -70,7 +80,11 @@ CreateList.propTypes = {
     //myProp: PropTypes.string.isRequired
 };
 
+function mapStateToProps(state) {
+    return { loading: state.shoppingLists.loading };
+}
+
 export default reduxForm({
     validate,
     form: 'CreateListForm'
-})(connect(null, { createList })(CreateList));
+})(connect(mapStateToProps, { createList })(CreateList));

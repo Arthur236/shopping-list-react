@@ -7,14 +7,14 @@ const ItemList = ({ id, listItems }) => {
     let items = '';
 
     if(listItems) {
-        items = _.map(listItems, listItem =>
+        items = _.map(listItems.shopping_list_items, listItem =>
             <tr key={ listItem.id }>
                 <td>{ listItem.name }</td>
                 <td>{ listItem.quantity }</td>
                 <td>{ listItem.unit_price }</td>
                 <td>{ listItem.quantity * listItem.unit_price }</td>
                 <td>
-                    <Link to={`/shopping_lists/${id}/items/${listItem.id}`} class="btn-floating tooltipped orange"
+                    <Link to={`/shopping_lists/${id}/items/edit/${listItem.id}`} className="btn-floating tooltipped orange"
                        data-position="top" data-delay="100" data-tooltip="Edit"><i
                         className="material-icons">edit</i></Link>
                 </td>
@@ -41,6 +41,8 @@ const ItemList = ({ id, listItems }) => {
                         <th>Quantity</th>
                         <th>Unit Price</th>
                         <th>Total</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>

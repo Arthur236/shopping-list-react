@@ -21,6 +21,25 @@ export default function listItems(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.GET_SINGLE_ITEM_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.GET_SINGLE_ITEM_SUCCESS:
+            return {
+                ...state,
+                activeItem: action.response.data,
+                loading: false
+            };
+
+        case actionTypes.GET_SINGLE_ITEM_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
         case actionTypes.CREATE_ITEM_REQUEST:
             return {
                 ...state,
@@ -35,6 +54,24 @@ export default function listItems(state = initialState, action) {
             };
 
         case actionTypes.CREATE_ITEM_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.EDIT_ITEM_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.EDIT_ITEM_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.EDIT_ITEM_FAIL:
             return {
                 ...state,
                 loading: false

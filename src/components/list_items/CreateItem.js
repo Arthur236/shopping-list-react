@@ -7,7 +7,8 @@ import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import { createItem } from "../../actions/listItemActions";
 import FormInput from '../common/FormInput';
-import validate from '../../utils/formValidator'
+import validate from '../../utils/formValidator';
+import Loader from '../common/Loader';
 
 class CreateItem extends Component {
     constructor(props, context) {
@@ -29,7 +30,15 @@ class CreateItem extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, loading } = this.props;
+
+        let button = '';
+
+        if (loading) {
+            button = <div className="center-align"><Loader size="small"/></div>;
+        } else {
+            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Add</button>;
+        }
 
         return(
             <div>
@@ -59,7 +68,9 @@ class CreateItem extends Component {
                                     name="unit_price"
                                     required="required" />
 
-                                <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Add</button>
+                                <div className="input-field col s12">
+                                    { button }
+                                </div>
                             </form>
                         </div>
                     </div>

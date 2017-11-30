@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
+import {reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as listItemActions from "../../actions/listItemActions";
 import customJs from '../../static/js/custom';
-import * as shoppingListActions from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Loader from '../common/Loader';
 
-class EditList extends Component {
+class EditItem extends Component {
     constructor(props, context) {
         super(props, context);
 
@@ -22,17 +22,19 @@ class EditList extends Component {
         customJs();
 
         const id = this.props.match.params.id;
-        this.props.actions.getSingleList(id);
+        const item_id = this.props.match.params.item_id;
+
+        this.props.actions.getSingleItem(id, item_id);
     }
 
     componentWillReceiveProps(nextProps) {
-        const { change, initialValues } = this.props;
+        const {change, initialValues} = this.props;
         const values = nextProps.initialValues;
 
-        if(initialValues !== values){
+        if (initialValues !== values) {
             for (let key in values) {
                 if (values.hasOwnProperty(key)) {
-                    change(key,values[key]);
+                    change(key, values[key]);
                 }
             }
         }
@@ -40,14 +42,15 @@ class EditList extends Component {
 
     onSubmit(values) {
         const id = this.props.match.params.id;
+        const item_id = this.props.match.params.item_id;
 
-        this.props.actions.editList(id, values, () => {
-            this.context.router.history.push('/dashboard');
+        this.props.actions.editItem(id, item_id, values, () => {
+            this.context.router.history.push('/shopping_lists/' + id + '/items');
         });
     }
 
     render() {
-        const { handleSubmit, activeList, loading } = this.props;
+        const {handleSubmit, activeItem, loading} = this.props;
 
         let button = '';
 
@@ -57,26 +60,33 @@ class EditList extends Component {
             button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Edit</button>;
         }
 
-        return(
+        return (
             <div>
-                <Sidebar />
-                <Navigation header={`Edit ${activeList.name}`} />
+                <Sidebar/>
+                <Navigation header={`Edit ${activeItem.name}`}/>
 
                 <div className="content">
                     <div className="dashboard">
                         <div className="container wow fadeInRight">
-                            <h4>Edit Shopping List</h4>
+                            <h4>Edit Item</h4>
                             <form onSubmit={handleSubmit(this.onSubmit)}>
                                 <FormInput
                                     type="text"
                                     label="Name"
                                     name="name"
-                                    required="required" />
+                                    required="required"/>
 
                                 <FormInput
-                                    type="text"
-                                    label="Description"
-                                    name="description" />
+                                    type="number"
+                                    label="Quantity"
+                                    name="quantity"
+                                    required="required"/>
+
+                                <FormInput
+                                    type="number"
+                                    label="Unit Price"
+                                    name="unit_price"
+                                    required="required"/>
 
                                 <div className="input-field col s12">
                                     { button }
@@ -91,31 +101,31 @@ class EditList extends Component {
 }
 
 // Pull in the React Router context so router is available on this.context.router.
-EditList.contextTypes = {
+EditItem.contextTypes = {
     router: PropTypes.object
 };
 
-EditList.propTypes = {
-    activeList: PropTypes.object.isRequired,
+EditItem.propTypes = {
+    activeItem: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        activeList: state.shoppingLists.activeList,
-        loading: state.shoppingLists.loading,
-        initialValues: state.shoppingLists.activeList
+        activeItem: state.listItems.activeItem,
+        loading: state.listItems.loading,
+        initialValues: state.listItems.activeItem
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(shoppingListActions, dispatch)
+        actions: bindActionCreators(listItemActions, dispatch)
     };
 }
 
 export default reduxForm({
     validate,
-    form: 'EditListForm',
+    form: 'EditItemForm',
     enableReinitialize : true
-})(connect(mapStateToProps, mapDispatchToProps)(EditList));
+})(connect(mapStateToProps, mapDispatchToProps)(EditItem));

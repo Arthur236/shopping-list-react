@@ -16,7 +16,7 @@ const SListCol = ({ shoppingList }) => {
         <div className="col s12 m6 l6">
             <div className="card white">
                 <div className="card-content">
-                    <Link to={`/shopping_lists/${shoppingList.id}`}>
+                    <Link to={`/shopping_lists/${shoppingList.id}/items`}>
                         <span className="card-title">{shoppingList.name}</span>
                     </Link>
                     <div className="fixed-action-btn horizontal">
