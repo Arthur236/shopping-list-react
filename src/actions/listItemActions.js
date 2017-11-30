@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Materialize from 'materialize-css/dist/js/materialize.min';
 import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
@@ -46,4 +47,51 @@ export function getListItems(id, page, limit) {
             errorHandling.catchError(error);
         });
     }
+}
+
+// Shopping list creation
+
+export function createItem(id, values, callback) {
+    return function (dispatch) {
+        dispatch(createItemRequest());
+
+        return axios({
+            method: "post",
+            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items",
+            headers: headers,
+            data: values
+
+        }).then(response => {
+            if (response.status === 201) {
+                Materialize.toast("List created successfully", 6000, 'rounded');
+
+                dispatch(createItemSuccess(response));
+                callback();
+            } else {
+                dispatch(createItemFail(response));
+            }
+        }).catch(error => {
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function createItemRequest() {
+    return {
+        type: actionTypes.CREATE_ITEM_REQUEST,
+    };
+}
+
+export function createItemSuccess(response) {
+    return {
+        type: actionTypes.CREATE_ITEM_SUCCESS,
+        response
+    };
+}
+
+export function createItemFail(response) {
+    return {
+        type: actionTypes.CREATE_ITEM_FAIL,
+        response
+    };
 }

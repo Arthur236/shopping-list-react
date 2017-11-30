@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const SLItemList = ({ id, listItems }) => {
+const ItemList = ({ id, listItems }) => {
     let items = '';
 
     if(listItems) {
@@ -48,12 +48,14 @@ const SLItemList = ({ id, listItems }) => {
                     </tbody>
                 </table>
             </div>
+
+
         </div>
     );
 };
 
-SLItemList.propTypes = {
+ItemList.propTypes = {
     listItems: PropTypes.object.isRequired
 };
 
-export default SLItemList;
+export default ItemList;

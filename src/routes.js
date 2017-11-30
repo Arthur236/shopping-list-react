@@ -7,6 +7,7 @@ import ShoppingLists from "./components/shopping_lists/ShoppingLists";
 import ViewShoppingList from "./components/shopping_lists/ViewShoppingList";
 import CreateList from "./components/shopping_lists/CreateList";
 import EditList from "./components/shopping_lists/EditList";
+import CreateItem from "./components/list_items/CreateItem";
 
 export default (
     <Switch>
@@ -17,6 +18,7 @@ export default (
         <Route exact path="/shopping_lists/create" component={CreateList} onEnter={requireAuth} />
         <Route exact path="/shopping_lists/edit/:id" component={EditList} onEnter={requireAuth} />
         <Route exact path="/shopping_lists/:id/items" component={ViewShoppingList} onEnter={requireAuth} />
+        <Route exact path="/shopping_lists/:id/items/create" component={CreateItem} onEnter={requireAuth} />
         <Route exact path="/shopping_lists/:id/items/:id" component={ViewShoppingList} onEnter={requireAuth} />
         <Route exact path="/shopping_lists/:id" component={ViewShoppingList} onEnter={requireAuth} />
     </Switch>
