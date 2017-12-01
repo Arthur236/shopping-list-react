@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import initialState from './initialState';
+import _ from 'lodash';
 
 export default function listItems(state = initialState, action) {
     switch(action.type) {
@@ -72,6 +73,24 @@ export default function listItems(state = initialState, action) {
             };
 
         case actionTypes.EDIT_ITEM_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.DELETE_ITEM_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.DELETE_ITEM_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.DELETE_ITEM_FAIL:
             return {
                 ...state,
                 loading: false

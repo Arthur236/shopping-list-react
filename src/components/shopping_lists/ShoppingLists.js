@@ -6,8 +6,8 @@ import { getLists } from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import Loader from '../common/Loader';
-import SLFab from "./SLFab";
-import SList from "./SList";
+import ListFab from "./ListsFab";
+import List from "./List";
 
 class ShoppingLists extends Component {
     constructor(props) {
@@ -47,10 +47,10 @@ class ShoppingLists extends Component {
                 <Navigation header="Shopping Lists" />
 
                 <div className="content">
-                    <SLFab />
+                    <ListFab />
 
                     <div className="dashboard">
-                        <SList shoppingLists={shoppingLists}/>
+                        <List shoppingLists={shoppingLists}/>
                     </div>
                 </div>
             </div>

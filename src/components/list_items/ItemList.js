@@ -2,9 +2,10 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import DeleteItem from './DeleteItem';
 
 const ItemList = ({ id, listItems }) => {
-    let items = '';
+    let items, deleteModals = '';
 
     if(listItems) {
         items = _.map(listItems.shopping_list_items, listItem =>
@@ -25,7 +26,12 @@ const ItemList = ({ id, listItems }) => {
                     </a>
                 </td>
             </tr>
-        )
+        );
+
+        deleteModals = _.map(listItems.shopping_list_items, listItem =>
+            <DeleteItem key={listItem.id} shoppingList={id} item={listItem} />
+        );
+
     } else {
         items = <tr><td colSpan="4">This list has no items. Please add some.</td></tr>
     }
@@ -51,7 +57,7 @@ const ItemList = ({ id, listItems }) => {
                 </table>
             </div>
 
-
+            { deleteModals }
         </div>
     );
 };

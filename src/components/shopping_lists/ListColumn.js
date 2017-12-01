@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import SLDeleteModal from "./SLDeleteModal";
+import DeleteList from "./DeleteList";
 
-const SListCol = ({ shoppingList }) => {
+const ListColumn = ({ shoppingList }) => {
     let description = '';
 
     if (!shoppingList.description) {
@@ -46,13 +46,13 @@ const SListCol = ({ shoppingList }) => {
                 </div>
             </div>
 
-            <SLDeleteModal shoppingList={shoppingList}/>
+            <DeleteList shoppingList={shoppingList} />
         </div>
     );
 };
 
-SListCol.propTypes = {
+ListColumn.propTypes = {
     shoppingList: PropTypes.object.isRequired
 };
 
-export default SListCol;
+export default ListColumn;

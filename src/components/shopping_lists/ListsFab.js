@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SLFab = () => {
+const ListFab = () => {
     return (
         <div className="cornerFab">
             <div className="fixed-action-btn wow bounceInRight">
@@ -15,4 +15,4 @@ const SLFab = () => {
     );
 };
 
-export default SLFab;
+export default ListFab;

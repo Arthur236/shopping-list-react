@@ -42,6 +42,7 @@ class Items extends Component {
 
                     <div className="container shoppingListCont wow fadeInRight">
                         <h4>{ activeList.name }</h4>
+                        <p>{ activeList.description }</p>
                         <div className="divider" />
                         <ItemList id={activeList.id} listItems={listItems.listItems} />
                     </div>

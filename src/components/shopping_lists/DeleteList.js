@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import customJs from '../../static/js/custom';
 import { deleteList } from '../../actions/shoppingListActions';
 
-class SLDeleteModal extends Component {
+class DeleteList extends Component {
     constructor(props, context) {
         super(props, context);
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        customJs();
+    }
+
     onSubmit() {
-        this.props.deleteList(this.props.shoppingList.id);
+        const { shoppingList } = this.props;
+
+        this.props.deleteList(shoppingList.id, () => {
+            this.context.router.history.push('/dashboard');
+        });
     }
 
     render() {
@@ -35,8 +45,13 @@ class SLDeleteModal extends Component {
     }
 }
 
-SLDeleteModal.propTypes = {
+// Pull in the React Router context so router is available on this.context.router.
+DeleteList.contextTypes = {
+    router: PropTypes.object
+};
+
+DeleteList.propTypes = {
     //myProp: PropTypes.string.isRequired
 };
 
-export default connect(null, { deleteList })(SLDeleteModal);
+export default connect(null, { deleteList })(DeleteList);

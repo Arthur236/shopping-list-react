@@ -111,7 +111,7 @@ export function createItem(id, values, callback) {
 
         }).then(response => {
             if (response.status === 201) {
-                Materialize.toast("List created successfully", 6000, 'rounded');
+                    Materialize.toast("Item created successfully", 6000, 'rounded');
 
                 dispatch(createItemSuccess(response));
                 callback();
@@ -189,6 +189,53 @@ export function editItemSuccess(response) {
 export function editItemFail(response) {
     return {
         type: actionTypes.EDIT_ITEM_FAIL,
+        response
+    };
+}
+
+// Delete item
+
+export function deleteItem(id, item_id, callback) {
+    return function (dispatch) {
+        dispatch(deleteItemRequest());
+
+        return axios({
+            method: "delete",
+            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items/" + item_id,
+            headers: headers
+
+        }).then(response => {
+            if (response.status === 200) {
+                Materialize.toast(response.data.message, 6000, 'rounded');
+
+                dispatch(deleteItemSuccess(response));
+                callback();
+            } else {
+                dispatch(deleteItemFail(response));
+            }
+        }).catch(error => {
+            dispatch(deleteItemFail(error));
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function deleteItemRequest() {
+    return {
+        type: actionTypes.DELETE_ITEM_REQUEST,
+    };
+}
+
+export function deleteItemSuccess(response) {
+    return {
+        type: actionTypes.DELETE_ITEM_SUCCESS,
+        response
+    };
+}
+
+export function deleteItemFail(response) {
+    return {
+        type: actionTypes.DELETE_ITEM_FAIL,
         response
     };
 }
