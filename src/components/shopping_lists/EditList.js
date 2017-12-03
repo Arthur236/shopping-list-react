@@ -5,7 +5,6 @@ import Notifications from 'react-notify-toast';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import customJs from '../../static/js/custom';
 import * as shoppingListActions from '../../actions/shoppingListActions';
 import Navigation from "../common/Navigation";
 import FormInput from '../common/FormInput';

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import customJs from '../../static/js/custom';
+import Notifications from 'react-notify-toast';
+import { Segment, Container } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import ItemList from "./ItemList";
 import { getListItems } from "../../actions/listItemActions";
-import ItemsFab from '../list_items/ItemsFab';
-import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
-import Loader from '../common/PreLoader';
+import PreLoader from '../common/PreLoader';
+import shoppingLists from "../../reducers/shoppingListsReducer";
 
 class Items extends Component {
     constructor(props) {
@@ -23,37 +24,48 @@ class Items extends Component {
     }
 
     componentWillMount() {
-        customJs();
-
         const id = this.props.match.params.id;
         this.props.getListItems(id, this.state.activePage, this.state.limit);
     }
 
     render() {
-        const { listItems, activeList } = this.props;
+        const { listItems, activeList, loading } = this.props;
+
+        if (!listItems || loading) {
+            return(
+                <PreLoader />
+            );
+        }
 
         return(
-            <div>
-                <Sidebar />
-                <Navigation header={ activeList.name } />
+            <div className="content">
+                <Notifications />
 
-                <div className="content">
-                    <ItemsFab id={ activeList.id } />
+                <Container>
+                    <Navigation header={activeList.name}/>
 
-                    <div className="container shoppingListCont wow fadeInRight">
-                        <h4>{ activeList.name }</h4>
+                    <Segment basic>
+                        <Link to={`/shopping_lists/${activeList.id}/items/create`} className="ui button purple fluid">Create Item</Link>
+
+                        <h3>{ activeList.name }</h3>
                         <p>{ activeList.description }</p>
+
                         <div className="divider" />
+
                         <ItemList id={activeList.id} listItems={listItems.listItems} />
-                    </div>
-                </div>
+                    </Segment>
+                </Container>
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return { activeList: state.shoppingLists.activeList , listItems: state.listItems };
+    return {
+        activeList: state.shoppingLists.activeList,
+        listItems: state.listItems,
+        loading: state.listItems.loading
+    };
 }
 
 export default connect(mapStateToProps, { getListItems })(Items);

@@ -25,28 +25,24 @@ class DeleteList extends Component {
         const { shoppingList } = this.props;
 
         return(
-            <div>
-                <Notifications />
+            <Modal trigger={<a className="right floated"><Icon name='trash' className="red"/>Delete</a>} basic size='small'>
+                <Header content={`Delete ${ shoppingList.name }`} />
 
-                <Modal trigger={<a className="right floated"><Icon name='trash' className="red"/>Delete</a>} basic size='small'>
-                    <Header content={`Delete ${ shoppingList.name }`} />
+                <Modal.Content>
+                    <p>Are you sure you want to delete this shopping list?</p>
+                </Modal.Content>
 
-                    <Modal.Content>
-                        <p>Are you sure you want to delete this shopping list?</p>
-                    </Modal.Content>
-
-                    <Modal.Actions>
-                        <Button type='submit' basic color='blue' inverted>
-                            <Icon name='remove' /> No
+                <Modal.Actions>
+                    <Button type='submit' basic color='blue' inverted>
+                        <Icon name='remove' /> No
+                    </Button>
+                    <form onSubmit={this.onSubmit}>
+                        <Button color='red' inverted className='right floated'>
+                            <Icon name='checkmark' /> Yes
                         </Button>
-                        <form onSubmit={this.onSubmit}>
-                            <Button color='red' inverted className='right floated'>
-                                <Icon name='checkmark' /> Yes
-                            </Button>
-                        </form>
-                    </Modal.Actions>
-                </Modal>
-            </div>
+                    </form>
+                </Modal.Actions>
+            </Modal>
         );
     }
 }
