@@ -28,10 +28,10 @@ class DeleteItem extends Component {
                     <p>Are you sure you want to delete this item list?</p>
                 </div>
                 <div className="modal-footer">
-                    <a href="#!" className="modal-action waves-effect waves-green btn-flat" name="add" onClick={this.onClick}>
+                    <button className="modal-action waves-effect waves-green btn-flat" name="add" onClick={this.onClick}>
                         Delete
-                    </a>
-                    <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                    </button>
+                    <button className="modal-action modal-close waves-effect waves-green btn-flat">Close</button>
                 </div>
             </div>
         );
