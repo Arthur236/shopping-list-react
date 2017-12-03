@@ -6,6 +6,7 @@ export default function auth(state = initialState, action) {
         case actionTypes.REGISTER_REQUEST:
             return {
                 ...state,
+                registered: false,
                 loading: true
             };
 
@@ -19,12 +20,14 @@ export default function auth(state = initialState, action) {
         case actionTypes.REGISTER_FAIL:
             return {
                 ...state,
+                registered: false,
                 loading: false
             };
 
         case actionTypes.LOGIN_REQUEST:
             return {
                 ...state,
+                loggedIn: false,
                 loading: true,
                 user: action.user.email
             };
@@ -39,6 +42,7 @@ export default function auth(state = initialState, action) {
         case actionTypes.LOGIN_FAIL:
             return {
                 ...state,
+                loggedIn: false,
                 loading: false
             };
 

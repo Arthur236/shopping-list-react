@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Materialize from 'materialize-css/dist/js/materialize.min';
 import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
@@ -17,15 +16,15 @@ export function register(values) {
             data: values
         }).then(response => {
             if (response.status === 201) {
-                Materialize.toast(response.data.message, 6000, 'rounded');
 
+                helpers.showToast('success', response.data.message);
                 dispatch(registerSuccess(response));
             } else {
-                Materialize.toast(response.data.message, 6000, 'rounded');
 
                 dispatch(registerFail(response));
             }
         }).catch(error => {
+            dispatch(registerFail(error));
             errorHandling.catchError(error);
         });
     }
@@ -65,16 +64,15 @@ export function login(values) {
             window.localStorage.removeItem('token');
 
             if (response.status === 200) {
-                Materialize.toast(response.data.message, 6000, 'rounded');
+                helpers.showToast('success', response.data.message);
                 window.localStorage.setItem('token', response.data.access_token);
 
                 dispatch(loginSuccess(response));
             } else {
-                Materialize.toast(response.data.message, 6000, 'rounded');
-
                 dispatch(loginFail(response));
             }
         }).catch(error => {
+            dispatch(loginFail(error));
             errorHandling.catchError(error);
         });
     }

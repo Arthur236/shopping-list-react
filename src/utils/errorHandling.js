@@ -1,11 +1,11 @@
-import Materialize from 'materialize-css/dist/js/materialize.min';
+import { showToast } from "./helpers";
 
 export function catchError(error) {
     if (error.response) {
-        Materialize.toast(error.response.data.message, 6000, 'rounded');
+        showToast('error', error.response.data.message);
     } else if (error.request) {
-        Materialize.toast(error.request.response.message, 6000, 'rounded');
+        showToast('error', error.request.response.message);
     } else {
-        Materialize.toast(error.message, 6000, 'rounded');
+        showToast('error', error.message);
     }
 }

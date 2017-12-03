@@ -1,15 +1,80 @@
-/************** Home **************/
-.landingContent {
-    height: 100vh;
+html, body {
+    color: #9e9e9e;
+    font-family: GillSans, Calibri, Trebuchet, sans-serif;
+    font-size: 14px;
+    line-height: 1.4285em;
+}
+
+/************************************* Home *************************************/
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     background-color: rgba(27, 23, 34, 0.9);
 }
-.landingContent .ui.text.container {
+
+.logo {
+    position: absolute;
+    padding-top: 50px;
+    color: #fefefe; !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.landingContent {
+    height: 100vh;
+    color: #fefefe;
+    position: absolute;
+    overflow: hidden;
+}
+
+.landingContent img {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.landingInfo {
+    position: absolute;
+    top: 30%;
+    bottom: 0;
+    left: 0;
+    right: 0;
     margin: auto;
 }
-.landingContent .footer {
-    height: 80px;
+
+.footer {
+    height: 50px;
     width: 100%;
     position: absolute;
     bottom: 0;
-    color: gray;
+    padding-left: 20px;
+    color: #fefefe;
+}
+
+.landingBtn {
+    width: 150px;
+}
+
+/************************************* Registration *************************************/
+.ui.container.formContainer {
+    margin-top: 6em;
+    max-width: 22em !important;
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.errorText {
+    color: #9f3a38;
 }

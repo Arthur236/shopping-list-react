@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Form } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { register } from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator'
-import Loader from '../common/Loader';
+import Footer from '../common/Footer';
 
 class RegistrationForm extends Component {
     constructor(props, context) {
@@ -18,7 +19,6 @@ class RegistrationForm extends Component {
     onSubmit(values) {
         this.props.register(values)
             .then(() => {
-            console.log(this.props);
                 if (this.props.registered) {
                     this.context.router.history.push('/login');
                 }
@@ -30,54 +30,58 @@ class RegistrationForm extends Component {
         let button = '';
 
         if (loading) {
-            button = <div className="center-align"><Loader size="small"/></div>;
+            button = <Button type='submit' inverted disabled loading color='purple' className='fluid'>Register</Button>;
         } else {
-            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Register</button>;
+            button = <Button type='submit' inverted color='purple' className='fluid'>Register</Button>;
         }
 
         return(
-            <div className="row container formsContainer wow fadeInDown">
-                <div className="col s8 offset-s2 landingForm">
-                    <div className="col s12">
-                        <h3>Register</h3>
-                    </div>
+            <div className="ui center aligned inverted landingContent">
+                <img src={process.env.PUBLIC_URL + '/img/img3.jpg'} />
+                <div className="overlay" />
 
-                    <form onSubmit={handleSubmit(this.onSubmit)}>
-                        <FormInput
-                            type="text"
-                            label="Username"
-                            name="username"
-                            required="required"/>
+                <div className="ui inverted center aligned grid">
+                    <div className="ui inverted container formContainer">
+                        <Form onSubmit={handleSubmit(this.onSubmit)}>
+                            <h1 className="ui inverted header">Register</h1>
+                            <FormInput
+                                type="text"
+                                placeholder="Username"
+                                name="username"
+                                required="required"
+                                icon="user"/>
 
-                        <FormInput
-                            type="email"
-                            label="Email"
-                            name="email"
-                            required="required"/>
+                            <FormInput
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                required="required"
+                                icon="mail"/>
 
-                        <FormInput
-                            type="password"
-                            label="Password"
-                            name="password"
-                            required="required"/>
+                            <FormInput
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                required="required"
+                                icon="key"/>
 
-                        <FormInput
-                            type="password"
-                            label="Confirm Password"
-                            name="c_password"
-                            required="required"/>
+                            <FormInput
+                                type="password"
+                                placeholder="Confirm Password"
+                                name="c_password"
+                                required="required"
+                                icon="key"/>
 
-                        <div className="input-field col s12">
                             { button }
-                        </div>
-                    </form>
+                        </Form>
 
-                    <div className="col s12">
-                        <p className="center-align ">
+                        <p className="ui inverted">
                             Already have an account? <Link to="/login" className="formLink">Sign In</Link>
                         </p>
                     </div>
                 </div>
+
+                <Footer />
             </div>
         );
     }

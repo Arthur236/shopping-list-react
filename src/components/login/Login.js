@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
-import customJs from '../../static/js/custom';
-import BackgroundSlider from '../common/BackgroundSlider';
 import LoginForm from "./LoginForm";
-import Banner from "../common/Banner";
+import Notifications from 'react-notify-toast';
 
 class Login extends Component {
-    componentDidMount() {
-        customJs();
-    }
-
     render() {
         return(
             <div>
-                <BackgroundSlider />
-                <div className="landingContent" id="pageContent">
-                    <div className="container">
-                        <Banner />
-                    </div>
-                </div>
+                <Notifications />
                 <LoginForm />
             </div>
         );

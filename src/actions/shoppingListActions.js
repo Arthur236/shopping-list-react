@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Materialize from 'materialize-css/dist/js/materialize.min';
 import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
@@ -109,7 +108,7 @@ export function createList(values, callback) {
 
         }).then(response => {
             if (response.status === 201) {
-                Materialize.toast("List created successfully", 6000, 'rounded');
+                helpers.showToast('success', "List created successfully");
 
                 dispatch(createListSuccess(response));
                 callback();
@@ -157,7 +156,7 @@ export function editList(id, values, callback) {
 
         }).then(response => {
             if (response.status === 200) {
-                Materialize.toast(response.data.message, 6000, 'rounded');
+                helpers.showToast('success', response.data.message);
 
                 dispatch(editListSuccess(response));
                 callback();
@@ -204,7 +203,7 @@ export function deleteList(id, callback) {
 
         }).then(response => {
             if (response.status === 200) {
-                Materialize.toast(response.data.message, 6000, 'rounded');
+                helpers.showToast('success', response.data.message);
 
                 dispatch(deleteListSuccess(response));
                 callback();

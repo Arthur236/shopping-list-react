@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Form } from 'semantic-ui-react'
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from "../../actions/authActions";
 import FormInput from '../common/FormInput';
-import validate from '../../utils/formValidator'
-import Loader from '../common/Loader';
+import validate from '../../utils/formValidator';
+import Footer from '../common/Footer';
 
 class LoginForm extends Component {
     constructor(props, context) {
@@ -41,42 +42,45 @@ class LoginForm extends Component {
         let button = '';
 
         if (loading) {
-            button = <div className="center-align"><Loader size="small"/></div>;
+            button = <Button type='submit' inverted disabled loading color='purple' className='fluid'>Register</Button>;
         } else {
-            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Log In</button>;
+            button = <Button type='submit' inverted color='purple' className='fluid'>Login</Button>;
         }
 
         return(
-            <div className="row container formsContainer loginContainer wow fadeInDown">
-                <div className="col s8 offset-s2 landingForm">
-                    <div className="col s12">
-                        <h3>Log In</h3>
-                    </div>
+            <div className="ui center aligned inverted landingContent">
+                <img src={process.env.PUBLIC_URL + '/img/img3.jpg'} />
+                <div className="overlay" />
 
-                    <form onSubmit={handleSubmit(this.onSubmit)} onChange={this.onChange}>
-                        <FormInput
-                            type="email"
-                            label="Email"
-                            name="email"
-                            required="required"/>
+                <div className="ui inverted center aligned grid">
+                    <div className="ui inverted container formContainer">
+                        <Form onSubmit={handleSubmit(this.onSubmit)} onChange={this.onChange}>
+                            <h1 className="ui inverted header">Log In</h1>
 
-                        <FormInput
-                            type="password"
-                            label="Password"
-                            name="password"
-                            required="required"/>
+                            <FormInput
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                required="required"
+                                icon="mail"/>
 
-                        <div className="input-field col s12">
+                            <FormInput
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                required="required"
+                                icon="key"/>
+
                             { button }
-                        </div>
-                    </form>
+                        </Form>
 
-                    <div className="col s12">
-                        <p className="center-align ">
+                        <p className="ui inverted">
                             Already have an account? <Link to="/register" className="formLink">Sign Up</Link>
                         </p>
                     </div>
                 </div>
+
+                <Footer />
             </div>
         );
     }

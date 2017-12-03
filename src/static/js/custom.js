@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import { WOW } from 'wowjs/dist/wow';
 
 export default function customJs() {
     //Preloader background timeout
@@ -10,10 +9,6 @@ export default function customJs() {
         .fadeOut();
 
     //Initialize wow js
-    let wow = new WOW({
-        scrollContainer: '#pageContent' // optional scroll container selector, otherwise use window
-    });
-    wow.init();
 
     // Initialize collapse button
     $('.button-collapse').sideNav();
