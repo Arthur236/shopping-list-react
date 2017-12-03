@@ -9,7 +9,7 @@ import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
-import Loader from '../common/Loader';
+import Loader from '../common/PreLoader';
 
 class EditList extends Component {
     constructor(props, context) {

@@ -7,7 +7,7 @@ import { getListItems } from "../../actions/listItemActions";
 import ItemsFab from '../list_items/ItemsFab';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
-import Loader from '../common/Loader';
+import Loader from '../common/PreLoader';
 
 class Items extends Component {
     constructor(props) {

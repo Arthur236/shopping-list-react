@@ -8,7 +8,7 @@ import Navigation from "../common/Navigation";
 import { createItem } from "../../actions/listItemActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
-import Loader from '../common/Loader';
+import Loader from '../common/PreLoader';
 
 class CreateItem extends Component {
     constructor(props, context) {

@@ -5,6 +5,12 @@ html, body {
     line-height: 1.4285em;
 }
 
+.loader {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
+
 /************************************* Home *************************************/
 
 .overlay {

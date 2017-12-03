@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Notifications from 'react-notify-toast';
-import { Container, Card, Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getLists } from '../../actions/shoppingListActions';
-import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
-import ListFab from "./ListsFab";
 import List from "./List";
+import PreLoader from '../common/PreLoader';
 
 class ShoppingLists extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class ShoppingLists extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getLists(this.state.activePage, this.state.limit);
     }
 
@@ -31,29 +32,19 @@ class ShoppingLists extends Component {
 
         if (!shoppingLists || loading) {
             return(
-                <Segment>
-                    <Dimmer active>
-                        <Loader size='big'>Loading</Loader>
-                    </Dimmer>
-                </Segment>
+                <PreLoader />
             );
         }
 
         return(
             <div className="content">
-                {/*<Sidebar />*/}
-                {/*<Navigation header="Shopping Lists" />*/}
-
-                {/*<div className="content">*/}
-                    {/*<ListFab />*/}
-
-                    {/*<div className="dashboard">*/}
-                        {/*<List shoppingLists={shoppingLists}/>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
                 <Notifications />
                 <Container>
-                    <Navigation header="Shopping Lists"/>
+                    <Navigation header="Create Shopping List"/>
+
+                    <Segment basic>
+                        <Link to="/shopping_lists/create" className="ui button purple fluid">Create List</Link>
+                    </Segment>
 
                     <List shoppingLists={shoppingLists}/>
                 </Container>
@@ -62,9 +53,8 @@ class ShoppingLists extends Component {
     }
 }
 
-ShoppingLists.PropTypes = {
-    shoppingLists: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+ShoppingLists.propTypes = {
+    shoppingLists: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

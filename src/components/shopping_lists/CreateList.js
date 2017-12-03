@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Container, Button, Header, Icon, Form, Grid, Segment } from 'semantic-ui-react';
+import Notifications from 'react-notify-toast';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import customJs from '../../static/js/custom';
-import Sidebar from "../common/Sidebar";
-import Navigation from "../common/Navigation";
 import { createList } from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
-import Loader from '../common/Loader';
+import Navigation from '../common/Navigation';
 
 class CreateList extends Component {
     constructor(props, context) {
         super(props, context);
 
         this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    componentDidMount() {
-        customJs();
     }
 
     onSubmit(values) {
@@ -33,39 +28,41 @@ class CreateList extends Component {
         let button = '';
 
         if (loading) {
-            button = <div className="center-align"><Loader size="small"/></div>;
+            button = <Button type='submit' disabled loading color='purple' className='fluid'>Create</Button>;
         } else {
-            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Create</button>;
+            button = <Button type='submit' color='purple' className='fluid'>Create</Button>;
         }
 
         return(
-            <div>
-                <Sidebar />
-                <Navigation header="Create List" />
+            <div className="content">
+                <Notifications />
 
-                <div className="content">
-                    <div className="dashboard">
-                        <div className="container wow fadeInRight">
-                            <h4>Create Shopping List</h4>
-                            <form onSubmit={handleSubmit(this.onSubmit)}>
+                <Container className="ui center aligned">
+                    <Navigation header="Shopping Lists"/>
+
+                    <Header as="h1" content='Create Shopping List' />
+
+                    <Grid centered columns='2'>
+                        <Grid.Column>
+                            <Form onSubmit={handleSubmit(this.onSubmit)}>
                                 <FormInput
                                     type="text"
-                                    label="Name"
+                                    placeholder="Name"
                                     name="name"
-                                    required="required" />
+                                    required="required"
+                                    icon="tag"/>
 
                                 <FormInput
                                     type="text"
-                                    label="Description"
-                                    name="description" />
+                                    placeholder="Description"
+                                    name="description"
+                                    icon="align left"/>
 
-                                <div className="input-field col s12">
-                                    { button }
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                                { button }
+                            </Form>
+                        </Grid.Column>
+                    </Grid>
+                </Container>
             </div>
         );
     }

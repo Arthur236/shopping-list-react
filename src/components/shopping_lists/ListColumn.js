@@ -14,8 +14,10 @@ const ListColumn = ({ shoppingList }) => {
     }
 
     return (
-        <Card color="purple" link={`/shopping_lists/${shoppingList.id}/items`}>
-            <Image src={process.env.PUBLIC_URL + '/img/thumb.png'} />
+        <Card color="purple">
+            <Link to={`/shopping_lists/${shoppingList.id}/items`}>
+                <Image src={process.env.PUBLIC_URL + '/img/thumb.png'} />
+            </Link>
 
             <Card.Content>
                 <Card.Header>{shoppingList.name}</Card.Header>
@@ -23,8 +25,8 @@ const ListColumn = ({ shoppingList }) => {
                 <Card.Description>{description}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <a><Icon name='edit' className="left aligned orange"/>Edit</a>
-                <a><Icon name='trash' className="right aligned red"/>Delete</a>
+                <a><Icon name='edit' className="orange"/>Edit</a>
+                <a className="right floated"><Icon name='trash' className="red"/>Delete</a>
             </Card.Content>
         </Card>
 
