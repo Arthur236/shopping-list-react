@@ -78,3 +78,8 @@ html, body {
 .errorText {
     color: #9f3a38;
 }
+
+
+.content {
+    padding-top: 100px;
+}

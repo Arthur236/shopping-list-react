@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Notifications from 'react-notify-toast';
+import { Container, Card, Dimmer, Loader, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import customJs from '../../static/js/custom';
 import { getLists } from '../../actions/shoppingListActions';
 import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
-import Loader from '../common/Loader';
 import ListFab from "./ListsFab";
 import List from "./List";
 
@@ -23,7 +23,6 @@ class ShoppingLists extends Component {
     }
 
     componentDidMount() {
-        customJs();
         this.props.getLists(this.state.activePage, this.state.limit);
     }
 
@@ -32,27 +31,32 @@ class ShoppingLists extends Component {
 
         if (!shoppingLists || loading) {
             return(
-                <div>
-                    <div className="preloaderBackground">
-                        <Loader size="medium"/>
-                    </div>
-                    <div className="overlay" />
-                </div>
+                <Segment>
+                    <Dimmer active>
+                        <Loader size='big'>Loading</Loader>
+                    </Dimmer>
+                </Segment>
             );
         }
 
         return(
-            <div>
-                <Sidebar />
-                <Navigation header="Shopping Lists" />
+            <div className="content">
+                {/*<Sidebar />*/}
+                {/*<Navigation header="Shopping Lists" />*/}
 
-                <div className="content">
-                    <ListFab />
+                {/*<div className="content">*/}
+                    {/*<ListFab />*/}
 
-                    <div className="dashboard">
-                        <List shoppingLists={shoppingLists}/>
-                    </div>
-                </div>
+                    {/*<div className="dashboard">*/}
+                        {/*<List shoppingLists={shoppingLists}/>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+                <Notifications />
+                <Container>
+                    <Navigation header="Shopping Lists"/>
+
+                    <List shoppingLists={shoppingLists}/>
+                </Container>
             </div>
         );
     }
