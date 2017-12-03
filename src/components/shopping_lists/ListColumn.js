@@ -21,50 +21,14 @@ const ListColumn = ({ shoppingList }) => {
 
             <Card.Content>
                 <Card.Header>{shoppingList.name}</Card.Header>
-                <Card.Meta>{shoppingList.date_created}</Card.Meta>
+                <Card.Meta>Created on: {shoppingList.date_created}</Card.Meta>
                 <Card.Description>{description}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <a><Icon name='edit' className="orange"/>Edit</a>
-                <a className="right floated"><Icon name='trash' className="red"/>Delete</a>
+                <Link to={`/shopping_lists/edit/${shoppingList.id}`}><Icon name='edit' className="orange"/>Edit</Link>
+                <DeleteList shoppingList={shoppingList} />
             </Card.Content>
         </Card>
-
-        // <div className="col s12 m6 l6">
-        //     <div className="card white">
-        //         <div className="card-content">
-        //             <Link to={`/shopping_lists/${shoppingList.id}/items`}>
-        //                 <span className="card-title">{shoppingList.name}</span>
-        //             </Link>
-        //             <div className="fixed-action-btn horizontal">
-        //                 <a className="btn-floating btn tooltipped" data-position="top" data-delay="100"
-        //                    data-tooltip="Menu">
-        //                     <i className="material-icons">menu</i>
-        //                 </a>
-        //                 <ul>
-        //                     <li>
-        //                         <a href={`#md_delete_${shoppingList.id}`}
-        //                            className="btn-floating modal-trigger tooltipped" data-position="top"
-        //                            data-delay="100" data-tooltip="Delete">
-        //                             <i className="material-icons">delete</i>
-        //                         </a>
-        //                     </li>
-        //
-        //                     <li>
-        //                         <Link to={`/shopping_lists/edit/${shoppingList.id}`} className="btn-floating tooltipped" data-position="top" data-delay="100" data-tooltip="Edit">
-        //                             <i className="material-icons">edit</i>
-        //                         </Link>
-        //                     </li>
-        //                 </ul>
-        //             </div>
-        //             <p className="truncateTxt">
-        //                 {description}
-        //             </p>
-        //         </div>
-        //     </div>
-        //
-        //     <DeleteList shoppingList={shoppingList} />
-        // </div>
     );
 };
 

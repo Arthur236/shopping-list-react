@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Notifications from 'react-notify-toast';
+import { Modal, Header, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import customJs from '../../static/js/custom';
+import { Redirect } from 'react-router';
 import { deleteList } from '../../actions/shoppingListActions';
 
 class DeleteList extends Component {
@@ -11,15 +13,11 @@ class DeleteList extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentDidMount() {
-        customJs();
-    }
-
     onSubmit() {
         const { shoppingList } = this.props;
 
         this.props.deleteList(shoppingList.id, () => {
-            this.context.router.history.push('/dashboard');
+            return <Redirect to='/dashboard' />;
         });
     }
 
@@ -27,19 +25,27 @@ class DeleteList extends Component {
         const { shoppingList } = this.props;
 
         return(
-            <div id={`md_delete_${ shoppingList.id }`} className="modal">
-                <div className="modal-content">
-                    <h4>Delete { shoppingList.name }</h4>
-                    <p>Are you sure you want to delete this shopping list?</p>
-                </div>
-                <div className="modal-footer">
-                    <form className="left" onSubmit={this.onSubmit}>
-                        <button className="modal-action modal-close waves-effect waves-green btn-flat"  type="submit" name="add">
-                            Delete
-                        </button>
-                    </form>
-                    <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-                </div>
+            <div>
+                <Notifications />
+
+                <Modal trigger={<a className="right floated"><Icon name='trash' className="red"/>Delete</a>} basic size='small'>
+                    <Header content={`Delete ${ shoppingList.name }`} />
+
+                    <Modal.Content>
+                        <p>Are you sure you want to delete this shopping list?</p>
+                    </Modal.Content>
+
+                    <Modal.Actions>
+                        <Button type='submit' basic color='blue' inverted>
+                            <Icon name='remove' /> No
+                        </Button>
+                        <form onSubmit={this.onSubmit}>
+                            <Button color='red' inverted className='right floated'>
+                                <Icon name='checkmark' /> Yes
+                            </Button>
+                        </form>
+                    </Modal.Actions>
+                </Modal>
             </div>
         );
     }

@@ -1,7 +1,6 @@
 import React from 'react';
 import Footer from "../common/Footer";
 import { Link } from 'react-router-dom';
-import Banner from "../common/Banner";
 
 const LandingContent = () => {
         return (

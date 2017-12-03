@@ -39,6 +39,7 @@ class ShoppingLists extends Component {
         return(
             <div className="content">
                 <Notifications />
+
                 <Container>
                     <Navigation header="Create Shopping List"/>
 

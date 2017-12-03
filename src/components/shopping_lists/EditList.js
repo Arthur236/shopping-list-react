@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
+import Notifications from 'react-notify-toast';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import customJs from '../../static/js/custom';
 import * as shoppingListActions from '../../actions/shoppingListActions';
-import Sidebar from "../common/Sidebar";
 import Navigation from "../common/Navigation";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
-import Loader from '../common/PreLoader';
 
 class EditList extends Component {
     constructor(props, context) {
@@ -19,8 +19,6 @@ class EditList extends Component {
     }
 
     componentWillMount() {
-        customJs();
-
         const id = this.props.match.params.id;
         this.props.actions.getSingleList(id);
     }
@@ -52,39 +50,41 @@ class EditList extends Component {
         let button = '';
 
         if (loading) {
-            button = <div className="center-align"><Loader size="small"/></div>;
+            button = <Button type='submit' disabled loading color='purple' className='fluid'>Edit</Button>;
         } else {
-            button = <button type="submit" className="btn btn-large formBtn waves-effect waves-dark deep-purple">Edit</button>;
+            button = <Button type='submit' color='purple' className='fluid'>Edit</Button>;
         }
 
         return(
-            <div>
-                <Sidebar />
-                <Navigation header={`Edit ${activeList.name}`} />
+            <div className="content">
+                <Notifications />
 
-                <div className="content">
-                    <div className="dashboard">
-                        <div className="container wow fadeInRight">
-                            <h4>Edit Shopping List</h4>
-                            <form onSubmit={handleSubmit(this.onSubmit)}>
+                <Container className="ui center aligned">
+                    <Navigation header={`Edit ${activeList.name}`} />
+
+                    <Header as="h1" content='Edit Shopping List' />
+
+                    <Grid centered columns='2'>
+                        <Grid.Column>
+                            <Form onSubmit={handleSubmit(this.onSubmit)}>
                                 <FormInput
                                     type="text"
-                                    label="Name"
+                                    placeholder="Name"
                                     name="name"
-                                    required="required" />
+                                    required="required"
+                                    icon="tag"/>
 
                                 <FormInput
                                     type="text"
-                                    label="Description"
-                                    name="description" />
+                                    placeholder="Description"
+                                    name="description"
+                                    icon="align left"/>
 
-                                <div className="input-field col s12">
-                                    { button }
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                                { button }
+                            </Form>
+                        </Grid.Column>
+                    </Grid>
+                </Container>
             </div>
         );
     }

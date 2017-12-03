@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Button, Header, Icon, Form, Grid, Segment } from 'semantic-ui-react';
+import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
 import Notifications from 'react-notify-toast';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
