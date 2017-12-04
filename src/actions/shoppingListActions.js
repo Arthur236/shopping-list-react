@@ -205,7 +205,7 @@ export function deleteList(id, callback) {
             if (response.status === 200) {
                 helpers.showToast('success', response.data.message);
 
-                dispatch(deleteListSuccess(response));
+                dispatch(deleteListSuccess(response, id));
                 callback();
             } else {
                 dispatch(deleteListFail(response));
@@ -223,10 +223,11 @@ export function deleteListRequest() {
     };
 }
 
-export function deleteListSuccess(response) {
+export function deleteListSuccess(response, id) {
     return {
         type: actionTypes.DELETE_LIST_SUCCESS,
-        response
+        response,
+        id
     };
 }
 

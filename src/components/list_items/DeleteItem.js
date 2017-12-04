@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Modal, Header, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { deleteItem } from '../../actions/listItemActions';
 
@@ -22,18 +23,22 @@ class DeleteItem extends Component {
         const { item } = this.props;
 
         return(
-            <div id={`md_delete_${ item.id }`} className="modal">
-                <div className="modal-content">
-                    <h4>Delete { item.name }</h4>
+            <Modal trigger={<a className="right floated"><Icon name='trash' className="red"/></a>} basic size='small'>
+                <Header content={`Delete ${ item.name }`} />
+
+                <Modal.Content>
                     <p>Are you sure you want to delete this item list?</p>
-                </div>
-                <div className="modal-footer">
-                    <button className="modal-action waves-effect waves-green btn-flat" name="add" onClick={this.onClick}>
-                        Delete
-                    </button>
-                    <button className="modal-action modal-close waves-effect waves-green btn-flat">Close</button>
-                </div>
-            </div>
+                </Modal.Content>
+
+                <Modal.Actions>
+                    <Button type='submit' basic color='blue' inverted>
+                        <Icon name='remove' /> No
+                    </Button>
+                    <Button color='red' inverted className='right floated' onClick={this.onClick}>
+                        <Icon name='checkmark' /> Yes
+                    </Button>
+                </Modal.Actions>
+            </Modal>
         );
     }
 }

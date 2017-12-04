@@ -23,7 +23,7 @@ class Items extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const id = this.props.match.params.id;
         this.props.getListItems(id, this.state.activePage, this.state.limit);
     }

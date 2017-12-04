@@ -17,13 +17,11 @@ class ShoppingLists extends Component {
         this.state = {
             activePage: 1,
             limit: 30,
-            next_page: '',
-            previous_page: '',
             total_lists: null
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getLists(this.state.activePage, this.state.limit);
     }
 

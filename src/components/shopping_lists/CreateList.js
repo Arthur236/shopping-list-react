@@ -38,7 +38,7 @@ class CreateList extends Component {
                 <Notifications />
 
                 <Container className="ui center aligned">
-                    <Navigation header="Shopping Lists"/>
+                    <Navigation header="Create Shopping List"/>
 
                     <Header as="h1" content='Create Shopping List' />
 

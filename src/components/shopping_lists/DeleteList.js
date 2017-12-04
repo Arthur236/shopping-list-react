@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Notifications from 'react-notify-toast';
 import { Modal, Header, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
@@ -10,14 +9,14 @@ class DeleteList extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
-    onSubmit() {
+    onClick() {
         const { shoppingList } = this.props;
 
         this.props.deleteList(shoppingList.id, () => {
-            return <Redirect to='/dashboard' />;
+            this.context.router.history.push('/dashboard');
         });
     }
 
@@ -36,11 +35,9 @@ class DeleteList extends Component {
                     <Button type='submit' basic color='blue' inverted>
                         <Icon name='remove' /> No
                     </Button>
-                    <form onSubmit={this.onSubmit}>
-                        <Button color='red' inverted className='right floated'>
-                            <Icon name='checkmark' /> Yes
-                        </Button>
-                    </form>
+                    <Button color='red' inverted className='right floated' onClick={this.onClick}>
+                        <Icon name='checkmark' /> Yes
+                    </Button>
                 </Modal.Actions>
             </Modal>
         );

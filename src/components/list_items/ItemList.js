@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import DeleteItem from './DeleteItem';
 
 const ItemList = ({ id, listItems }) => {
-    let items, deleteModals = '';
+    let items = '';
 
     if(listItems) {
         items = _.map(listItems.shopping_list_items, listItem =>
@@ -18,15 +18,10 @@ const ItemList = ({ id, listItems }) => {
                     <Link to={`/shopping_lists/${id}/items/edit/${listItem.id}`}><i className="edit icon orange" /></Link>
                 </td>
                 <td>
-                    <Link to={`/shopping_lists/${id}/items/edit/${listItem.id}`}><i className="trash icon red" /></Link>
+                    <DeleteItem key={listItem.id} shoppingList={id} item={listItem} />
                 </td>
             </tr>
         );
-
-        deleteModals = _.map(listItems.shopping_list_items, listItem =>
-            <DeleteItem key={listItem.id} shoppingList={id} item={listItem} />
-        );
-
     } else {
         items = <tr><td colSpan="4">This list has no items. Please add some.</td></tr>
     }
@@ -49,8 +44,6 @@ const ItemList = ({ id, listItems }) => {
                     { items }
                 </tbody>
             </table>
-
-            { deleteModals }
         </div>
     );
 };
