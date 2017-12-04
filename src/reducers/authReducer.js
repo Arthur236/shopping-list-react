@@ -46,6 +46,12 @@ export default function auth(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.LOGOUT_REQUEST:
+            return {
+                ...state,
+                loggedIn: false
+            };
+
         default:
             return state;
     }

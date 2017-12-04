@@ -1,9 +1,8 @@
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
-
-const headers = { 'Content-Type': 'application/json' };
 
 export function register(values) {
     return function (dispatch) {
@@ -12,7 +11,6 @@ export function register(values) {
         return axios({
             method: "post",
             url: helpers.ROOT_URL + "/auth/register",
-            headers: headers,
             data: values
         }).then(response => {
             if (response.status === 201) {
@@ -58,14 +56,13 @@ export function login(values) {
         return axios({
             method: "post",
             url: helpers.ROOT_URL + "/auth/login",
-            headers: headers,
             data: values
         }).then(response => {
-            window.localStorage.removeItem('token');
-
             if (response.status === 200) {
                 helpers.showToast('success', response.data.message);
-                window.localStorage.setItem('token', response.data.access_token);
+                localStorage.setItem('token', response.data.access_token);
+                helpers.setAuthorizationToken(response.data.access_token);
+                console.log("token decode", jwt.decode(response.data.access_token));
 
                 dispatch(loginSuccess(response));
             } else {
@@ -96,5 +93,18 @@ export function loginSuccess(response) {
     return {
         type: actionTypes.LOGIN_SUCCESS,
         response
+    };
+}
+
+export function logout() {
+    return function (dispatch) {
+        localStorage.removeItem("token");
+        dispatch(logoutRequest());
+    }
+}
+
+export function logoutRequest() {
+    return {
+        type: actionTypes.LOGOUT_REQUEST
     };
 }

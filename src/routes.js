@@ -15,20 +15,11 @@ export default (
         <Route exact path="/" component={App} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/dashboard" component={ShoppingLists} onEnter={requireAuth} />
-        <Route exact path="/shopping_lists/create" component={CreateList} onEnter={requireAuth} />
-        <Route exact path="/shopping_lists/edit/:id" component={EditList} onEnter={requireAuth} />
-        <Route exact path="/shopping_lists/:id/items/edit/:item_id" component={EditItem} onEnter={requireAuth} />
-        <Route exact path="/shopping_lists/:id/items" component={Items} onEnter={requireAuth} />
-        <Route exact path="/shopping_lists/:id/items/create" component={CreateItem} onEnter={requireAuth} />
+        <Route exact path="/dashboard" component={ShoppingLists} />
+        <Route exact path="/shopping_lists/create" component={CreateList} />
+        <Route exact path="/shopping_lists/edit/:id" component={EditList} />
+        <Route exact path="/shopping_lists/:id/items/edit/:item_id" component={EditItem} />
+        <Route exact path="/shopping_lists/:id/items" component={Items} />
+        <Route exact path="/shopping_lists/:id/items/create" component={CreateItem} />
     </Switch>
 );
-
-function requireAuth(nextState, replace) {
-    if (!localStorage.getItem('token')) {
-        replace({
-            pathname: '/login',
-            state: { nextPathname: nextState.location.pathname }
-        })
-    }
-}

@@ -4,11 +4,6 @@ import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 import { getSingleList } from "./shoppingListActions";
 
-const headers = {
-    'Content-Type': 'application/json',
-    'x-access-token': localStorage.getItem('token')
-};
-
 // Fetch all shopping list items
 
 export function getListItems(id, page, limit) {
@@ -18,8 +13,7 @@ export function getListItems(id, page, limit) {
 
         return axios({
             method: "get",
-            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items?page=" + page +"&limit=" + limit,
-            headers: headers
+            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items?page=" + page +"&limit=" + limit
         }).then(response => {
             if (response.status === 200) {
                 dispatch(getItemsSuccess(response));
@@ -61,8 +55,7 @@ export function getSingleItem(id, item_id) {
 
         return axios({
             method: "get",
-            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items/" + item_id,
-            headers: headers
+            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items/" + item_id
         }).then(response => {
             if (response.status === 200) {
                 dispatch(getSingleItemSuccess(response));
@@ -105,7 +98,6 @@ export function createItem(id, values, callback) {
         return axios({
             method: "post",
             url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items",
-            headers: headers,
             data: values
 
         }).then(response => {
@@ -153,7 +145,6 @@ export function editItem(id, item_id, values, callback) {
         return axios({
             method: "put",
             url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items/" +item_id,
-            headers: headers,
             data: values
 
         }).then(response => {
@@ -200,9 +191,7 @@ export function deleteItem(id, item_id, callback) {
 
         return axios({
             method: "delete",
-            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items/" + item_id,
-            headers: headers
-
+            url: helpers.ROOT_URL + "/shopping_lists/" + id + "/items/" + item_id
         }).then(response => {
             if (response.status === 200) {
                 helpers.showToast('success', response.data.message);

@@ -6,6 +6,8 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+
 export const GET_LISTS_REQUEST = 'GET_LISTS_REQUEST';
 export const GET_LISTS_SUCCESS = 'GET_LISTS_SUCCESS';
 export const GET_LISTS_FAIL = 'GET_LISTS_FAIL';

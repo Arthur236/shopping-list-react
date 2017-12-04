@@ -3,11 +3,6 @@ import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
-const headers = {
-    'Content-Type': 'application/json',
-    'x-access-token': localStorage.getItem('token')
-};
-
 // Fetch all shopping lists
 
 export function getLists(page, limit) {
@@ -16,8 +11,7 @@ export function getLists(page, limit) {
 
         return axios({
             method: "get",
-            url: helpers.ROOT_URL + "/shopping_lists?page=" + page +"&limit=" + limit,
-            headers: headers
+            url: helpers.ROOT_URL + "/shopping_lists?page=" + page +"&limit=" + limit
         }).then(response => {
             if (response.status === 200) {
                 dispatch(getListsSuccess(response));
@@ -59,8 +53,7 @@ export function getSingleList(id) {
 
         return axios({
             method: "get",
-            url: helpers.ROOT_URL + "/shopping_lists/" + id,
-            headers: headers
+            url: helpers.ROOT_URL + "/shopping_lists/" + id
         }).then(response => {
             if (response.status === 200) {
                 dispatch(getSingleListSuccess(response));
@@ -103,7 +96,6 @@ export function createList(values, callback) {
         return axios({
             method: "post",
             url: helpers.ROOT_URL + "/shopping_lists",
-            headers: headers,
             data: values
 
         }).then(response => {
@@ -151,7 +143,6 @@ export function editList(id, values, callback) {
         return axios({
             method: "put",
             url: helpers.ROOT_URL + "/shopping_lists/" + id,
-            headers: headers,
             data: values
 
         }).then(response => {
@@ -199,8 +190,6 @@ export function deleteList(id, callback) {
         return axios({
             method: "delete",
             url: helpers.ROOT_URL + "/shopping_lists/" + id,
-            headers: headers
-
         }).then(response => {
             if (response.status === 200) {
                 helpers.showToast('success', response.data.message);
