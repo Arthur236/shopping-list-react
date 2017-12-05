@@ -43,13 +43,10 @@ class Navigation extends Component {
                     <a className="header item">Shopping List App</a>
                     <div className="right menu">
                         <div className="item">
-                            <div className="ui mini input">
-                                <input placeholder="Search..."/>
-                            </div>
+                            <Link to="/dashboard" className="item">Dashboard</Link>
                         </div>
-                        <Link to="/dashboard" className="item">Dashboard</Link>
                         <div className="ui simple dropdown item">
-                            <img className="ui avatar image" src={process.env.PUBLIC_URL + '/img/avatar.png'}/>
+                            <img className="ui avatar image" src={process.env.PUBLIC_URL + '/img/avatar.png'} alt="avatar"/>
                             <i className="dropdown icon"/>
                             { loggedIn ? userLinks : guestLinks }
                         </div>
@@ -66,7 +63,6 @@ Navigation.propTypes = {
 };
 
 function mapStateToProps(state) {
-    console.log(">>>>>>>>>>>>> ", state);
     return { loggedIn: state.auth.loggedIn }
 }
 

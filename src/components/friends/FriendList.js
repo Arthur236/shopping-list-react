@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FriendList = ({ friends }) => {
-    console.log("<><><><><><>", friends);
+    console.log("<><><><><><> ", friends);
 
     return(
         <div>

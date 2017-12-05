@@ -22,6 +22,24 @@ export default function friends(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.SEARCH_USER_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.SEARCH_USER_SUCCESS:
+            return { ...state,
+                friends: action.response.data,
+                loading: false
+            };
+
+        case actionTypes.SEARCH_USER_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
         default:
             return state;
     }
