@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getLists } from '../../actions/shoppingListActions';
+import { getFriends } from "../../actions/friendActions";
 import Navigation from "../common/Navigation";
-import List from "./List";
 import PreLoader from '../common/PreLoader';
+import FriendList from './FriendList';
 
-class ShoppingLists extends Component {
+class Friends extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             activePage: 1,
-            limit: 30,
-            total_lists: null
+            limit: 20,
+            total_friends: null
         };
     }
 
     componentDidMount() {
-        this.props.getLists(this.state.activePage, this.state.limit);
+        this.props.getFriends(this.state.activePage, this.state.limit);
     }
 
     render() {
-        const { shoppingLists, loading } = this.props;
+        const { friends, loading } = this.props;
 
-        if (!shoppingLists || loading) {
+        if (!friends || loading) {
             return(
                 <PreLoader />
             );
@@ -41,22 +41,22 @@ class ShoppingLists extends Component {
                     <Navigation />
 
                     <Segment basic>
-                        <Link to="/shopping_lists/create" className="ui button purple fluid">Create List</Link>
+                        <Link to="/friends/add" className="ui button purple fluid">Add Friend</Link>
                     </Segment>
 
-                    <List shoppingLists={shoppingLists}/>
+                    <FriendList friends={friends}/>
                 </Container>
             </div>
         );
     }
 }
 
-ShoppingLists.propTypes = {
-    shoppingLists: PropTypes.object.isRequired
+Friends.propTypes = {
+    //myProp: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
-    return { shoppingLists: state.shoppingLists.shoppingLists, loading: state.shoppingLists.loading };
+    return { friends: state.friends, loading: state.friends.loading };
 }
 
-export default connect(mapStateToProps, { getLists })(ShoppingLists);
+export default connect(mapStateToProps, { getFriends })(Friends);

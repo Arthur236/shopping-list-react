@@ -6,6 +6,8 @@ export default {
     activeList: {},
     shoppingLists: {},
     activeItem: {},
-    listItems: {}
+    listItems: {},
+    activeFriend: {},
+    friends: {}
 };
 

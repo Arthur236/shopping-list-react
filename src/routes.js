@@ -9,6 +9,7 @@ import EditList from "./components/shopping_lists/EditList";
 import Items from "./components/list_items/Items";
 import EditItem from "./components/list_items/EditItem";
 import CreateItem from "./components/list_items/CreateItem";
+import Friends from "./components/friends/Friends";
 
 export default (
     <Switch>
@@ -21,5 +22,6 @@ export default (
         <Route exact path="/shopping_lists/:id/items/edit/:item_id" component={EditItem} />
         <Route exact path="/shopping_lists/:id/items" component={Items} />
         <Route exact path="/shopping_lists/:id/items/create" component={CreateItem} />
+        <Route exact path="/friends" component={Friends} />
     </Switch>
 );

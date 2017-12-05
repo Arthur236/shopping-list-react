@@ -17,8 +17,6 @@ class Items extends Component {
         this.state = {
             activePage: 1,
             limit: 20,
-            next_page: '',
-            previous_page: '',
             total_items: null
         };
     }
@@ -42,15 +40,15 @@ class Items extends Component {
                 <Notifications />
 
                 <Container>
-                    <Navigation header={activeList.name}/>
+                    <Navigation />
 
                     <Segment basic>
                         <Link to={`/shopping_lists/${activeList.id}/items/create`} className="ui button purple fluid">Create Item</Link>
 
                         <h3>{ activeList.name }</h3>
-                        <p>{ activeList.description }</p>
+                        <p>{ activeList.description ? activeList.description : "No description added" }</p>
 
-                        <div className="divider" />
+                        <hr/>
 
                         <ItemList id={activeList.id} listItems={listItems.listItems} />
                     </Segment>
