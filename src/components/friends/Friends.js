@@ -20,7 +20,7 @@ class Friends extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getFriends(this.state.activePage, this.state.limit);
     }
 

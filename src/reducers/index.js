@@ -4,13 +4,15 @@ import auth from './authReducer';
 import shoppingLists from './shoppingListsReducer';
 import listItems from './listItemsReducer';
 import friends from './friendsReducer';
+import users from './usersReducer';
 
 const rootReducer = combineReducers({
     form: formReducer,
     auth,
     shoppingLists,
     listItems,
-    friends
+    friends,
+    users
 });
 
 export default rootReducer;

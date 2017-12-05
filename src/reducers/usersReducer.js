@@ -2,21 +2,21 @@ import _ from 'lodash';
 import * as actionTypes from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function friends(state = initialState, action) {
+export default function users(state = initialState, action) {
     switch(action.type) {
-        case actionTypes.GET_FRIENDS_REQUEST:
+        case actionTypes.SEARCH_USER_REQUEST:
             return {
                 ...state,
                 loading: true
             };
 
-        case actionTypes.GET_FRIENDS_SUCCESS:
+        case actionTypes.SEARCH_USER_SUCCESS:
             return { ...state,
-                users: action.response.data,
+                friends: action.response.data,
                 loading: false
             };
 
-        case actionTypes.GET_FRIENDS_FAIL:
+        case actionTypes.SEARCH_USER_FAIL:
             return {
                 ...state,
                 loading: false

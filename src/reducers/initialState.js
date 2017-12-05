@@ -8,6 +8,8 @@ export default {
     activeItem: {},
     listItems: {},
     activeFriend: {},
-    friends: {}
+    friends: {},
+    activeUser: {},
+    users: {}
 };
 

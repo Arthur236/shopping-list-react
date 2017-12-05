@@ -3,9 +3,10 @@ import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { searchUser } from "../../actions/friendActions";
+import { searchUser } from "../../actions/userActions";
 import Search from "../common/Search";
 import Navigation from '../common/Navigation';
+import FriendList from "./FriendList";
 
 class AddFriend extends Component {
     constructor(props) {
@@ -23,12 +24,18 @@ class AddFriend extends Component {
         let username = event.target.value;
 
         this.setState({username});
-        console.log(">>>> ", username);
         _.delay(() => this.searchUserOnChange(username), 1000);
     }
 
     render() {
-        console.log("<<<<< ", this.state);
+        const { users } = this.props;
+        let friendList = '';
+
+        if (!users) {
+            friendList = <div>Search for a user above</div>
+        } else {
+            friendList = <FriendList users={users}/>
+        }
 
         return(
             <div className="content">
@@ -40,8 +47,9 @@ class AddFriend extends Component {
                     <Segment basic>
                         <Search onInputChange={this.onInputChange} />
                     </Segment>
+
+                    { friendList }
                 </Container>
-                ADD FRIEND
             </div>
         );
     }
@@ -52,7 +60,7 @@ AddFriend.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return { friends: state.friends, loading: state.friends.loading };
+    return { users: state.users, loading: state.users.loading };
 }
 
 export default connect(mapStateToProps, { searchUser })(AddFriend);

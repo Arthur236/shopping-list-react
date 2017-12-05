@@ -44,6 +44,7 @@ class Navigation extends Component {
                     <div className="right menu">
                         <div className="item">
                             <Link to="/dashboard" className="item">Dashboard</Link>
+                            <Link to="/friends" className="item">Friends</Link>
                         </div>
                         <div className="ui simple dropdown item">
                             <img className="ui avatar image" src={process.env.PUBLIC_URL + '/img/avatar.png'} alt="avatar"/>
