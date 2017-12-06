@@ -44,3 +44,48 @@ export function getFriendsFail(response) {
         response
     };
 }
+
+// Send friend request
+
+export function sendRequest(values) {
+    return function (dispatch) {
+        dispatch(sendRequestRequest());
+
+        return axios({
+            method: "post",
+            url: helpers.ROOT_URL + "/friends",
+            data: values
+        }).then(response => {
+            if (response.status === 200) {
+                helpers.showToast('success', response.data.message);
+
+                dispatch(sendRequestSuccess(response));
+            } else {
+                dispatch(sendRequestFail(response));
+            }
+        }).catch(error => {
+            dispatch(sendRequestFail(error));
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function sendRequestRequest() {
+    return {
+        type: actionTypes.ADD_FRIEND_REQUEST,
+    };
+}
+
+export function sendRequestSuccess(response) {
+    return {
+        type: actionTypes.ADD_FRIEND_SUCCESS,
+        response
+    };
+}
+
+export function sendRequestFail(response) {
+    return {
+        type: actionTypes.ADD_FRIEND_FAIL,
+        response
+    };
+}

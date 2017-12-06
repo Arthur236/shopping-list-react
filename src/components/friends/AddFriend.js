@@ -4,9 +4,10 @@ import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { searchUser } from "../../actions/userActions";
+import { sendRequest } from "../../actions/friendActions";
 import Search from "../common/Search";
 import Navigation from '../common/Navigation';
-import FriendList from "./FriendList";
+import UserList from "./UserList";
 
 class AddFriend extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class AddFriend extends Component {
 
         this.onInputChange = this.onInputChange.bind(this);
         this.searchUserOnChange = this.searchUserOnChange.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
     searchUserOnChange(username) {
@@ -27,14 +29,23 @@ class AddFriend extends Component {
         _.delay(() => this.searchUserOnChange(username), 1000);
     }
 
+    handleAdd(e) {
+        e.preventDefault();
+
+        let field = {};
+        field[e.target.friend_id.name] = e.target.friend_id.value;
+
+        this.props.sendRequest(field);
+    }
+
     render() {
         const { users } = this.props;
-        let friendList = '';
+        let userList = '';
 
         if (!users) {
-            friendList = <div>Search for a user above</div>
+            userList = <div>Search for a user above</div>
         } else {
-            friendList = <FriendList users={users}/>
+            userList = <UserList users={users} handleAdd={this.handleAdd}/>
         }
 
         return(
@@ -48,7 +59,7 @@ class AddFriend extends Component {
                         <Search onInputChange={this.onInputChange} />
                     </Segment>
 
-                    { friendList }
+                    { userList }
                 </Container>
             </div>
         );
@@ -63,4 +74,4 @@ function mapStateToProps(state) {
     return { users: state.users, loading: state.users.loading };
 }
 
-export default connect(mapStateToProps, { searchUser })(AddFriend);
+export default connect(mapStateToProps, { searchUser, sendRequest })(AddFriend);
