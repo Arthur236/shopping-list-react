@@ -1,15 +1,9 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Card, Image } from 'semantic-ui-react';
 import _ from 'lodash';
 
 const UserList = ({ users, handleAdd }) => {
-
-    if (!users) {
-        return(
-            <div>No data could be found</div>
-        );
-    }
-
     return(
         <Card.Group itemsPerRow={3}>
             { _.map(users.friends, user =>
@@ -32,7 +26,8 @@ const UserList = ({ users, handleAdd }) => {
 };
 
 UserList.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    users: PropTypes.object.isRequired,
+    handleAdd: PropTypes.func.isRequired
 };
 
 export default UserList;

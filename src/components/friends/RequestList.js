@@ -1,18 +1,14 @@
 import React from 'react';
-import { Card, Icon, Image, Header } from 'semantic-ui-react';
+import { Card, Image, Header } from 'semantic-ui-react';
 import _ from 'lodash';
+import Notifications from 'react-notify-toast';
 
-const RequestList = ({ requests }) => {
+const RequestList = ({ requests, acceptFriend }) => {
     console.log("<><><><> ", requests);
-
-    if (!requests) {
-        return(
-            <div>You do not have any friend requests</div>
-        );
-    }
 
     return(
         <div>
+            <Notifications />
             <Header as='h1'>Your Friend Requests</Header>
             <Card.Group itemsPerRow={3}>
                 { _.map(requests.friend_requests, user =>
@@ -23,10 +19,7 @@ const RequestList = ({ requests }) => {
                             <Card.Header>{user.username}</Card.Header>
                         </Card.Content>
                         <Card.Content extra>
-                            <form>
-                                <input type='number' name='friend_id' defaultValue={user.id} hidden disabled />
-                                <button type='submit' className='ui button purple fluid'>Accept Friend</button>
-                            </form>
+                            <button className='ui button purple fluid' onClick={() => acceptFriend(user.id)}>Accept Friend</button>
                         </Card.Content>
                     </Card>
                 )}

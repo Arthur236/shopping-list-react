@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getFriendRequests } from "../../actions/friendActions";
+import { getFriendRequests, acceptRequest } from "../../actions/friendActions";
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import RequestList from './RequestList';
@@ -16,14 +16,20 @@ class ViewRequests extends Component {
             limit: 10,
             total_friends: null
         };
+
+        this.acceptFriend = this.acceptFriend.bind(this);
     }
 
     componentWillMount() {
         this.props.getFriendRequests(this.state.activePage, this.state.limit);
     }
 
-    acceptFriend() {
+    acceptFriend(id) {
+        console.log(">>>>>>> ", this.props);
 
+        this.props.acceptRequest(id, () => {
+            this.props.history.push('/friends');
+        });
     }
 
     render() {
@@ -37,13 +43,11 @@ class ViewRequests extends Component {
 
         return(
             <div className="content">
-                <Notifications />
-
                 <Container>
                     <Navigation />
 
                     <Segment basic>
-                        <RequestList requests={friendRequests}/>
+                        <RequestList requests={friendRequests} acceptFriend={this.acceptFriend}/>
                     </Segment>
                 </Container>
             </div>
@@ -59,4 +63,4 @@ function mapStateToProps(state) {
     return { friendRequests: state.friends.friendRequests, loading: state.friends.loading };
 }
 
-export default connect(mapStateToProps, { getFriendRequests })(ViewRequests);
+export default connect(mapStateToProps, { getFriendRequests, acceptRequest })(ViewRequests);

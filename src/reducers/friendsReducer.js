@@ -58,6 +58,24 @@ export default function friends(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.ACCEPT_FRIEND_REQUEST_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.ACCEPT_FRIEND_REQUEST_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.ACCEPT_FRIEND_REQUEST_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
         default:
             return state;
     }

@@ -1,23 +1,17 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Card, Image } from 'semantic-ui-react';
 import _ from 'lodash';
 
-const FriendList = ({ users }) => {
-
-    if (!users) {
-        return(
-            <div>No data could be found</div>
-        );
-    }
-
+const FriendList = ({ friends }) => {
     return(
         <Card.Group itemsPerRow={3}>
-            { _.map(users.friends, user =>
-                <Card color="purple" key={user.id}>
+            { _.map(friends.users.friends, friend =>
+                <Card color="purple" key={friend.id}>
                     <Image src={process.env.PUBLIC_URL + '/img/thumb.png'} />
 
                     <Card.Content>
-                        <Card.Header>{user.username}</Card.Header>
+                        <Card.Header>{friend.username}</Card.Header>
                     </Card.Content>
                     <Card.Content extra>
 
@@ -29,7 +23,7 @@ const FriendList = ({ users }) => {
 };
 
 FriendList.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    friends: PropTypes.object.isRequired
 };
 
 export default FriendList;
