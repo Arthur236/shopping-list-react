@@ -12,7 +12,7 @@ export default function friends(state = initialState, action) {
 
         case actionTypes.GET_FRIENDS_SUCCESS:
             return { ...state,
-                users: action.response.data,
+                friends: action.response.data,
                 loading: false
             };
 
@@ -71,6 +71,24 @@ export default function friends(state = initialState, action) {
             };
 
         case actionTypes.ACCEPT_FRIEND_REQUEST_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.DELETE_FRIEND_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.DELETE_FRIEND_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.DELETE_FRIEND_FAIL:
             return {
                 ...state,
                 loading: false

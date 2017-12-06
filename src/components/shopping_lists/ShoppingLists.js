@@ -44,7 +44,9 @@ class ShoppingLists extends Component {
                         <Link to="/shopping_lists/create" className="ui button purple fluid">Create List</Link>
                     </Segment>
 
-                    <List shoppingLists={shoppingLists}/>
+                    <Segment basic>
+                        <List shoppingLists={shoppingLists}/>
+                    </Segment>
                 </Container>
             </div>
         );

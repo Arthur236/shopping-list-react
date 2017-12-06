@@ -4,7 +4,7 @@ import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getFriends } from "../../actions/friendActions";
+import { getFriends, removeFriend } from "../../actions/friendActions";
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import FriendList from './FriendList';
@@ -18,10 +18,18 @@ class Friends extends Component {
             limit: 20,
             total_friends: null
         };
+
+        this.removeFriend = this.removeFriend.bind(this);
     }
 
     componentWillMount() {
         this.props.getFriends(this.state.activePage, this.state.limit);
+    }
+
+    removeFriend(id) {
+        this.props.removeFriend(id, () => {
+            this.props.history.push('/friends');
+        });
     }
 
     render() {
@@ -44,7 +52,9 @@ class Friends extends Component {
                         <Link to="/friends/add" className="ui button purple fluid">Add Friend</Link>
                     </Segment>
 
-                    <FriendList friends={friends}/>
+                    <Segment basic>
+                        <FriendList friends={friends} removeFriend={this.removeFriend}/>
+                    </Segment>
                 </Container>
             </div>
         );
@@ -59,4 +69,4 @@ function mapStateToProps(state) {
     return { friends: state.friends, loading: state.friends.loading };
 }
 
-export default connect(mapStateToProps, { getFriends })(Friends);
+export default connect(mapStateToProps, { getFriends, removeFriend })(Friends);

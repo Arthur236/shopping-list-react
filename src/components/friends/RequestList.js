@@ -1,14 +1,12 @@
 import React from 'react';
 import { Card, Image, Header } from 'semantic-ui-react';
 import _ from 'lodash';
-import Notifications from 'react-notify-toast';
+import { ToastContainer } from 'react-toastify';
 
 const RequestList = ({ requests, acceptFriend }) => {
-    console.log("<><><><> ", requests);
-
     return(
         <div>
-            <Notifications />
+            <ToastContainer />
             <Header as='h1'>Your Friend Requests</Header>
             <Card.Group itemsPerRow={3}>
                 { _.map(requests.friend_requests, user =>

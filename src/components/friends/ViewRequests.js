@@ -25,8 +25,6 @@ class ViewRequests extends Component {
     }
 
     acceptFriend(id) {
-        console.log(">>>>>>> ", this.props);
-
         this.props.acceptRequest(id, () => {
             this.props.history.push('/friends');
         });
@@ -43,6 +41,7 @@ class ViewRequests extends Component {
 
         return(
             <div className="content">
+                <Notifications />
                 <Container>
                     <Navigation />
 

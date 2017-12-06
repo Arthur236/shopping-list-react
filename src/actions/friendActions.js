@@ -176,3 +176,48 @@ export function acceptRequestFail(response) {
         response
     };
 }
+
+// Remove friend
+
+export function removeFriend(id, callback) {
+    return function (dispatch) {
+        dispatch(removeFriendRequest());
+
+        return axios({
+            method: "delete",
+            url: helpers.ROOT_URL + "/friends/" + id
+        }).then(response => {
+            if (response.status === 200) {
+                helpers.showToast('success', response.data.message);
+
+                dispatch(removeFriendSuccess(response));
+                callback();
+            } else {
+                dispatch(removeFriendFail(response));
+            }
+        }).catch(error => {
+            dispatch(removeFriendFail(error));
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function removeFriendRequest() {
+    return {
+        type: actionTypes.DELETE_FRIEND_REQUEST,
+    };
+}
+
+export function removeFriendSuccess(response) {
+    return {
+        type: actionTypes.DELETE_FRIEND_SUCCESS,
+        response
+    };
+}
+
+export function removeFriendFail(response) {
+    return {
+        type: actionTypes.DELETE_FRIEND_FAIL,
+        response
+    };
+}
