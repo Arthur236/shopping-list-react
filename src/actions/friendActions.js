@@ -45,6 +45,48 @@ export function getFriendsFail(response) {
     };
 }
 
+// Fetch all friends
+
+export function getFriendRequests(page, limit) {
+    return function (dispatch) {
+        dispatch(getFriendRequestsRequest());
+
+        return axios({
+            method: "get",
+            url: helpers.ROOT_URL + "/friends/requests?page=" + page +"&limit=" + limit
+        }).then(response => {
+            if (response.status === 200) {
+                dispatch(getFriendRequestsSuccess(response));
+            } else {
+                dispatch(getFriendRequestsFail(response));
+            }
+        }).catch(error => {
+            dispatch(getFriendRequestsFail(error));
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function getFriendRequestsRequest() {
+    return {
+        type: actionTypes.GET_FRIEND_REQUESTS_REQUEST,
+    };
+}
+
+export function getFriendRequestsSuccess(response) {
+    return {
+        type: actionTypes.GET_FRIEND_REQUESTS_SUCCESS,
+        response
+    };
+}
+
+export function getFriendRequestsFail(response) {
+    return {
+        type: actionTypes.GET_FRIEND_REQUESTS_FAIL,
+        response
+    };
+}
+
 // Send friend request
 
 export function sendRequest(values) {
@@ -72,20 +114,20 @@ export function sendRequest(values) {
 
 export function sendRequestRequest() {
     return {
-        type: actionTypes.ADD_FRIEND_REQUEST,
+        type: actionTypes.REQUEST_FRIEND_REQUEST,
     };
 }
 
 export function sendRequestSuccess(response) {
     return {
-        type: actionTypes.ADD_FRIEND_SUCCESS,
+        type: actionTypes.REQUEST_FRIEND_SUCCESS,
         response
     };
 }
 
 export function sendRequestFail(response) {
     return {
-        type: actionTypes.ADD_FRIEND_FAIL,
+        type: actionTypes.REQUEST_FRIEND_FAIL,
         response
     };
 }

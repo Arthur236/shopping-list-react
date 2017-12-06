@@ -9,6 +9,7 @@ export default {
     listItems: {},
     activeFriend: {},
     friends: {},
+    friendRequests: {},
     activeUser: {},
     users: {}
 };

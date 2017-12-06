@@ -16,25 +16,43 @@ export default function friends(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.GET_FRIEND_REQUESTS_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.GET_FRIEND_REQUESTS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.GET_FRIEND_REQUESTS_SUCCESS:
+            return { ...state,
+                friendRequests: action.response.data,
+                loading: false
+            };
+
         case actionTypes.GET_FRIENDS_FAIL:
             return {
                 ...state,
                 loading: false
             };
 
-        case actionTypes.ADD_FRIEND_REQUEST:
+        case actionTypes.REQUEST_FRIEND_REQUEST:
             return {
                 ...state,
                 loading: true
             };
 
-        case actionTypes.ADD_FRIEND_SUCCESS:
+        case actionTypes.REQUEST_FRIEND_SUCCESS:
             return {
                 ...state,
                 loading: false
             };
 
-        case actionTypes.ADD_FRIEND_FAIL:
+        case actionTypes.REQUEST_FRIEND_FAIL:
             return {
                 ...state,
                 loading: false

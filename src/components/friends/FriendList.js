@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 const FriendList = ({ users }) => {

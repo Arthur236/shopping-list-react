@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 const UserList = ({ users, handleAdd }) => {
@@ -23,7 +22,7 @@ const UserList = ({ users, handleAdd }) => {
                     <Card.Content extra>
                         <form onSubmit={handleAdd}>
                             <input type='number' name='friend_id' defaultValue={user.id} hidden disabled />
-                            <button type='submit' className='ui button purple fluid'>Add Friend</button>
+                            <button type='submit' className='ui button purple fluid'>Send Request</button>
                         </form>
                     </Card.Content>
                 </Card>
