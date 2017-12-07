@@ -11,6 +11,7 @@ export default {
     friends: {},
     friendRequests: {},
     activeUser: {},
-    users: {}
+    users: {},
+    share: {}
 };
 

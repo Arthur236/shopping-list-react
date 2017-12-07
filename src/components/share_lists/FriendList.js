@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Image } from 'semantic-ui-react';
 import _ from 'lodash';
 
-const FriendList = ({ friends, removeFriend }) => {
+const FriendList = ({ friends, shareList }) => {
     return(
         <Card.Group itemsPerRow={3}>
             { _.map(friends.friends.friends, friend =>
@@ -15,7 +15,10 @@ const FriendList = ({ friends, removeFriend }) => {
                     </Card.Content>
 
                     <Card.Content extra>
-                        <button className='ui button red fluid' onClick={() => removeFriend(friend.id)}>Remove Friend</button>
+                        <form onSubmit={shareList}>
+                            <input type='number' name='friend_id' defaultValue={friend.id} hidden disabled />
+                            <button type='submit' className='ui button blue fluid'>Share</button>
+                        </form>
                     </Card.Content>
                 </Card>
             )}
@@ -25,7 +28,7 @@ const FriendList = ({ friends, removeFriend }) => {
 
 FriendList.propTypes = {
     friends: PropTypes.object.isRequired,
-    removeFriend: PropTypes.func.isRequired
+    shareList: PropTypes.func.isRequired
 };
 
 export default FriendList;

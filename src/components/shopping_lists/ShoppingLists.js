@@ -20,7 +20,7 @@ class ShoppingLists extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getLists(this.state.activePage, this.state.limit);
     }
 

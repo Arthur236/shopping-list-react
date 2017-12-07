@@ -5,6 +5,7 @@ import shoppingLists from './shoppingListsReducer';
 import listItems from './listItemsReducer';
 import friends from './friendsReducer';
 import users from './usersReducer';
+import share from './shareReducer';
 
 const rootReducer = combineReducers({
     form: formReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     shoppingLists,
     listItems,
     friends,
-    users
+    users,
+    share
 });
 
 export default rootReducer;
