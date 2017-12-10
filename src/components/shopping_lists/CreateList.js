@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
+import Notifications from 'react-notify-toast';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createList } from "../../actions/shoppingListActions";
@@ -9,15 +10,15 @@ import validate from '../../utils/formValidator';
 import Navigation from '../common/Navigation';
 
 class CreateList extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(values) {
         this.props.createList(values, () => {
-            this.context.router.history.push('/dashboard');
+            this.props.history.push('/dashboard');
         });
     }
 
@@ -34,6 +35,8 @@ class CreateList extends Component {
 
         return(
             <div className="content">
+                <Notifications />
+
                 <Container className="ui center aligned">
                     <Navigation header="Create Shopping List"/>
 
@@ -65,13 +68,10 @@ class CreateList extends Component {
     }
 }
 
-// Pull in the React Router context so router is available on this.context.router.
-CreateList.contextTypes = {
-    router: PropTypes.object
-};
-
 CreateList.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    createList: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

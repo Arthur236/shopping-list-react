@@ -16,8 +16,7 @@ class ShoppingLists extends Component {
         this.state = {
             activePage: 1,
             limit: 30,
-            total_lists: null,
-            redirect: false
+            total_lists: null
         };
 
         this.handleDelete = this.handleDelete.bind(this);

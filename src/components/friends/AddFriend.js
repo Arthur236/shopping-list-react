@@ -1,7 +1,7 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { searchUser } from "../../actions/userActions";
 import { sendRequest } from "../../actions/friendActions";
 import Search from "../common/Search";
