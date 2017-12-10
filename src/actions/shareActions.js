@@ -16,6 +16,8 @@ export function shareList(values) {
             data: values
         }).then(response => {
             if (response.status === 200) {
+                helpers.showToast('success', response.data.message);
+
                 dispatch(shareListSuccess(response));
             } else {
                 dispatch(shareListFail(response));

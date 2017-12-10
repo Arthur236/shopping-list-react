@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
@@ -48,6 +49,13 @@ class ShareList extends Component {
             );
         }
 
+        let friendList = '';
+        if (_.isEmpty(friends)) {
+            friendList = <p>You currently have no friends</p>;
+        } else {
+            friendList = <FriendList list_id={list_id} friends={friends} shareList={this.shareList}/>;
+        }
+
         return(
             <div className="content">
                 <Container>
@@ -56,7 +64,7 @@ class ShareList extends Component {
                     <Segment basic>
                         <h1>Select Friends To Share With</h1>
 
-                        <FriendList list_id={list_id} friends={friends} shareList={this.shareList}/>
+                        { friendList }
                     </Segment>
                 </Container>
             </div>
@@ -65,7 +73,8 @@ class ShareList extends Component {
 }
 
 ShareList.propTypes = {
-
+    friends: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

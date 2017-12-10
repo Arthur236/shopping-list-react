@@ -5,7 +5,7 @@ import { Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import DeleteSharedList from "./DeleteSharedList";
 
-const SharedList = ({ sharedLists }) => {
+const SharedList = ({ sharedLists, handleRemove }) => {
     const { shared_lists } = sharedLists;
 
     return (
@@ -22,7 +22,7 @@ const SharedList = ({ sharedLists }) => {
                         <Card.Description>{sharedList.description ? sharedList.description : 'No description added'}</Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <DeleteSharedList sharedList={sharedList} />
+                        <DeleteSharedList sharedList={sharedList} handleRemove={handleRemove} />
                     </Card.Content>
                 </Card>
             ) }
@@ -31,7 +31,8 @@ const SharedList = ({ sharedLists }) => {
 };
 
 SharedList.propTypes = {
-    sharedLists: PropTypes.object.isRequired
+    sharedLists: PropTypes.object.isRequired,
+    handleRemove: PropTypes.func.isRequired
 };
 
 export default SharedList;
