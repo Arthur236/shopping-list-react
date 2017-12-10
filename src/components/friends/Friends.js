@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
@@ -41,17 +42,25 @@ class Friends extends Component {
             );
         }
 
+        let friendList = '';
+        if (_.isEmpty(friends)) {
+            friendList = <p>You currently have no friends</p>;
+        } else {
+            friendList = <FriendList friends={friends} removeFriend={this.removeFriend}/>;
+        }
+
         return(
             <div className="content">
                 <Container>
                     <Navigation />
 
                     <Segment basic>
+                        <h1>Your Friends</h1>
                         <Link to="/friends/add" className="ui button purple fluid">Add Friend</Link>
                     </Segment>
 
                     <Segment basic>
-                        <FriendList friends={friends} removeFriend={this.removeFriend}/>
+                        { friendList }
                     </Segment>
                 </Container>
             </div>
@@ -61,8 +70,6 @@ class Friends extends Component {
 
 Friends.propTypes = {
     friends: PropTypes.object.isRequired,
-    getFriends: PropTypes.func.isRequired,
-    removeFriend: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired
 };
 

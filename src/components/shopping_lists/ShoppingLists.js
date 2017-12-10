@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
@@ -34,7 +35,6 @@ class ShoppingLists extends Component {
 
     render() {
         const { shoppingLists, loading } = this.props;
-        const { redirect } = this.state;
 
         if (!shoppingLists || loading) {
             return(
@@ -42,8 +42,11 @@ class ShoppingLists extends Component {
             );
         }
 
-        if (redirect) {
-            return <Redirect to='/dashboard' />
+        let lists = '';
+        if (_.isEmpty(shoppingLists)) {
+            lists = <p>You currently have no shopping lists</p>;
+        } else {
+            lists = <List shoppingLists={shoppingLists} handleDelete={this.handleDelete} />;
         }
 
         return(
@@ -52,11 +55,12 @@ class ShoppingLists extends Component {
                     <Navigation />
 
                     <Segment basic>
+                        <h1>Shopping Lists</h1>
                         <Link to="/shopping_lists/create" className="ui button purple fluid">Create List</Link>
                     </Segment>
 
                     <Segment basic>
-                        <List shoppingLists={shoppingLists} handleDelete={this.handleDelete} />
+                        { lists }
                     </Segment>
                 </Container>
             </div>
@@ -65,7 +69,8 @@ class ShoppingLists extends Component {
 }
 
 ShoppingLists.propTypes = {
-    shoppingLists: PropTypes.object.isRequired
+    shoppingLists: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

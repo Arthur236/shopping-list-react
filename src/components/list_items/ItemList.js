@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import DeleteItem from './DeleteItem';
 
-const ItemList = ({ id, listItems }) => {
+const ItemList = ({ id, listItems, handleDelete }) => {
     let items = '';
 
-    if(listItems) {
+    if (!_.isEmpty(listItems)) {
         items = _.map(listItems.shopping_list_items, listItem =>
             <tr key={ listItem.id }>
                 <td>{ listItem.name }</td>
@@ -18,7 +18,7 @@ const ItemList = ({ id, listItems }) => {
                     <Link to={`/shopping_lists/${id}/items/edit/${listItem.id}`}><i className="edit icon orange" /></Link>
                 </td>
                 <td>
-                    <DeleteItem key={listItem.id} shoppingList={id} item={listItem} />
+                    <DeleteItem shoppingList={id} item={listItem} handleDelete={handleDelete} />
                 </td>
             </tr>
         );

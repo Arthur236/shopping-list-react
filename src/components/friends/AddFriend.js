@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { searchUser } from "../../actions/userActions";
@@ -53,6 +54,7 @@ class AddFriend extends Component {
                     <Navigation />
 
                     <Segment basic>
+                        <h1>Send Friend Requests</h1>
                         <Search onInputChange={this.onInputChange} />
                     </Segment>
 
@@ -64,7 +66,8 @@ class AddFriend extends Component {
 }
 
 AddFriend.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    users: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
