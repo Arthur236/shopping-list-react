@@ -12,7 +12,7 @@ A simple application to help you keep track of your shopping lists. It has been 
 
 ## Demo
 
-The live demo of the application can be found [here.]()
+The live demo of the application can be found [here.](https://awesome-shoppinglist-react.herokuapp.com/)
 
 ## Getting Started
 
