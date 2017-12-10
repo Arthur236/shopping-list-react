@@ -45,3 +45,92 @@ export function shareListFail(response) {
         response
     };
 }
+
+// Fetch all shared lists
+
+export function getSharedLists(page, limit) {
+    return function (dispatch) {
+        dispatch(getSharedListsRequest());
+
+        return axios({
+            method: "get",
+            url: helpers.ROOT_URL + "/shopping_lists/share?page=" + page +"&limit=" + limit
+        }).then(response => {
+            if (response.status === 200) {
+                dispatch(getSharedListsSuccess(response));
+            } else {
+                dispatch(getSharedListsFail(response));
+            }
+        }).catch(error => {
+            dispatch(getSharedListsFail(error));
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function getSharedListsRequest() {
+    return {
+        type: actionTypes.GET_SHARED_LISTS_REQUEST,
+    };
+}
+
+export function getSharedListsSuccess(response) {
+    return {
+        type: actionTypes.GET_SHARED_LISTS_SUCCESS,
+        response
+    };
+}
+
+export function getSharedListsFail(response) {
+    return {
+        type: actionTypes.GET_SHARED_LISTS_FAIL,
+        response
+    };
+}
+
+// Remove shared list
+
+export function removeSharedList(user_id, list_id, callback) {
+    return function (dispatch) {
+        dispatch(removeSharedListRequest());
+
+        return axios({
+            method: "delete",
+            url: helpers.ROOT_URL + "/shopping_lists/share/" + list_id,
+            data: user_id
+        }).then(response => {
+            if (response.status === 200) {
+                helpers.showToast('success', response.data.message);
+
+                dispatch(removeSharedListSuccess(response, list_id));
+                callback();
+            } else {
+                dispatch(removeSharedListFail(response));
+            }
+        }).catch(error => {
+            dispatch(removeSharedListFail(error));
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function removeSharedListRequest() {
+    return {
+        type: actionTypes.REMOVE_SHARED_LIST_REQUEST,
+    };
+}
+
+export function removeSharedListSuccess(response, id) {
+    return {
+        type: actionTypes.REMOVE_SHARED_LIST_SUCCESS,
+        response,
+        id
+    };
+}
+
+export function removeSharedListFail(response) {
+    return {
+        type: actionTypes.REMOVE_SHARED_LIST_FAIL,
+        response
+    };
+}

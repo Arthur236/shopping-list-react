@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { logout } from '../../actions/authActions';
 
 class Navigation extends Component {
@@ -13,13 +14,15 @@ class Navigation extends Component {
 
     logout(e) {
         e.preventDefault();
-        console.log("<><><><><><><>", this.props);
-
         this.props.logout();
     }
 
     render() {
         const { loggedIn } = this.props;
+
+        if (!loggedIn) {
+            return <Redirect to='/'/>
+        }
 
         const userLinks = (
             <div className="menu">
@@ -52,6 +55,8 @@ class Navigation extends Component {
                                 <Link to="/friends" className="item">Friends</Link>
                                 <div className="divider"/>
                                 <Link to="/friends/requests" className="item">Friend Requests</Link>
+                                <div className="divider"/>
+                                <Link to="/shopping_lists/share" className="item">Shared Lists</Link>
                             </div>
                         </div>
                         <div className="ui simple dropdown item">

@@ -21,6 +21,24 @@ export default function share(state = initialState, action) {
                 loading: false
             };
 
+        case actionTypes.GET_SHARED_LISTS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.GET_SHARED_LISTS_SUCCESS:
+            return { ...state,
+                share: action.response.data,
+                loading: false
+            };
+
+        case actionTypes.GET_SHARED_LISTS_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
         default:
             return state;
     }

@@ -1,13 +1,15 @@
 import React from 'react';
-import {  Dimmer, Loader, Segment } from 'semantic-ui-react';
+import {  Dimmer, Loader, Grid } from 'semantic-ui-react';
 
-const PreLoader = ({size}) => {
+const PreLoader = () => {
     return (
-        <Segment className="loader">
-            <Dimmer active>
-                <Loader size='massive'>Loading</Loader>
-            </Dimmer>
-        </Segment>
+        <Dimmer active>
+            <Grid centered columns={2}>
+                <Grid.Row centered columns={4}>
+                    <Loader content='Loading' size='massive' />
+                </Grid.Row>
+            </Grid>
+        </Dimmer>
     );
 };
 
