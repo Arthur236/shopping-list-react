@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
 import initialState from './initialState';
-import _ from 'lodash';
 
 export default function listItems(state = initialState, action) {
     switch(action.type) {

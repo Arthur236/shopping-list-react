@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getLists } from '../../actions/shoppingListActions';
+import { bindActionCreators } from 'redux';
+import * as shoppingListActions from '../../actions/shoppingListActions';
 import Navigation from "../common/Navigation";
 import List from "./List";
 import PreLoader from '../common/PreLoader';
@@ -15,21 +16,35 @@ class ShoppingLists extends Component {
         this.state = {
             activePage: 1,
             limit: 30,
-            total_lists: null
+            total_lists: null,
+            redirect: false
         };
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentWillMount() {
-        this.props.getLists(this.state.activePage, this.state.limit);
+        this.props.actions.getLists(this.state.activePage, this.state.limit);
+    }
+
+    handleDelete(id) {
+        this.props.actions.deleteList(id, () => {
+            this.props.actions.getLists(this.state.activePage, this.state.limit);
+        });
     }
 
     render() {
         const { shoppingLists, loading } = this.props;
+        const { redirect } = this.state;
 
         if (!shoppingLists || loading) {
             return(
                 <PreLoader />
             );
+        }
+
+        if (redirect) {
+            return <Redirect to='/dashboard' />
         }
 
         return(
@@ -42,7 +57,7 @@ class ShoppingLists extends Component {
                     </Segment>
 
                     <Segment basic>
-                        <List shoppingLists={shoppingLists}/>
+                        <List shoppingLists={shoppingLists} handleDelete={this.handleDelete} />
                     </Segment>
                 </Container>
             </div>
@@ -58,4 +73,10 @@ function mapStateToProps(state) {
     return { shoppingLists: state.shoppingLists.shoppingLists, loading: state.shoppingLists.loading };
 }
 
-export default connect(mapStateToProps, { getLists })(ShoppingLists);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(shoppingListActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingLists);
