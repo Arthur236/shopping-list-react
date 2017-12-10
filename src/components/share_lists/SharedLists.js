@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getSharedLists } from "../../actions/shareActions";
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import SharedList from "./SharedList";
 
-class ViewSharedLists extends Component {
+class SharedLists extends Component {
     constructor(props) {
         super(props);
 
@@ -35,8 +33,6 @@ class ViewSharedLists extends Component {
 
         return(
             <div className="content">
-                <Notifications />
-
                 <Container>
                     <Navigation />
 
@@ -49,7 +45,7 @@ class ViewSharedLists extends Component {
     }
 }
 
-ViewSharedLists.propTypes = {
+SharedLists.propTypes = {
     //myProp: PropTypes.string.isRequired
 };
 
@@ -57,4 +53,4 @@ function mapStateToProps(state) {
     return { share: state.share.share, loading: state.share.loading };
 }
 
-export default connect(mapStateToProps, { getSharedLists } )(ViewSharedLists);
+export default connect(mapStateToProps, { getSharedLists } )(SharedLists);

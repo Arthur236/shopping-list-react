@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -43,8 +42,6 @@ class Friends extends Component {
 
         return(
             <div className="content">
-                <Notifications />
-
                 <Container>
                     <Navigation />
 

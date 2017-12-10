@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getFriendRequests, acceptRequest } from "../../actions/friendActions";
@@ -41,7 +40,6 @@ class ViewRequests extends Component {
 
         return(
             <div className="content">
-                <Notifications />
                 <Container>
                     <Navigation />
 

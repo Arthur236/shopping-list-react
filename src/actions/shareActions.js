@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
+import { getSingleList } from "./shoppingListActions";
 
 // Share a list
 
@@ -84,6 +85,49 @@ export function getSharedListsSuccess(response) {
 export function getSharedListsFail(response) {
     return {
         type: actionTypes.GET_SHARED_LISTS_FAIL,
+        response
+    };
+}
+
+// Fetch all shared shopping list items
+
+export function getSharedListItems(id, page, limit) {
+    return function (dispatch) {
+        dispatch(getSingleList(id));
+        dispatch(getSharedListItemsRequest());
+
+        return axios({
+            method: "get",
+            url: helpers.ROOT_URL + "/shopping_lists/share/" + id + "/items?page=" + page +"&limit=" + limit
+        }).then(response => {
+            if (response.status === 200) {
+                dispatch(getSharedListItemsSuccess(response));
+            } else {
+                dispatch(getSharedListItemsFail(response));
+            }
+        }).catch(error => {
+            dispatch(getSharedListItemsFail(error));
+            errorHandling.catchError(error);
+        });
+    }
+}
+
+export function getSharedListItemsRequest() {
+    return {
+        type: actionTypes.GET_SHARED_LIST_ITEMS_REQUEST
+    };
+}
+
+export function getSharedListItemsSuccess(response) {
+    return {
+        type: actionTypes.GET_SHARED_LIST_ITEMS_SUCCESS,
+        response
+    };
+}
+
+export function getSharedListItemsFail(response) {
+    return {
+        type: actionTypes.GET_SHARED_LIST_ITEMS_FAIL,
         response
     };
 }

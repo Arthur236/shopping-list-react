@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
-import Notifications from 'react-notify-toast';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import Navigation from "../common/Navigation";
@@ -37,8 +36,6 @@ class CreateItem extends Component {
 
         return(
             <div className="content">
-                <Notifications />
-
                 <Container className="ui center aligned">
                     <Navigation header="Add List Item"/>
 

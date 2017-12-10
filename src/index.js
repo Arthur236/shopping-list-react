@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
@@ -16,6 +17,7 @@ if (localStorage.token) {
 ReactDOM.render(
     <Provider store={store}>
         <div>
+            <Notifications />
             <Router>
                 {routes}
             </Router>

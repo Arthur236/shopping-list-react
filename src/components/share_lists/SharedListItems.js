@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Segment, Container } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import ItemList from "./ItemList";
-import { getListItems } from "../../actions/listItemActions";
+import { getSharedListItems } from "../../actions/shareActions";
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 
-class Items extends Component {
+class SharedListItems extends Component {
     constructor(props) {
         super(props);
 
@@ -21,7 +20,7 @@ class Items extends Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        this.props.getListItems(id, this.state.activePage, this.state.limit);
+        this.props.getSharedListItems(id, this.state.activePage, this.state.limit);
     }
 
     render() {
@@ -39,14 +38,12 @@ class Items extends Component {
                     <Navigation />
 
                     <Segment basic>
-                        <Link to={`/shopping_lists/${activeList.id}/items/create`} className="ui button purple fluid">Create Item</Link>
-
                         <h3>{ activeList.name }</h3>
                         <p>{ activeList.description ? activeList.description : "No description added" }</p>
 
                         <hr/>
 
-                        <ItemList id={activeList.id} listItems={listItems.listItems} />
+                        <ItemList id={activeList.id} listItems={listItems} />
                     </Segment>
                 </Container>
             </div>
@@ -54,12 +51,16 @@ class Items extends Component {
     }
 }
 
+SharedListItems.propTypes = {
+
+};
+
 function mapStateToProps(state) {
     return {
         activeList: state.shoppingLists.activeList,
-        listItems: state.listItems,
-        loading: state.listItems.loading
+        listItems: state.share.listItems,
+        loading: state.share.loading
     };
 }
 
-export default connect(mapStateToProps, { getListItems })(Items);
+export default connect(mapStateToProps, { getSharedListItems })(SharedListItems);

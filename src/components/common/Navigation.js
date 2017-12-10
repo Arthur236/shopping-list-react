@@ -43,7 +43,7 @@ class Navigation extends Component {
         return (
             <div>
                 <div className="ui inverted huge borderless fixed fluid menu">
-                    <a className="header item">Shopping List App</a>
+                    <Link to='/' className="header item">Shopping List App</Link>
                     <div className="right menu">
                         <div className="item">
                             <Link to="/dashboard" className="item">Dashboard</Link>

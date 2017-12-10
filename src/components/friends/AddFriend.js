@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -50,8 +49,6 @@ class AddFriend extends Component {
 
         return(
             <div className="content">
-                <Notifications />
-
                 <Container>
                     <Navigation />
 
