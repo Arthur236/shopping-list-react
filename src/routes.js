@@ -23,16 +23,16 @@ export default (
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Authenticate(ShoppingLists)} />
-        <Route exact path="/shopping_lists/create" component={CreateList} />
-        <Route exact path="/shopping_lists/edit/:id" component={EditList} />
-        <Route exact path="/shopping_lists/share/:id/items" component={SharedListItems} />
-        <Route exact path="/shopping_lists/share/:id" component={ShareList} />
-        <Route exact path="/shopping_lists/share" component={SharedLists} />
-        <Route exact path="/shopping_lists/:id/items/edit/:item_id" component={EditItem} />
-        <Route exact path="/shopping_lists/:id/items" component={Items} />
-        <Route exact path="/shopping_lists/:id/items/create" component={CreateItem} />
-        <Route exact path="/friends" component={Friends} />
-        <Route exact path="/friends/add" component={AddFriend} />
-        <Route exact path="/friends/requests" component={ViewRequests} />
+        <Route exact path="/shopping_lists/create" component={Authenticate(CreateList)} />
+        <Route exact path="/shopping_lists/edit/:id" component={Authenticate(EditList)} />
+        <Route exact path="/shopping_lists/share/:id/items" component={Authenticate(SharedListItems)} />
+        <Route exact path="/shopping_lists/share/:id" component={Authenticate(ShareList)} />
+        <Route exact path="/shopping_lists/share" component={Authenticate(SharedLists)} />
+        <Route exact path="/shopping_lists/:id/items/edit/:item_id" component={Authenticate(EditItem)} />
+        <Route exact path="/shopping_lists/:id/items" component={Authenticate(Items)} />
+        <Route exact path="/shopping_lists/:id/items/create" component={Authenticate(CreateItem)} />
+        <Route exact path="/friends" component={Authenticate(Friends)} />
+        <Route exact path="/friends/add" component={Authenticate(AddFriend)} />
+        <Route exact path="/friends/requests" component={Authenticate(ViewRequests)} />
     </Switch>
 );
