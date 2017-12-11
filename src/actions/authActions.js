@@ -62,7 +62,6 @@ export function login(values) {
                 helpers.showToast('success', response.data.message);
                 localStorage.setItem('token', response.data.access_token);
                 helpers.setAuthorizationToken(response.data.access_token);
-                console.log("token decode", jwt.decode(response.data.access_token));
 
                 dispatch(loginSuccess(response));
             } else {

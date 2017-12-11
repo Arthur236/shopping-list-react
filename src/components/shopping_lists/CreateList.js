@@ -10,15 +10,15 @@ import validate from '../../utils/formValidator';
 import Navigation from '../common/Navigation';
 
 class CreateList extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
 
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(values) {
         this.props.createList(values, () => {
-            this.context.router.history.push('/dashboard');
+            this.props.history.push('/dashboard');
         });
     }
 
@@ -68,13 +68,10 @@ class CreateList extends Component {
     }
 }
 
-// Pull in the React Router context so router is available on this.context.router.
-CreateList.contextTypes = {
-    router: PropTypes.object
-};
-
 CreateList.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    createList: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

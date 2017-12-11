@@ -5,7 +5,7 @@ import { Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import DeleteList from "./DeleteList";
 
-const List = ({ shoppingLists }) => {
+const List = ({ shoppingLists, handleDelete }) => {
     const { shopping_lists } = shoppingLists;
 
     return (
@@ -24,7 +24,7 @@ const List = ({ shoppingLists }) => {
                     <Card.Content extra>
                         <Link to={`/shopping_lists/edit/${shoppingList.id}`}><Icon name='edit' className="orange"/>Edit</Link>
                         <Link to={`/shopping_lists/share/${shoppingList.id}`}><Icon name='share' className="blue" style={{marginLeft: '15px'}}/>Share</Link>
-                        <DeleteList shoppingList={shoppingList} />
+                        <DeleteList shoppingList={shoppingList} handleDelete={handleDelete} />
                     </Card.Content>
                 </Card>
             ) }

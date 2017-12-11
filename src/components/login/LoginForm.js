@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
         return(
             <div className="ui center aligned inverted landingContent">
-                <img src={process.env.PUBLIC_URL + '/img/img3.jpg'} />
+                <img src={process.env.PUBLIC_URL + '/img/img5.jpeg'} />
                 <div className="overlay" />
 
                 <div className="ui inverted center aligned grid">

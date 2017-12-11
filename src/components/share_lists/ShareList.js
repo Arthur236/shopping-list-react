@@ -1,9 +1,8 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Notifications from 'react-notify-toast';
 import { Container, Segment } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as shareActions from '../../actions/shareActions';
 import * as friendActions from '../../actions/friendActions';
@@ -41,7 +40,6 @@ class ShareList extends Component {
     }
 
     render() {
-        console.log("<><><><><><><", this.props);
         const { match, friends, loading } = this.props;
         const list_id = match.params.id;
 
@@ -51,17 +49,22 @@ class ShareList extends Component {
             );
         }
 
+        let friendList = '';
+        if (_.isEmpty(friends)) {
+            friendList = <p>You currently have no friends</p>;
+        } else {
+            friendList = <FriendList list_id={list_id} friends={friends} shareList={this.shareList}/>;
+        }
+
         return(
             <div className="content">
-                <Notifications />
-
                 <Container>
                     <Navigation />
 
                     <Segment basic>
                         <h1>Select Friends To Share With</h1>
 
-                        <FriendList list_id={list_id} friends={friends} shareList={this.shareList}/>
+                        { friendList }
                     </Segment>
                 </Container>
             </div>
@@ -70,11 +73,12 @@ class ShareList extends Component {
 }
 
 ShareList.propTypes = {
-
+    friends: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
-    return { friends: state.friends, loading: state.share.loading };
+    return { friends: state.friends, loading: state.friends.loading };
 }
 
 function mapDispatchToProps(dispatch) {

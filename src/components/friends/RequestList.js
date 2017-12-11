@@ -1,11 +1,11 @@
-import React from 'react';
-import { Card, Image, Header } from 'semantic-ui-react';
 import _ from 'lodash';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Card, Image } from 'semantic-ui-react';
 
 const RequestList = ({ requests, acceptFriend }) => {
     return(
         <div>
-            <Header as='h1'>Your Friend Requests</Header>
             <Card.Group itemsPerRow={3}>
                 { _.map(requests.friend_requests, user =>
                     <Card color="purple" key={user.id}>
@@ -33,7 +33,8 @@ const RequestList = ({ requests, acceptFriend }) => {
 };
 
 RequestList.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    requests: PropTypes.object.isRequired,
+    acceptFriend: PropTypes.func.isRequired
 };
 
 export default RequestList;

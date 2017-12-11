@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Notifications from 'react-notify-toast';
 import { Segment, Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import * as listItemActions from '../../actions/listItemActions';
 import ItemList from "./ItemList";
-import { getListItems } from "../../actions/listItemActions";
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
-import shoppingLists from "../../reducers/shoppingListsReducer";
 
 class Items extends Component {
     constructor(props) {
@@ -19,11 +18,19 @@ class Items extends Component {
             limit: 20,
             total_items: null
         };
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        this.props.getListItems(id, this.state.activePage, this.state.limit);
+        this.props.actions.getListItems(id, this.state.activePage, this.state.limit);
+    }
+
+    handleDelete(shoppingList, item_id) {
+        this.props.actions.deleteItem(shoppingList, item_id, () => {
+            this.props.actions.getListItems(shoppingList, this.state.activePage, this.state.limit);
+        });
     }
 
     render() {
@@ -37,8 +44,6 @@ class Items extends Component {
 
         return(
             <div className="content">
-                <Notifications />
-
                 <Container>
                     <Navigation />
 
@@ -50,13 +55,19 @@ class Items extends Component {
 
                         <hr/>
 
-                        <ItemList id={activeList.id} listItems={listItems.listItems} />
+                        <ItemList id={activeList.id} listItems={listItems.listItems} handleDelete={this.handleDelete} />
                     </Segment>
                 </Container>
             </div>
         );
     }
 }
+
+Items.propTypes = {
+    activeList: PropTypes.object.isRequired,
+    listItems: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+};
 
 function mapStateToProps(state) {
     return {
@@ -66,4 +77,10 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { getListItems })(Items);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(listItemActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Items);

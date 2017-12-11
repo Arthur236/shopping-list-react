@@ -13,8 +13,6 @@ class Navigation extends Component {
 
     logout(e) {
         e.preventDefault();
-        console.log("<><><><><><><>", this.props);
-
         this.props.logout();
     }
 
@@ -40,7 +38,7 @@ class Navigation extends Component {
         return (
             <div>
                 <div className="ui inverted huge borderless fixed fluid menu">
-                    <a className="header item">Shopping List App</a>
+                    <Link to='/' className="header item">Shopping List App</Link>
                     <div className="right menu">
                         <div className="item">
                             <Link to="/dashboard" className="item">Dashboard</Link>
@@ -52,6 +50,8 @@ class Navigation extends Component {
                                 <Link to="/friends" className="item">Friends</Link>
                                 <div className="divider"/>
                                 <Link to="/friends/requests" className="item">Friend Requests</Link>
+                                <div className="divider"/>
+                                <Link to="/shopping_lists/share" className="item">Shared Lists</Link>
                             </div>
                         </div>
                         <div className="ui simple dropdown item">

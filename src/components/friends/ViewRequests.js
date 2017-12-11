@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
-import Notifications from 'react-notify-toast';
+import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getFriendRequests, acceptRequest } from "../../actions/friendActions";
+import { bindActionCreators } from 'redux';
+import * as friendActions from '../../actions/friendActions';
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import RequestList from './RequestList';
@@ -21,12 +23,12 @@ class ViewRequests extends Component {
     }
 
     componentWillMount() {
-        this.props.getFriendRequests(this.state.activePage, this.state.limit);
+        this.props.actions.getFriendRequests(this.state.activePage, this.state.limit);
     }
 
     acceptFriend(id) {
-        this.props.acceptRequest(id, () => {
-            this.props.history.push('/friends');
+        this.props.actions.acceptRequest(id, () => {
+            this.props.actions.getFriendRequests(this.state.activePage, this.state.limit);
         });
     }
 
@@ -39,14 +41,21 @@ class ViewRequests extends Component {
             );
         }
 
+        let requestList = '';
+        if (_.isEmpty(friendRequests)) {
+            requestList = <p>You currently have no friend requests</p>;
+        } else {
+            requestList = <RequestList requests={friendRequests} acceptFriend={this.acceptFriend}/>;
+        }
+
         return(
             <div className="content">
-                <Notifications />
                 <Container>
                     <Navigation />
 
                     <Segment basic>
-                        <RequestList requests={friendRequests} acceptFriend={this.acceptFriend}/>
+                        <h1>Your Friend Requests</h1>
+                        { requestList }
                     </Segment>
                 </Container>
             </div>
@@ -55,11 +64,18 @@ class ViewRequests extends Component {
 }
 
 ViewRequests.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    friendRequests: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
     return { friendRequests: state.friends.friendRequests, loading: state.friends.loading };
 }
 
-export default connect(mapStateToProps, { getFriendRequests, acceptRequest })(ViewRequests);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(friendActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewRequests);

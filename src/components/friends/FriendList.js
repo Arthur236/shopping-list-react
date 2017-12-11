@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Image } from 'semantic-ui-react';
 import _ from 'lodash';
+import RemoveFriend from "./RemoveFriend";
 
 const FriendList = ({ friends, removeFriend }) => {
     return(
@@ -15,7 +16,7 @@ const FriendList = ({ friends, removeFriend }) => {
                     </Card.Content>
 
                     <Card.Content extra>
-                        <button className='ui button red fluid' onClick={() => removeFriend(friend.id)}>Remove Friend</button>
+                        <RemoveFriend friend={friend} removeFriend={removeFriend} />
                     </Card.Content>
                 </Card>
             )}
