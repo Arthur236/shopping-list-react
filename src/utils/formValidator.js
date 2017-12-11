@@ -1,6 +1,6 @@
 export default function validate(values) {
     const errors = {};
-    const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const mailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
     // Validate inputs from 'values' object
     if (!values.username) {

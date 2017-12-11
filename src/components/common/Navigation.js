@@ -23,7 +23,7 @@ class Navigation extends Component {
             <div className="menu">
                 <Link to="" className="item">Profile</Link>
                 <div className="divider"/>
-                <a href="#" onClick={this.logout} className="item">Sign Out</a>
+                <a onClick={this.logout} className="item">Sign Out</a>
             </div>
         );
 
@@ -44,7 +44,7 @@ class Navigation extends Component {
                             <Link to="/dashboard" className="item">Dashboard</Link>
                         </div>
                         <div className="ui simple dropdown item">
-                            <a href='#' className="item">Friends</a>
+                            <a className="item">Friends</a>
                             <i className="dropdown icon"/>
                             <div className="menu">
                                 <Link to="/friends" className="item">Friends</Link>

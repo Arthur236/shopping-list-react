@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const LandingContent = () => {
         return (
             <div className="ui center aligned landingContent">
-                <img src={process.env.PUBLIC_URL + '/img/img2.jpg'} />
+                <img src={process.env.PUBLIC_URL + '/img/img2.jpg'} alt='background' />
                 <div className="overlay" />
 
                 <div className="ui container logo">

@@ -52,7 +52,9 @@ class SharedListItems extends Component {
 }
 
 SharedListItems.propTypes = {
-
+    activeList: PropTypes.object.isRequired,
+    listItems: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

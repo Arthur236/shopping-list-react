@@ -1,5 +1,4 @@
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
 import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';

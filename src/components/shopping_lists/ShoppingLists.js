@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as shoppingListActions from '../../actions/shoppingListActions';
