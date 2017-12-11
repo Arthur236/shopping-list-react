@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Authenticate from './components/common/Authenticate';
 import App from './components/App';
 import Register from './components/register/Register';
 import Login from "./components/login/Login";
@@ -21,7 +22,7 @@ export default (
         <Route exact path="/" component={App} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/dashboard" component={ShoppingLists} />
+        <Route exact path="/dashboard" component={Authenticate(ShoppingLists)} />
         <Route exact path="/shopping_lists/create" component={CreateList} />
         <Route exact path="/shopping_lists/edit/:id" component={EditList} />
         <Route exact path="/shopping_lists/share/:id/items" component={SharedListItems} />

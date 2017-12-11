@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { logout } from '../../actions/authActions';
 
 class Navigation extends Component {
@@ -19,10 +18,6 @@ class Navigation extends Component {
 
     render() {
         const { loggedIn } = this.props;
-
-        if (!loggedIn) {
-            return <Redirect to='/'/>
-        }
 
         const userLinks = (
             <div className="menu">
