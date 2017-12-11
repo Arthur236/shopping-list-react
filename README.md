@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Arthur236/shopping-list-react.svg?branch=ft-share-feature-153028891)](https://travis-ci.org/Arthur236/shopping-list-react)   [![Coverage Status](https://coveralls.io/repos/github/Arthur236/shopping-list-react/badge.svg?branch=master)](https://coveralls.io/github/Arthur236/shopping-list-react?branch=master)   
+
 # Shopping List Application
 
 A simple application to help you keep track of your shopping lists. It has been developed using React and consumes the Shopping List Api that can be found [here.](https://shoppinglistapi4.docs.apiary.io)

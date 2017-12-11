@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
 
-class Navigation extends Component {
+export class Navigation extends Component {
     constructor(props) {
         super(props);
 

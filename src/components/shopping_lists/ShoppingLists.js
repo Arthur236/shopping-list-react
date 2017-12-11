@@ -10,7 +10,7 @@ import Navigation from "../common/Navigation";
 import List from "./List";
 import PreLoader from '../common/PreLoader';
 
-class ShoppingLists extends Component {
+export class ShoppingLists extends Component {
     constructor(props) {
         super(props);
 
