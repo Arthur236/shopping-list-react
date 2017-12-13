@@ -26,7 +26,7 @@ export function shareList(values) {
             dispatch(shareListFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function shareListRequest() {
@@ -68,7 +68,7 @@ export function getSharedLists(page, limit) {
             dispatch(getSharedListsFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getSharedListsRequest() {
@@ -111,7 +111,7 @@ export function getSharedListItems(id, page, limit) {
             dispatch(getSharedListItemsFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getSharedListItemsRequest() {
@@ -157,7 +157,7 @@ export function removeSharedList(user_id, list_id, callback) {
             dispatch(removeSharedListFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function removeSharedListRequest() {

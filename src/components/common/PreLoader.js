@@ -6,7 +6,7 @@ const PreLoader = () => {
         <Dimmer active>
             <Grid centered columns={2}>
                 <Grid.Row centered columns={4}>
-                    <Loader content='Loading' size='massive' />
+                    <Loader content="Loading" size="massive" />
                 </Grid.Row>
             </Grid>
         </Dimmer>

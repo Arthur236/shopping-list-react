@@ -24,7 +24,7 @@ export function getListItems(id, page, limit) {
             dispatch(getItemsFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getItemsRequest() {
@@ -66,7 +66,7 @@ export function getSingleItem(id, item_id) {
             dispatch(getSingleItemFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getSingleItemRequest() {
@@ -113,7 +113,7 @@ export function createItem(id, values, callback) {
             dispatch(createItemFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function createItemRequest() {
@@ -160,7 +160,7 @@ export function editItem(id, item_id, values, callback) {
             dispatch(editItemFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function editItemRequest() {
@@ -205,7 +205,7 @@ export function deleteItem(id, item_id, callback) {
             dispatch(deleteItemFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function deleteItemRequest() {

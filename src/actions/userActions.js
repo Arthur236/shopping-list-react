@@ -22,7 +22,7 @@ export function searchUser(term) {
             dispatch(searchUserFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function searchUserRequest() {

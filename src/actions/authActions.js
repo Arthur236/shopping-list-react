@@ -24,7 +24,7 @@ export function register(values) {
             dispatch(registerFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function registerRequest(user) {
@@ -70,7 +70,7 @@ export function login(values) {
             dispatch(loginFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function loginRequest(user) {
@@ -98,7 +98,7 @@ export function logout() {
     return function (dispatch) {
         localStorage.removeItem("token");
         dispatch(logoutRequest());
-    }
+    };
 }
 
 export function logoutRequest() {

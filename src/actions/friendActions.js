@@ -22,7 +22,7 @@ export function getFriends(page, limit) {
             dispatch(getFriendsFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getFriendsRequest() {
@@ -64,7 +64,7 @@ export function getFriendRequests(page, limit) {
             dispatch(getFriendRequestsFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getFriendRequestsRequest() {
@@ -109,7 +109,7 @@ export function sendRequest(values) {
             dispatch(sendRequestFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function sendRequestRequest() {
@@ -154,7 +154,7 @@ export function acceptRequest(id, callback) {
             dispatch(acceptRequestFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function acceptRequestRequest() {
@@ -199,7 +199,7 @@ export function removeFriend(id, callback) {
             dispatch(removeFriendFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function removeFriendRequest() {

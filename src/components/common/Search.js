@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Search extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    onInputChange: PropTypes.object.isRequired
 };
 
 export default Search;

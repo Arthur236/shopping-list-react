@@ -28,13 +28,14 @@ export default function (ComposedComponent) {
     }
 
     Authenticate.propTypes = {
-        loggedIn: PropTypes.bool.isRequired
+        loggedIn: PropTypes.bool.isRequired,
+        history: PropTypes.object.isRequired
     };
 
     function mapStateToProps(state) {
         return {
             loggedIn: state.auth.loggedIn
-        }
+        };
     }
 
     return connect(mapStateToProps)(Authenticate);

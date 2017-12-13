@@ -22,7 +22,7 @@ export function getLists(page, limit) {
             dispatch(getListsFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getListsRequest() {
@@ -64,7 +64,7 @@ export function getSingleList(id) {
             dispatch(getSingleListFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function getSingleListRequest() {
@@ -111,7 +111,7 @@ export function createList(values, callback) {
             dispatch(createListFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function createListRequest() {
@@ -158,7 +158,7 @@ export function editList(id, values, callback) {
             dispatch(editListFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function editListRequest() {
@@ -203,7 +203,7 @@ export function deleteList(id, callback) {
             dispatch(deleteListFail(error));
             errorHandling.catchError(error);
         });
-    }
+    };
 }
 
 export function deleteListRequest() {

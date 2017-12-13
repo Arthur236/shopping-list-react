@@ -38,7 +38,7 @@ export class Navigation extends Component {
         return (
             <div>
                 <div className="ui inverted huge borderless fixed fluid menu">
-                    <Link to='/' className="header item">Shopping List App</Link>
+                    <Link to="/" className="header item">Shopping List App</Link>
                     <div className="right menu">
                         <div className="item">
                             <Link to="/dashboard" className="item">Dashboard</Link>
@@ -72,7 +72,7 @@ Navigation.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return { loggedIn: state.auth.loggedIn }
+    return { loggedIn: state.auth.loggedIn };
 }
 
 export default connect(mapStateToProps, { logout })(Navigation);
