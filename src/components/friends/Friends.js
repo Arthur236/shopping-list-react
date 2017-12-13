@@ -70,7 +70,8 @@ class Friends extends Component {
 
 Friends.propTypes = {
     friends: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    actions: PropTypes.object
 };
 
 function mapStateToProps(state) {
@@ -80,7 +81,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(friendActions, dispatch)
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Friends);

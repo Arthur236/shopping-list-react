@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function friends(state = initialState, action) {
+export default function (state = initialState, action) {
     switch(action.type) {
         case actionTypes.GET_FRIENDS_REQUEST:
             return {

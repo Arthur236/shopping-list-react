@@ -22,8 +22,8 @@ const List = ({ shoppingLists, handleDelete }) => {
                         <Card.Description>{shoppingList.description ? shoppingList.description : 'No description added'}</Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Link to={`/shopping_lists/edit/${shoppingList.id}`}><Icon name='edit' className="orange"/>Edit</Link>
-                        <Link to={`/shopping_lists/share/${shoppingList.id}`}><Icon name='share' className="blue" style={{marginLeft: '15px'}}/>Share</Link>
+                        <Link to={`/shopping_lists/edit/${shoppingList.id}`}><Icon name="edit" className="orange"/>Edit</Link>
+                        <Link to={`/shopping_lists/share/${shoppingList.id}`}><Icon name="share" className="blue" style={{marginLeft: '15px'}}/>Share</Link>
                         <DeleteList shoppingList={shoppingList} handleDelete={handleDelete} />
                     </Card.Content>
                 </Card>
@@ -33,7 +33,8 @@ const List = ({ shoppingLists, handleDelete }) => {
 };
 
 List.propTypes = {
-    shoppingLists: PropTypes.object.isRequired
+    shoppingLists: PropTypes.object.isRequired,
+    handleDelete: PropTypes.func.isRequired
 };
 
 export default List;

@@ -74,7 +74,10 @@ class ShareList extends Component {
 
 ShareList.propTypes = {
     friends: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    shareActions: PropTypes.object.isRequired,
+    friendActions: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -85,7 +88,7 @@ function mapDispatchToProps(dispatch) {
     return {
         shareActions: bindActionCreators(shareActions, dispatch),
         friendActions: bindActionCreators(friendActions, dispatch)
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShareList);

@@ -51,9 +51,9 @@ class EditItem extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type='submit' disabled loading color='purple' className='fluid'>Edit</Button>;
+            button = <Button type="submit" disabled loading color="purple" className="fluid">Edit</Button>;
         } else {
-            button = <Button type='submit' color='purple' className='fluid'>Edit</Button>;
+            button = <Button type="submit" color="purple" className="fluid">Edit</Button>;
         }
 
         return (
@@ -61,9 +61,9 @@ class EditItem extends Component {
                 <Container className="ui center aligned">
                     <Navigation header={`Edit ${activeItem.name}`}/>
 
-                    <Header as="h1" content='Edit List Item' />
+                    <Header as="h1" content="Edit List Item" />
 
-                    <Grid centered columns='2'>
+                    <Grid centered columns="2">
                         <Grid.Column>
                             <Form onSubmit={handleSubmit(this.onSubmit)}>
                                 <FormInput
@@ -104,7 +104,12 @@ EditItem.contextTypes = {
 
 EditItem.propTypes = {
     activeItem: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    match: PropTypes.object,
+    change: PropTypes.func,
+    initialValues: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    loading: PropTypes.object
 };
 
 function mapStateToProps(state) {

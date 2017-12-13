@@ -4,7 +4,8 @@ import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
 import Notifications from 'react-notify-toast';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createList } from "../../actions/shoppingListActions";
+import { bindActionCreators } from 'redux';
+import * as shoppingListActions from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Navigation from '../common/Navigation';
@@ -17,7 +18,7 @@ class CreateList extends Component {
     }
 
     onSubmit(values) {
-        this.props.createList(values, () => {
+        this.props.actions.createList(values, () => {
             this.props.history.push('/dashboard');
         });
     }
@@ -28,9 +29,9 @@ class CreateList extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type='submit' disabled loading color='purple' className='fluid'>Create</Button>;
+            button = <Button type="submit" disabled loading color="purple" className="fluid">Create</Button>;
         } else {
-            button = <Button type='submit' color='purple' className='fluid'>Create</Button>;
+            button = <Button type="submit" color="purple" className="fluid">Create</Button>;
         }
 
         return(
@@ -40,9 +41,9 @@ class CreateList extends Component {
                 <Container className="ui center aligned">
                     <Navigation header="Create Shopping List"/>
 
-                    <Header as="h1" content='Create Shopping List' />
+                    <Header as="h1" content="Create Shopping List" />
 
-                    <Grid centered columns='2'>
+                    <Grid centered columns="2">
                         <Grid.Column>
                             <Form onSubmit={handleSubmit(this.onSubmit)}>
                                 <FormInput
@@ -71,14 +72,22 @@ class CreateList extends Component {
 CreateList.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     createList: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return { loading: state.shoppingLists.loading };
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(shoppingListActions, dispatch)
+    };
+}
+
 export default reduxForm({
     validate,
     form: 'CreateListForm'
-})(connect(mapStateToProps, { createList })(CreateList));
+})(connect(mapStateToProps, mapDispatchToProps)(CreateList));

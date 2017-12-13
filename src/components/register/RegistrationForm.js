@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { register } from "../../actions/authActions";
+import { bindActionCreators } from 'redux';
+import * as authActions from "../../actions/authActions";
 import FormInput from '../common/FormInput';
-import validate from '../../utils/formValidator'
+import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
 
 class RegistrationForm extends Component {
@@ -17,7 +18,7 @@ class RegistrationForm extends Component {
     }
 
     onSubmit(values) {
-        this.props.register(values)
+        this.props.actions.register(values)
             .then(() => {
                 if (this.props.registered) {
                     this.context.router.history.push('/login');
@@ -30,14 +31,14 @@ class RegistrationForm extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type='submit' inverted disabled loading color='purple' className='fluid'>Register</Button>;
+            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Register</Button>;
         } else {
-            button = <Button type='submit' inverted color='purple' className='fluid'>Register</Button>;
+            button = <Button type="submit" inverted color="purple" className="fluid">Register</Button>;
         }
 
         return(
             <div className="ui center aligned inverted landingContent">
-                <img src={process.env.PUBLIC_URL + '/img/img3.jpg'} alt='background' />
+                <img src={process.env.PUBLIC_URL + '/img/img3.jpg'} alt="background" />
                 <div className="overlay" />
 
                 <div className="ui inverted center aligned grid">
@@ -92,11 +93,27 @@ RegistrationForm.contextTypes = {
     router: PropTypes.object
 };
 
+RegistrationForm.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    registered: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired
+};
+
 function mapStateToProps(state) {
-    return { loading: state.auth.loading, registered: state.auth.registered }
+    return {
+        loading: state.auth.loading,
+        registered: state.auth.registered
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(authActions, dispatch)
+    };
 }
 
 export default reduxForm({
     validate,
     form: 'SignUpForm'
-})(connect(mapStateToProps, { register })(RegistrationForm));
+})(connect(mapStateToProps, mapDispatchToProps)(RegistrationForm));

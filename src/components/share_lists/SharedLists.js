@@ -69,7 +69,8 @@ class SharedLists extends Component {
 
 SharedLists.propTypes = {
     share: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -79,7 +80,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(shareActions, dispatch)
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SharedLists);

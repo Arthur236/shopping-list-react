@@ -67,6 +67,8 @@ Items.propTypes = {
     activeList: PropTypes.object.isRequired,
     listItems: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
+    actions: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -80,7 +82,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(listItemActions, dispatch)
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Items);

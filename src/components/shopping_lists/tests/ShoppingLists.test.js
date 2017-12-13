@@ -20,6 +20,6 @@ describe('ShoppingLists Tests', () => {
     });
 
     it('renders correctly', () => {
-
+        expect(wrapper.length).toEqual(1);
     })
 });

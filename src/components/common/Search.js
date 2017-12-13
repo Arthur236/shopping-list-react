@@ -20,7 +20,7 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-    onInputChange: PropTypes.object.isRequired
+    onInputChange: PropTypes.func
 };
 
 export default Search;

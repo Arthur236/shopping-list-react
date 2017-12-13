@@ -4,7 +4,7 @@ import { Modal, Header, Button, Icon } from 'semantic-ui-react';
 
 const DeleteList = ({ shoppingList, handleDelete }) => {
     return(
-        <Modal trigger={<a className="right floated"><Icon name='trash' className="red"/>Delete</a>} basic size='small'>
+        <Modal trigger={<a className="right floated"><Icon name="trash" className="red"/>Delete</a>} basic size="small">
             <Header content={`Delete ${ shoppingList.name }`} />
 
             <Modal.Content>
@@ -12,11 +12,11 @@ const DeleteList = ({ shoppingList, handleDelete }) => {
             </Modal.Content>
 
             <Modal.Actions>
-                <Button type='submit' basic color='blue' inverted>
-                    <Icon name='remove' /> No
+                <Button type="submit" basic color="blue" inverted>
+                    <Icon name="remove" /> No
                 </Button>
-                <Button color='red' inverted className='right floated' onClick={() => handleDelete(shoppingList.id)}>
-                    <Icon name='checkmark' /> Yes
+                <Button color="red" inverted className="right floated" onClick={() => handleDelete(shoppingList.id)}>
+                    <Icon name="checkmark" /> Yes
                 </Button>
             </Modal.Actions>
         </Modal>

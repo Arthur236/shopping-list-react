@@ -15,8 +15,8 @@ const UserList = ({ users, handleAdd }) => {
                     </Card.Content>
                     <Card.Content extra>
                         <form onSubmit={handleAdd}>
-                            <input type='number' name='friend_id' defaultValue={user.id} hidden disabled />
-                            <button type='submit' className='ui button purple fluid'>Send Request</button>
+                            <input type="number" name="friend_id" defaultValue={user.id} hidden disabled />
+                            <button type="submit" className="ui button purple fluid">Send Request</button>
                         </form>
                     </Card.Content>
                 </Card>

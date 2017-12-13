@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from "../../actions/authActions";
+import { bindActionCreators } from 'redux';
+import * as authActions from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
@@ -23,7 +24,7 @@ class LoginForm extends Component {
     }
 
     onSubmit(values) {
-        this.props.login(values)
+        this.props.actions.login(values)
             .then(() => {
                 if(this.props.loggedIn) {
                     this.context.router.history.push('/dashboard');
@@ -42,14 +43,14 @@ class LoginForm extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type='submit' inverted disabled loading color='purple' className='fluid'>Register</Button>;
+            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Register</Button>;
         } else {
-            button = <Button type='submit' inverted color='purple' className='fluid'>Login</Button>;
+            button = <Button type="submit" inverted color="purple" className="fluid">Login</Button>;
         }
 
         return(
             <div className="ui center aligned inverted landingContent">
-                <img src={process.env.PUBLIC_URL + '/img/img5.jpeg'} alt='background' />
+                <img src={process.env.PUBLIC_URL + '/img/img5.jpeg'} alt="background" />
                 <div className="overlay" />
 
                 <div className="ui inverted center aligned grid">
@@ -91,11 +92,27 @@ LoginForm.contextTypes = {
     router: PropTypes.object
 };
 
+LoginForm.propTypes = {
+    actions: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired
+};
+
 function mapStateToProps(state) {
-    return { loading: state.auth.loading, loggedIn: state.auth.loggedIn }
+    return {
+        loading: state.auth.loading,
+        loggedIn: state.auth.loggedIn
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(authActions, dispatch)
+    };
 }
 
 export default reduxForm({
     validate,
     form: 'SignInForm'
-})(connect(mapStateToProps, { login })(LoginForm));
+})(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

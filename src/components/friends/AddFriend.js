@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { searchUser } from "../../actions/userActions";
-import { sendRequest } from "../../actions/friendActions";
+import { bindActionCreators } from 'redux';
+import * as userActions from "../../actions/userActions";
+import * as friendActions from "../../actions/friendActions";
 import Search from "../common/Search";
 import Navigation from '../common/Navigation';
 import UserList from "./UserList";
@@ -19,7 +20,7 @@ class AddFriend extends Component {
     }
 
     searchUserOnChange(username) {
-        this.props.searchUser(username)
+        this.props.userActions.searchUser(username);
     }
 
     onInputChange(event) {
@@ -35,7 +36,7 @@ class AddFriend extends Component {
         let field = {};
         field[e.target.friend_id.name] = e.target.friend_id.value;
 
-        this.props.sendRequest(field);
+        this.props.friendActions.sendRequest(field);
     }
 
     render() {
@@ -43,9 +44,9 @@ class AddFriend extends Component {
         let userList = '';
 
         if (!users) {
-            userList = <div>Search for a user above</div>
+            userList = <div>Search for a user above</div>;
         } else {
-            userList = <UserList users={users} handleAdd={this.handleAdd}/>
+            userList = <UserList users={users} handleAdd={this.handleAdd}/>;
         }
 
         return(
@@ -68,10 +69,19 @@ class AddFriend extends Component {
 AddFriend.propTypes = {
     users: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
+    friendActions: PropTypes.object,
+    userActions: PropTypes.object
 };
 
 function mapStateToProps(state) {
     return { users: state.users, loading: state.users.loading };
 }
 
-export default connect(mapStateToProps, { searchUser, sendRequest })(AddFriend);
+function mapDispatchToProps(dispatch) {
+    return {
+        friendActions: bindActionCreators(friendActions, dispatch),
+        userActions: bindActionCreators(userActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddFriend);

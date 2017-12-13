@@ -9,7 +9,7 @@ const ItemList = ({ id, listItems, handleDelete }) => {
 
     if (!_.isEmpty(listItems)) {
         items = _.map(listItems.shopping_list_items, listItem =>
-            <tr key={ listItem.id }>
+            <tr key={listItem.id}>
                 <td>{ listItem.name }</td>
                 <td>{ listItem.quantity }</td>
                 <td>{ listItem.unit_price }</td>
@@ -23,7 +23,7 @@ const ItemList = ({ id, listItems, handleDelete }) => {
             </tr>
         );
     } else {
-        items = <tr><td colSpan="4">This list has no items. Please add some.</td></tr>
+        items = <tr><td colSpan="4">This list has no items. Please add some.</td></tr>;
     }
     return (
         <div>
@@ -49,7 +49,9 @@ const ItemList = ({ id, listItems, handleDelete }) => {
 };
 
 ItemList.propTypes = {
-    listItems: PropTypes.object.isRequired
+    listItems: PropTypes.object.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
 };
 
 export default ItemList;

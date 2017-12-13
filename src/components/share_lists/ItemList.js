@@ -7,7 +7,7 @@ const ItemList = ({ listItems }) => {
 
     if(listItems) {
         items = _.map(listItems.shared_list_items, listItem =>
-            <tr key={ listItem.id }>
+            <tr key={listItem.id}>
                 <td>{ listItem.name }</td>
                 <td>{ listItem.quantity }</td>
                 <td>{ listItem.unit_price }</td>
@@ -15,7 +15,7 @@ const ItemList = ({ listItems }) => {
             </tr>
         );
     } else {
-        items = <tr><td colSpan="4">This list has no items. Please add some.</td></tr>
+        items = <tr><td colSpan="4">This list has no items. Please add some.</td></tr>;
     }
     return (
         <div>

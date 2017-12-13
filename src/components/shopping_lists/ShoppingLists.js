@@ -70,7 +70,8 @@ export class ShoppingLists extends Component {
 
 ShoppingLists.propTypes = {
     shoppingLists: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -80,7 +81,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(shoppingListActions, dispatch)
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingLists);

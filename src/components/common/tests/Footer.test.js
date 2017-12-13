@@ -16,5 +16,5 @@ describe('Footer Tests', () => {
     it('renders a div and p tag', () => {
         expect(wrapper.find('div').length).toBe(1);
         expect(wrapper.find('p').text()).toContain('Shopping List Application');
-    })
+    });
 });

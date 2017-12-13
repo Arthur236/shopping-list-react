@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Navigation from "../common/Navigation";
-import { createItem } from "../../actions/listItemActions";
+import * as itemActions from "../../actions/listItemActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
@@ -18,7 +19,7 @@ class CreateItem extends Component {
     onSubmit(values) {
         const id = this.props.match.params.id;
 
-        this.props.createItem(id, values, () => {
+        this.props.actions.createItem(id, values, () => {
             this.context.router.history.push('/shopping_lists/'+ id +'/items');
         });
     }
@@ -29,9 +30,9 @@ class CreateItem extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type='submit' disabled loading color='purple' className='fluid'>Create</Button>;
+            button = <Button type="submit" disabled loading color="purple" className="fluid">Create</Button>;
         } else {
-            button = <Button type='submit' color='purple' className='fluid'>Create</Button>;
+            button = <Button type="submit" color="purple" className="fluid">Create</Button>;
         }
 
         return(
@@ -39,9 +40,9 @@ class CreateItem extends Component {
                 <Container className="ui center aligned">
                     <Navigation header="Add List Item"/>
 
-                    <Header as="h1" content='Add List Item' />
+                    <Header as="h1" content="Add List Item" />
 
-                    <Grid centered columns='2'>
+                    <Grid centered columns="2">
                         <Grid.Column>
                             <Form onSubmit={handleSubmit(this.onSubmit)}>
                                 <FormInput
@@ -81,10 +82,19 @@ CreateItem.contextTypes = {
 };
 
 CreateItem.propTypes = {
-    //myProp: PropTypes.string.isRequired
+    match: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func,
+    loading: PropTypes.func
 };
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(itemActions, dispatch)
+    };
+}
 
 export default reduxForm({
     validate,
     form: 'CreateItemForm'
-})(connect(null, { createItem })(CreateItem));
+})(connect(null, mapDispatchToProps)(CreateItem));
