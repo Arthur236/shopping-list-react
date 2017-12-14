@@ -6,7 +6,7 @@ import Footer from '../Footer';
 
 configure({ adapter: new Adapter() });
 
-describe('Footer Tests', () => {
+describe('Test Cases For Footer', () => {
     let wrapper = null;
 
     beforeEach(() => {

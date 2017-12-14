@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Field} from 'redux-form';
 
-function renderField(field) {
+export function renderField(field) {
     const {meta} = field;
     const error = meta.touched && meta.error ? "error" : "";
 
