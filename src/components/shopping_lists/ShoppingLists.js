@@ -9,6 +9,7 @@ import * as shoppingListActions from '../../actions/shoppingListActions';
 import Navigation from "../common/Navigation";
 import List from "./List";
 import PreLoader from '../common/PreLoader';
+import Pagination from "react-js-pagination";
 
 export class ShoppingLists extends Component {
     constructor(props) {
@@ -16,25 +17,43 @@ export class ShoppingLists extends Component {
 
         this.state = {
             activePage: 1,
-            limit: 30,
-            total_lists: null
+            limit: 2,
+            total_lists: 0
         };
 
         this.handleDelete = this.handleDelete.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
     }
 
-    componentWillMount() {
-        this.props.actions.getLists(this.state.activePage, this.state.limit);
+    componentDidMount() {
+        const { actions } = this.props;
+        const { activePage, limit } = this.state;
+
+        actions.getLists(activePage, limit);
     }
 
     handleDelete(id) {
-        this.props.actions.deleteList(id, () => {
-            this.props.actions.getLists(this.state.activePage, this.state.limit);
+        const { actions } = this.props;
+        const { activePage, limit } = this.state;
+
+        actions.deleteList(id, () => {
+            actions.getLists(activePage, limit);
+        });
+    }
+
+    handlePageChange(pageNumber) {
+        const { actions } = this.props;
+        const { activePage, limit } = this.state;
+
+        this.setState({ activePage: pageNumber }, () => {
+            actions.getLists(activePage, limit);
         });
     }
 
     render() {
         const { shoppingLists, loading } = this.props;
+        const { activePage, limit } = this.state;
+        let total_lists = 0;
 
         if (!shoppingLists || loading) {
             return(
@@ -42,11 +61,28 @@ export class ShoppingLists extends Component {
             );
         }
 
-        let lists = '';
+        if (shoppingLists.shopping_lists) {
+            if (shoppingLists.shopping_lists.length) {
+                total_lists = shoppingLists.shopping_lists.length;
+            }
+        }
+
+        let lists, pagination = '';
         if (_.isEmpty(shoppingLists)) {
             lists = <p>You currently have no shopping lists</p>;
+            pagination = '';
         } else {
             lists = <List shoppingLists={shoppingLists} handleDelete={this.handleDelete} />;
+            pagination = <Pagination
+                            activePage={activePage}
+                            itemsCountPerPage={limit}
+                            totalItemsCount={total_lists}
+                            pageRangeDisplayed={5}
+                            onChange={this.handlePageChange}
+                            innerClass='ui pagination menu'
+                            itemClass='item'
+                            disabledClass='disabledClass'
+                        />;
         }
 
         return(
@@ -61,6 +97,7 @@ export class ShoppingLists extends Component {
 
                     <Segment basic>
                         { lists }
+                        { pagination }
                     </Segment>
                 </Container>
             </div>
@@ -75,7 +112,12 @@ ShoppingLists.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return { shoppingLists: state.shoppingLists.shoppingLists, loading: state.shoppingLists.loading };
+    const { shoppingLists } = state;
+
+    return {
+        shoppingLists: shoppingLists.shoppingLists,
+        loading: shoppingLists.loading
+    };
 }
 
 function mapDispatchToProps(dispatch) {

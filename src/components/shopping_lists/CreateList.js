@@ -71,7 +71,7 @@ class CreateList extends Component {
 
 CreateList.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    createList: PropTypes.func.isRequired,
+    createList: PropTypes.func,
     loading: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired

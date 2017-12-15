@@ -39,7 +39,7 @@ FormInput.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
-    required: PropTypes.string.isRequired
+    required: PropTypes.string
 };
 
 export default FormInput;
