@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import {Field} from 'redux-form';
 
 export function renderField(field) {
+    // Logic to render an input field
     const {meta} = field;
     const error = meta.touched && meta.error ? "error" : "";
 
+    // Return a representation of an input field
     return (
         <div className={`${error} field`}>
             <div className="ui left icon input">
@@ -23,6 +25,7 @@ export function renderField(field) {
 }
 
 const FormInput = ({type, name, placeholder, icon, required}) => {
+    // Return an input field
     return (
         <Field
             type={type}
@@ -34,6 +37,7 @@ const FormInput = ({type, name, placeholder, icon, required}) => {
     );
 };
 
+// Validate propTypes
 FormInput.propTypes = {
     type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

@@ -17,8 +17,7 @@ export class ShoppingLists extends Component {
 
         this.state = {
             activePage: 1,
-            limit: 2,
-            total_lists: 0
+            limit: 9
         };
 
         this.handleDelete = this.handleDelete.bind(this);
@@ -43,28 +42,20 @@ export class ShoppingLists extends Component {
 
     handlePageChange(pageNumber) {
         const { actions } = this.props;
-        const { activePage, limit } = this.state;
+        const { limit } = this.state;
 
-        this.setState({ activePage: pageNumber }, () => {
-            actions.getLists(activePage, limit);
-        });
+        this.setState({ activePage: pageNumber });
+        actions.getLists(pageNumber, limit);
     }
 
     render() {
         const { shoppingLists, loading } = this.props;
         const { activePage, limit } = this.state;
-        let total_lists = 0;
 
         if (!shoppingLists || loading) {
             return(
                 <PreLoader />
             );
-        }
-
-        if (shoppingLists.shopping_lists) {
-            if (shoppingLists.shopping_lists.length) {
-                total_lists = shoppingLists.shopping_lists.length;
-            }
         }
 
         let lists, pagination = '';
@@ -73,16 +64,19 @@ export class ShoppingLists extends Component {
             pagination = '';
         } else {
             lists = <List shoppingLists={shoppingLists} handleDelete={this.handleDelete} />;
-            pagination = <Pagination
+            pagination =
+                <div className="ui inverted center aligned grid">
+                    <Pagination
                             activePage={activePage}
                             itemsCountPerPage={limit}
-                            totalItemsCount={total_lists}
+                            totalItemsCount={shoppingLists.total}
                             pageRangeDisplayed={5}
                             onChange={this.handlePageChange}
                             innerClass='ui pagination menu'
                             itemClass='item'
                             disabledClass='disabledClass'
-                        />;
+                        />
+                </div>;
         }
 
         return(
