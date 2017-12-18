@@ -9,14 +9,13 @@ import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import RequestList from './RequestList';
 
-class ViewRequests extends Component {
+export class ViewRequests extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             activePage: 1,
-            limit: 10,
-            total_friends: null
+            limit: 10
         };
 
         this.acceptFriend = this.acceptFriend.bind(this);

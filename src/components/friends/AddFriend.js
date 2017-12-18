@@ -10,7 +10,7 @@ import Search from "../common/Search";
 import Navigation from '../common/Navigation';
 import UserList from "./UserList";
 
-class AddFriend extends Component {
+export class AddFriend extends Component {
     constructor(props) {
         super(props);
 

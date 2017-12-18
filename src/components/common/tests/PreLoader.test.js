@@ -11,7 +11,6 @@ describe('Test Cases For PreLoader', () => {
     });
 
     it('renders the dimmer component', () => {
-        console.log(wrapper.debug());
         expect(wrapper.find('Dimmer').length).toBe(1);
     });
 });

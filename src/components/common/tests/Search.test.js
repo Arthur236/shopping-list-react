@@ -11,7 +11,6 @@ describe('Test Cases For Search', () => {
     });
 
     it('renders the search input', () => {
-        console.log(wrapper.debug());
         expect(wrapper.find('input').length).toBe(1);
     });
 });
