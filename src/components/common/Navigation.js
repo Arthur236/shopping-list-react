@@ -23,9 +23,9 @@ export class Navigation extends Component {
 
         const userLinks = (
             <div className="menu">
-                <Link to="" className="item">Profile</Link>
+                <Link id="profile" to="/dashboard" className="item">Profile</Link>
                 <div className="divider"/>
-                <a onClick={this.logout} className="item">Sign Out</a>
+                <a id="logout" onClick={this.logout} className="item">Sign Out</a>
             </div>
         );
 

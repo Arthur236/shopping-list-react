@@ -17,7 +17,7 @@ export class ShoppingLists extends Component {
 
         this.state = {
             activePage: 1,
-            limit: 9
+            limit: 10
         };
 
         this.handleDelete = this.handleDelete.bind(this);

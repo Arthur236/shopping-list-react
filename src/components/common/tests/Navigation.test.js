@@ -1,22 +1,23 @@
 import expect from 'expect';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
+import * as sinon from "sinon";
 import { Navigation } from '../Navigation';
 
 describe('Test Cases For Navigation', () => {
     let wrapper = null;
 
-    function setup(login) {
+    function setupShallow(login) {
         const props = {
             loggedIn: login,
-            logout: () => {}
+            logout: sinon.spy()
         };
 
-        return wrapper = shallow(<Navigation {...props} />);
+        return shallow(<Navigation {...props} />);
     }
 
     it('renders a wrapper div', () => {
-        const wrapper = setup(false);
+        const wrapper = setupShallow(false);
         expect(wrapper.find('.borderless').length).toBe(1);
     });
 });
