@@ -51,7 +51,7 @@ const ItemList = ({ id, listItems, handleDelete }) => {
 ItemList.propTypes = {
     listItems: PropTypes.object.isRequired,
     handleDelete: PropTypes.func.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
 };
 
 export default ItemList;

@@ -10,7 +10,7 @@ import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
     constructor(props, context) {
         super(props, context);
 
