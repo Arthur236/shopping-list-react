@@ -10,7 +10,7 @@ import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Navigation from '../common/Navigation';
 
-class CreateList extends Component {
+export class CreateList extends Component {
     constructor(props) {
         super(props);
 
@@ -71,7 +71,6 @@ class CreateList extends Component {
 
 CreateList.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    createList: PropTypes.func,
     loading: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired

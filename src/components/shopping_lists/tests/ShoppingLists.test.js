@@ -1,25 +1,57 @@
 import expect from 'expect';
-import { configure, shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 import React from 'react';
-import { ShoppingLists } from '../ShoppingLists';
+import * as sinon from "sinon";
+import {ShoppingLists} from '../ShoppingLists';
 
-configure({ adapter: new Adapter() });
-
-describe('ShoppingLists Tests', () => {
-    let wrapper = null;
-
-    beforeEach(() => {
+describe('Test Cases For ShoppingLists', () => {
+    function setupEmptyShoppingLists(loading) {
         const props = {
-            loading: false,
             shoppingLists: {},
-            actions: { getLists: () => { return Promise.resolve(); } }
+            loading: loading,
+            actions: {
+                getLists: sinon.spy(),
+                deleteList: sinon.spy()
+            }
         };
 
-        wrapper = shallow(<ShoppingLists {...props} />);
-    });
+        return shallow(<ShoppingLists {...props} />);
+    }
 
-    it('renders correctly', () => {
-        expect(wrapper.length).toEqual(1);
+    function setupShoppingLists(loading) {
+        const props = {
+            shoppingLists: {
+                "total": 1,
+                "next_page": "None",
+                "previous_page": "None",
+                "shared_lists": [
+                    {
+                        "id": 1,
+                        "name": "List 1",
+                        "description": "Some text"
+                    }
+                ]
+            },
+            loading: loading,
+            actions: {
+                getLists: sinon.spy(),
+                deleteList: sinon.spy()
+            }
+        };
+
+        return shallow(<ShoppingLists {...props} />);
+    }
+
+    it('renders PreLoader correctly', () => {
+        const wrapper = setupEmptyShoppingLists(true);
+        expect(wrapper.find('PreLoader').length).toBe(1);
+    });
+    it('renders a wrapper div', () => {
+        const wrapper = setupEmptyShoppingLists(false);
+        expect(wrapper.find('.content').length).toBe(1);
+    });
+    it('renders friend list correctly', () => {
+        const wrapper = setupShoppingLists(false);
+        expect(wrapper.find('List').length).toBe(1);
     });
 });
