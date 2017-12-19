@@ -72,9 +72,9 @@ export class ShoppingLists extends Component {
                             totalItemsCount={shoppingLists.total}
                             pageRangeDisplayed={5}
                             onChange={this.handlePageChange}
-                            innerClass='ui pagination menu'
-                            itemClass='item'
-                            disabledClass='disabledClass'
+                            innerClass="ui pagination menu"
+                            itemClass="item"
+                            disabledClass="disabledClass"
                         />
                 </div>;
         }

@@ -9,14 +9,13 @@ import ItemList from "./ItemList";
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 
-class Items extends Component {
+export class Items extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             activePage: 1,
-            limit: 20,
-            total_items: null
+            limit: 10
         };
 
         this.handleDelete = this.handleDelete.bind(this);

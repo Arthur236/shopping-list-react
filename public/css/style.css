@@ -8,7 +8,8 @@ html, body {
 /************************************* Pagination *************************************/
 
 .ui.pagination.menu {
-    margin-top: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     padding: 0;
 }
 

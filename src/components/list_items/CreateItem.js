@@ -9,7 +9,7 @@ import * as itemActions from "../../actions/listItemActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
-class CreateItem extends Component {
+export class CreateItem extends Component {
     constructor(props, context) {
         super(props, context);
 
@@ -85,8 +85,12 @@ CreateItem.propTypes = {
     match: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func,
-    loading: PropTypes.func
+    loading: PropTypes.bool.isRequired
 };
+
+function mapStateToProps(state) {
+    return { loading: state.listItems.loading };
+}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -97,4 +101,4 @@ function mapDispatchToProps(dispatch) {
 export default reduxForm({
     validate,
     form: 'CreateItemForm'
-})(connect(null, mapDispatchToProps)(CreateItem));
+})(connect(mapStateToProps, mapDispatchToProps)(CreateItem));

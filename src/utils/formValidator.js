@@ -32,6 +32,12 @@ export default function validate(values) {
     if (!values.name) {
         errors.name = "Enter a name";
     }
+    if (values.quantity < 0) {
+        errors.quantity = "Quantity must be a positive number";
+    }
+    if (values.unit_price < 0) {
+        errors.unit_price = "Unit Price must be a positive number";
+    }
 
     // If errors is empty, the form can be submitted
     // If errors  has any properties, redux-form assumes form is invalid

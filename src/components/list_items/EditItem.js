@@ -9,7 +9,7 @@ import Navigation from "../common/Navigation";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
-class EditItem extends Component {
+export class EditItem extends Component {
     constructor(props, context) {
         super(props, context);
 
