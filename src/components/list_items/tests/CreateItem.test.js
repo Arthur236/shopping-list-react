@@ -6,9 +6,8 @@ import {CreateItem} from '../CreateItem';
 
 describe('Test Cases For CreateItem', () => {
     function setup(loading) {
-        const id = 3;
         const props = {
-            match: { params: { id } },
+            match: { params: { id: 1 } },
             actions: { createItem: sinon.spy() },
             handleSubmit: sinon.spy(),
             loading: loading

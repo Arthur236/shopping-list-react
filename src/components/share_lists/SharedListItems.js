@@ -8,7 +8,7 @@ import ItemList from "./ItemList";
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 
-class SharedListItems extends Component {
+export class SharedListItems extends Component {
     constructor(props) {
         super(props);
 
