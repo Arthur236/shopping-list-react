@@ -73,7 +73,7 @@ Navigation.propTypes = {
 };
 
 // Map props to component state
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
     return {loggedIn: state.auth.loggedIn};
 }
 
