@@ -67,7 +67,7 @@ export class AddFriend extends Component {
 }
 
 AddFriend.propTypes = {
-    users: PropTypes.object.isRequired,
+    users: PropTypes.object,
     loading: PropTypes.bool.isRequired,
     friendActions: PropTypes.object,
     userActions: PropTypes.object

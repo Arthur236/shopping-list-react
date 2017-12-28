@@ -107,9 +107,9 @@ EditItem.propTypes = {
     actions: PropTypes.object.isRequired,
     match: PropTypes.object,
     change: PropTypes.func,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func,
-    loading: PropTypes.object
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

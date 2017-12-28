@@ -26,7 +26,7 @@ describe('Test Cases For FriendList', () => {
                     ]
                 }
             },
-            removeFriend: sinon.spy()
+            shareList: sinon.spy()
         };
 
         return shallow(<FriendList {...props} />);

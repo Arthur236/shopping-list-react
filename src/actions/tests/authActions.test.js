@@ -2,12 +2,10 @@ import expect from 'expect';
 import React from 'react';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import Notifications from 'react-notify-toast';
 import * as authActions from '../authActions';
 import * as types from '../actionTypes';
-import initialState from "../../reducers/initialState";
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -34,6 +32,7 @@ describe('Tests For Register Actions', () => {
     it('should register successfully', () => {
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
+
             request.respondWith({
                 status: 201,
                 response: userPayload
@@ -51,7 +50,11 @@ describe('Tests For Register Actions', () => {
             <Notifications key={1}/>,
 
             store.dispatch(authActions.register(userPayload)).then(() => {
-                expect(store.getActions()).toEqual(expectedActions);
+
+                const dispatchedActions = store.getActions();
+                const actionTypes = dispatchedActions.map(action => action.type);
+
+                expect(actionTypes).toEqual(expectedActions);
             })
         ];
     });
@@ -90,6 +93,7 @@ describe('Tests For Log In Actions', () => {
     it('should log in successfully', () => {
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
+
             request.respondWith({
                 status: 200,
                 message: "You logged in successfully."
@@ -102,13 +106,17 @@ describe('Tests For Log In Actions', () => {
         ];
 
         const store = mockStore({});
+
         return [
             <Notifications key={1}/>,
 
-            store.dispatch(authActions.login(userPayload))
-                .then(() => {
-                    expect(store.getActions()).toEqual(expectedActions);
-                })
+            store.dispatch(authActions.login(userPayload)).then(() => {
+
+                const dispatchedActions = store.getActions();
+                const actionTypes = dispatchedActions.map(action => action.type);
+
+                expect(actionTypes).toEqual(expectedActions);
+            })
         ];
     });
 
@@ -135,36 +143,16 @@ describe('Tests For Log In Actions', () => {
 });
 
 describe('Tests For Log Out Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
-    afterEach(() => {
-        moxios.uninstall();
-    });
-
     it('should log out successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-            request.respondWith({
-                status: 200
-            });
-        });
-
-        const expectedActions = [types.LOGOUT_REQUEST];
-        const store = mockStore(initialState, expectedActions);
-
-        return [
-            <Notifications key={1}/>,
-
-            store.dispatch(authActions.logout(), () => {
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(dispatchedActions.length).toBe(1);
-                expect(actionTypes).toEqual(expectedActions);
-            })
+        const expectedActions = [
+            { type: types.LOGOUT_REQUEST }
         ];
+
+        const store = mockStore({});
+
+        store.dispatch(authActions.logout());
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(localStorageMock.removeItem.toHaveBeenCalled);
     });
 
     it('returns an object with the type of LOGOUT_REQUEST', function() {
