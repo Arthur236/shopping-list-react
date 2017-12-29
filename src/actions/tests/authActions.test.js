@@ -1,15 +1,16 @@
 import expect from 'expect';
 import React from 'react';
 import thunk from 'redux-thunk';
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
-import Notifications from 'react-notify-toast';
 import * as authActions from '../authActions';
 import * as types from '../actionTypes';
 
 const middleware = [thunk];
+const mockAxios = new MockAdapter(axios);
 const mockStore = configureMockStore(middleware);
-const userPayload = { username: 'User 1', email: 'user1@gmail.com', password: 'password' };
+const userPayload = {username: 'User 1', email: 'user1@gmail.com', password: 'password'};
 const emptyResponse = {};
 
 const localStorageMock = {
@@ -21,59 +22,44 @@ const localStorageMock = {
 global.localStorage = localStorageMock;
 
 describe('Tests For Register Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     it('should register successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 201,
-                response: userPayload
-            });
-        });
+        mockAxios.onPost('/auth/register').reply(201, userPayload);
 
         const expectedActions = [
-            { type: types.REGISTER_REQUEST },
-            { type: types.REGISTER_SUCCESS, user: userPayload },
+            {type: types.REGISTER_REQUEST},
+            {type: types.REGISTER_SUCCESS, user: userPayload},
         ];
 
-        const store = mockStore({ user: {} });
+        const store = mockStore({user: {}});
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(authActions.register(userPayload)).then(() => {
 
-            store.dispatch(authActions.register(userPayload)).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
-    it('returns an object with the type of REGISTER_REQUEST', function() {
+    it('returns an object with the type of REGISTER_REQUEST', function () {
         expect(authActions.registerRequest(userPayload)).toEqual({
             type: types.REGISTER_REQUEST,
             user: userPayload
         });
     });
 
-    it('returns an object with the type of REGISTER_SUCCESS', function() {
+    it('returns an object with the type of REGISTER_SUCCESS', function () {
         expect(authActions.registerSuccess(emptyResponse)).toEqual({
             type: types.REGISTER_SUCCESS,
             response: emptyResponse
         });
     });
 
-    it('returns an object with the type of REGISTER_FAIL', function() {
+    it('returns an object with the type of REGISTER_FAIL', function () {
         expect(authActions.registerFail(emptyResponse)).toEqual({
             type: types.REGISTER_FAIL,
             response: emptyResponse
@@ -82,59 +68,48 @@ describe('Tests For Register Actions', () => {
 });
 
 describe('Tests For Log In Actions', () => {
-    beforeEach(() => {
-        moxios.install();
+    afterEach(() => {
+        mockAxios.reset();
     });
 
-    afterEach(() => {
-        moxios.uninstall();
-    });
+    const payLoad = {
+        "message": "You logged in successfully."
+    };
 
     it('should log in successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                message: "You logged in successfully."
-            });
-        });
+        mockAxios.onPost('/auth/login').reply(200, payLoad);
 
         const expectedActions = [
-            { type: types.LOGIN_REQUEST },
-            { type: types.LOGIN_SUCCESS, response: "You logged in successfully." },
+            {type: types.LOGIN_REQUEST},
+            {type: types.LOGIN_SUCCESS, response: payLoad},
         ];
 
         const store = mockStore({});
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(authActions.login(userPayload)).then(() => {
 
-            store.dispatch(authActions.login(userPayload)).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
-    it('returns an object with the type of LOGIN_REQUEST', function() {
+    it('returns an object with the type of LOGIN_REQUEST', function () {
         expect(authActions.loginRequest(userPayload)).toEqual({
             type: types.LOGIN_REQUEST,
             user: userPayload
         });
     });
 
-    it('returns an object with the type of LOGIN_SUCCESS', function() {
+    it('returns an object with the type of LOGIN_SUCCESS', function () {
         expect(authActions.loginSuccess(emptyResponse)).toEqual({
             type: types.LOGIN_SUCCESS,
             response: emptyResponse
         });
     });
 
-    it('returns an object with the type of LOGIN_FAIL', function() {
+    it('returns an object with the type of LOGIN_FAIL', function () {
         expect(authActions.loginFail(emptyResponse)).toEqual({
             type: types.LOGIN_FAIL,
             response: emptyResponse
@@ -145,7 +120,7 @@ describe('Tests For Log In Actions', () => {
 describe('Tests For Log Out Actions', () => {
     it('should log out successfully', () => {
         const expectedActions = [
-            { type: types.LOGOUT_REQUEST }
+            {type: types.LOGOUT_REQUEST}
         ];
 
         const store = mockStore({});
@@ -155,7 +130,7 @@ describe('Tests For Log Out Actions', () => {
         expect(localStorageMock.removeItem.toHaveBeenCalled);
     });
 
-    it('returns an object with the type of LOGOUT_REQUEST', function() {
+    it('returns an object with the type of LOGOUT_REQUEST', function () {
         expect(authActions.logoutRequest()).toEqual({
             type: types.LOGOUT_REQUEST
         });

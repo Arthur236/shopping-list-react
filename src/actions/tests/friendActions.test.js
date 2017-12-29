@@ -1,22 +1,19 @@
 import expect from 'expect';
 import React from 'react';
 import thunk from 'redux-thunk';
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
-import Notifications from 'react-notify-toast';
 import * as friendActions from '../friendActions';
 import * as types from '../actionTypes';
 
 const middleware = [thunk];
+const mockAxios = new MockAdapter(axios);
 const mockStore = configureMockStore(middleware);
 
 describe('Tests For Get Friends Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
@@ -37,14 +34,7 @@ describe('Tests For Get Friends Actions', () => {
     };
 
     it('should get all friends successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: friendsPayload
-            });
-        });
+        mockAxios.onGet('/friends', { params: { page: 1, limit: 10 } }).reply(200, friendsPayload);
 
         const expectedActions = [
             { type: types.GET_FRIENDS_REQUEST },
@@ -53,17 +43,13 @@ describe('Tests For Get Friends Actions', () => {
 
         const store = mockStore({ friendRequests: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(friendActions.getFriends(1, 10)).then(() => {
 
-            store.dispatch(friendActions.getFriends(1, 10)).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of GET_FRIENDS_REQUEST', function() {
@@ -88,12 +74,8 @@ describe('Tests For Get Friends Actions', () => {
 });
 
 describe('Tests For Get Friend Requests Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
@@ -114,14 +96,7 @@ describe('Tests For Get Friend Requests Actions', () => {
     };
 
     it('should get all friend requests successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: requestsPayload
-            });
-        });
+        mockAxios.onGet('/friends/requests', { params: { page: 1, limit: 10 } }).reply(200, requestsPayload);
 
         const expectedActions = [
             { type: types.GET_FRIEND_REQUESTS_REQUEST },
@@ -130,17 +105,13 @@ describe('Tests For Get Friend Requests Actions', () => {
 
         const store = mockStore({ friendRequests: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(friendActions.getFriendRequests(1, 10)).then(() => {
 
-            store.dispatch(friendActions.getFriendRequests(1, 10)).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of GET_FRIEND_REQUESTS_REQUEST', function() {
@@ -165,26 +136,15 @@ describe('Tests For Get Friend Requests Actions', () => {
 });
 
 describe('Tests For Send Friend Request Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
     const requestsPayload = { "message": "Friend request sent" };
 
     it('should send a friend request successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: requestsPayload
-            });
-        });
+        mockAxios.onPost('/friends').reply(200, requestsPayload);
 
         const expectedActions = [
             { type: types.REQUEST_FRIEND_REQUEST },
@@ -193,17 +153,13 @@ describe('Tests For Send Friend Request Actions', () => {
 
         const store = mockStore({ friendRequests: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(friendActions.sendRequest({friend_id: 1})).then(() => {
 
-            store.dispatch(friendActions.sendRequest({friend_id: 1})).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of REQUEST_FRIEND_REQUEST', function() {
@@ -228,26 +184,15 @@ describe('Tests For Send Friend Request Actions', () => {
 });
 
 describe('Tests For Accept Friend Request Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
     const requestsPayload = { "message": "You are now friends" };
 
     it('should accept a friend request successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: requestsPayload
-            });
-        });
+        mockAxios.onPut('/friends/1').reply(200, requestsPayload);
 
         const expectedActions = [
             { type: types.ACCEPT_FRIEND_REQUEST_REQUEST },
@@ -256,17 +201,13 @@ describe('Tests For Accept Friend Request Actions', () => {
 
         const store = mockStore({ friends: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(friendActions.acceptRequest(1, () => {})).then(() => {
 
-            store.dispatch(friendActions.acceptRequest(1, () => {})).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of ACCEPT_FRIEND_REQUEST_REQUEST', function() {
@@ -291,26 +232,15 @@ describe('Tests For Accept Friend Request Actions', () => {
 });
 
 describe('Tests For Remove Friend Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
     const requestsPayload = { "message": "Friend deleted successfully" };
 
     it('should remove a friend successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: requestsPayload
-            });
-        });
+        mockAxios.onDelete('/friends/1').reply(200, requestsPayload);
 
         const expectedActions = [
             { type: types.DELETE_FRIEND_REQUEST },
@@ -319,17 +249,13 @@ describe('Tests For Remove Friend Actions', () => {
 
         const store = mockStore({ friends: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(friendActions.removeFriend(1, () => {})).then(() => {
 
-            store.dispatch(friendActions.removeFriend(1, () => {})).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of DELETE_FRIEND_REQUEST', function() {

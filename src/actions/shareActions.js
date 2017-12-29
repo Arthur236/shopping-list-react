@@ -37,7 +37,7 @@ export function shareListRequest() {
 
 export function shareListSuccess(response) {
     return {
-        type: actionTypes.SHARE_LIST_REQUEST,
+        type: actionTypes.SHARE_LIST_SUCCESS,
         response
     };
 }

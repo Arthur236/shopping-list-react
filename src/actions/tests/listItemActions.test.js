@@ -1,22 +1,18 @@
 import expect from 'expect';
 import React from 'react';
-import thunk from 'redux-thunk';
-import moxios from 'moxios';
+import thunk from 'redux-thunk';import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
-import Notifications from 'react-notify-toast';
 import * as listItemActions from '../listItemActions';
 import * as types from '../actionTypes';
 
 const middleware = [thunk];
+const mockAxios = new MockAdapter(axios);
 const mockStore = configureMockStore(middleware);
 
 describe('Tests For Get List Items Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
@@ -41,14 +37,7 @@ describe('Tests For Get List Items Actions', () => {
     };
 
     it('should get all list items successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: itemsPayload
-            });
-        });
+        mockAxios.onGet('/shopping_lists/1/items', { params: { page: 1, limit: 10 } }).reply(200, itemsPayload);
 
         const expectedActions = [
             { type: types.GET_SINGLE_LIST_REQUEST },
@@ -58,17 +47,13 @@ describe('Tests For Get List Items Actions', () => {
 
         const store = mockStore({ listItems: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(listItemActions.getListItems(1, 1, 10)).then(() => {
 
-            store.dispatch(listItemActions.getListItems(1, 1, 10)).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of GET_ITEMS_REQUEST', function() {
@@ -93,12 +78,8 @@ describe('Tests For Get List Items Actions', () => {
 });
 
 describe('Tests For Get Single List Item Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
@@ -110,14 +91,7 @@ describe('Tests For Get Single List Item Actions', () => {
     };
 
     it('should get a list item successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: itemPayload
-            });
-        });
+        mockAxios.onGet('/shopping_lists/1/items/1').reply(200, itemPayload);
 
         const expectedActions = [
             { type: types.GET_SINGLE_LIST_REQUEST },
@@ -127,17 +101,13 @@ describe('Tests For Get Single List Item Actions', () => {
 
         const store = mockStore({ listItems: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(listItemActions.getSingleItem(1, 1)).then(() => {
 
-            store.dispatch(listItemActions.getSingleItem(1, 1)).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of GET_SINGLE_ITEM_REQUEST', function() {
@@ -162,12 +132,8 @@ describe('Tests For Get Single List Item Actions', () => {
 });
 
 describe('Tests For List Item Creation Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
@@ -179,14 +145,7 @@ describe('Tests For List Item Creation Actions', () => {
     };
 
     it('should create a list item successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 201,
-                response: itemPayload
-            });
-        });
+        mockAxios.onPost('/shopping_lists/1/items').reply(201, itemPayload);
 
         const expectedActions = [
             { type: types.GET_SINGLE_LIST_REQUEST },
@@ -196,17 +155,13 @@ describe('Tests For List Item Creation Actions', () => {
 
         const store = mockStore({ listItems: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(listItemActions.createItem(1, itemPayload, () => {})).then(() => {
 
-            store.dispatch(listItemActions.createItem(1, itemPayload, () => {})).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of CREATE_ITEM_REQUEST', function() {
@@ -231,12 +186,8 @@ describe('Tests For List Item Creation Actions', () => {
 });
 
 describe('Tests For List Item Edit Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
@@ -248,14 +199,7 @@ describe('Tests For List Item Edit Actions', () => {
     };
 
     it('should edit a list item successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: itemPayload
-            });
-        });
+        mockAxios.onPut('/shopping_lists/1/items/1').reply(200, itemPayload);
 
         const expectedActions = [
             { type: types.GET_SINGLE_LIST_REQUEST },
@@ -265,17 +209,13 @@ describe('Tests For List Item Edit Actions', () => {
 
         const store = mockStore({ listItems: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(listItemActions.editItem(1, 1, itemPayload, () => {})).then(() => {
 
-            store.dispatch(listItemActions.editItem(1, 1, itemPayload, () => {})).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of EDIT_ITEM_REQUEST', function() {
@@ -300,12 +240,8 @@ describe('Tests For List Item Edit Actions', () => {
 });
 
 describe('Tests For List Item Deletion Actions', () => {
-    beforeEach(() => {
-        moxios.install();
-    });
-
     afterEach(() => {
-        moxios.uninstall();
+        mockAxios.reset();
     });
 
     const emptyResponse = {};
@@ -314,14 +250,7 @@ describe('Tests For List Item Deletion Actions', () => {
     };
 
     it('should delete a list item successfully', () => {
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-
-            request.respondWith({
-                status: 200,
-                response: itemPayload
-            });
-        });
+        mockAxios.onDelete('/shopping_lists/1/items/1').reply(200, itemPayload);
 
         const expectedActions = [
             { type: types.GET_SINGLE_LIST_REQUEST },
@@ -331,17 +260,13 @@ describe('Tests For List Item Deletion Actions', () => {
 
         const store = mockStore({ listItems: {} });
 
-        return [
-            <Notifications key={1}/>,
+        return store.dispatch(listItemActions.deleteItem(1, 1, itemPayload, () => {})).then(() => {
 
-            store.dispatch(listItemActions.deleteItem(1, 1, itemPayload, () => {})).then(() => {
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
 
-                const dispatchedActions = store.getActions();
-                const actionTypes = dispatchedActions.map(action => action.type);
-
-                expect(actionTypes).toEqual(expectedActions);
-            })
-        ];
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {})
     });
 
     it('returns an object with the type of DELETE_ITEM_REQUEST', function() {
