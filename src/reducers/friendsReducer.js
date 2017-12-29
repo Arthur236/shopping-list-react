@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
                 loading: false
             };
 
-        case actionTypes.GET_FRIEND_REQUESTS_FAIL:
+        case actionTypes.GET_FRIENDS_FAIL:
             return {
                 ...state,
                 loading: false
@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
                 loading: false
             };
 
-        case actionTypes.GET_FRIENDS_FAIL:
+        case actionTypes.GET_FRIEND_REQUESTS_FAIL:
             return {
                 ...state,
                 loading: false
