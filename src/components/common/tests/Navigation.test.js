@@ -40,6 +40,7 @@ describe('Test Cases For Navigation', () => {
         const expected = {
             loggedIn: false
         };
+
         expect(mapStateToProps(state)).toEqual(expected);
     });
 });

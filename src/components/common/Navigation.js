@@ -39,11 +39,8 @@ export class Navigation extends Component {
 
         return (
             <div className="ui inverted huge borderless fixed fluid menu">
-                <Link to="/" className="header item">Shopping List App</Link>
+                <Link to="/dashboard" className="header item">Shopping List App</Link>
                 <div className="right menu">
-                    <div className="item">
-                        <Link to="/dashboard" className="item">Dashboard</Link>
-                    </div>
                     <div className="ui simple dropdown item">
                         <a className="item">Friends</a>
                         <i className="dropdown icon"/>
