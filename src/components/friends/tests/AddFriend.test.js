@@ -17,8 +17,8 @@ describe('Test Cases For AddFriend', () => {
                 ]
             },
             loading: loading,
-            sendRequest: () => { sendRequestCalled = true },
-            searchUser: () => { searchUserCalled = true }
+            sendRequest: () => { sendRequestCalled = true; },
+            searchUser: () => { searchUserCalled = true; }
         };
 
         return shallow(<AddFriend {...props} />);
@@ -27,8 +27,8 @@ describe('Test Cases For AddFriend', () => {
     function setupUndefinedUsers(loading) {
         const props = {
             loading: loading,
-            sendRequest: () => { sendRequestCalled = true },
-            searchUser: () => { searchUserCalled = true }
+            sendRequest: () => { sendRequestCalled = true; },
+            searchUser: () => { searchUserCalled = true; }
         };
 
         return shallow(<AddFriend {...props} />);
@@ -49,13 +49,13 @@ describe('Test Cases For AddFriend', () => {
         expect(wrapper.find('div').last().html()).toContain('Search for');
     });
 
-    it('can search for users', () => {
+    it('does not search for users without value', () => {
         const wrapper = setup(true);
         const input = wrapper.find('Search').dive().find('input');
 
-        input.simulate('change', { target: { value: 'user' } });
+        input.simulate('change', { target: {} });
 
-        expect(searchUserCalled).toBe(true);
+        expect(searchUserCalled).toBe(false);
     });
 
     it('can send a friend request', () => {

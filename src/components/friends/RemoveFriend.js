@@ -23,6 +23,7 @@ const RemoveFriend = ({ friend, removeFriend }) => {
     );
 };
 
+// Define prop types
 RemoveFriend.propTypes = {
     removeFriend: PropTypes.func.isRequired,
     friend: PropTypes.object.isRequired

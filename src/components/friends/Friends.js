@@ -1,11 +1,10 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Container, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as friendActions from '../../actions/friendActions';
+import {Container, Segment} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getFriends, removeFriend} from '../../actions/friendActions';
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import FriendList from './FriendList';
@@ -23,35 +22,35 @@ export class Friends extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.getFriends(this.state.activePage, this.state.limit);
+        this.props.getFriends(this.state.activePage, this.state.limit);
     }
 
     removeFriend(id) {
-        this.props.actions.removeFriend(id, () => {
-            this.props.actions.getFriends(this.state.activePage, this.state.limit);
+        this.props.removeFriend(id, () => {
+            this.props.getFriends(this.state.activePage, this.state.limit);
         });
     }
 
     render() {
-        const { friends, loading } = this.props;
+        const {friends, loading} = this.props;
 
         if (!friends || loading) {
-            return(
-                <PreLoader />
+            return (
+                <PreLoader/>
             );
         }
 
         let friendList = '';
-        if (_.isEmpty(friends)) {
+        if (_.isEmpty(friends.friends)) {
             friendList = <p>You currently have no friends</p>;
         } else {
             friendList = <FriendList friends={friends} removeFriend={this.removeFriend}/>;
         }
 
-        return(
+        return (
             <div className="content">
                 <Container>
-                    <Navigation />
+                    <Navigation/>
 
                     <Segment basic>
                         <h1>Your Friends</h1>
@@ -59,7 +58,7 @@ export class Friends extends Component {
                     </Segment>
 
                     <Segment basic>
-                        { friendList }
+                        {friendList}
                     </Segment>
                 </Container>
             </div>
@@ -67,20 +66,21 @@ export class Friends extends Component {
     }
 }
 
+// Define prop types
 Friends.propTypes = {
     friends: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    actions: PropTypes.object
+    actions: PropTypes.object,
+    getFriends: PropTypes.func,
+    removeFriend: PropTypes.func
 };
 
-function mapStateToProps(state) {
-    return { friends: state.friends, loading: state.friends.loading };
-}
-
-function mapDispatchToProps(dispatch) {
+// Map store state to component props
+export function mapStateToProps(state) {
     return {
-        actions: bindActionCreators(friendActions, dispatch)
+        friends: state.friends,
+        loading: state.friends.loading
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Friends);
+export default connect(mapStateToProps, {getFriends, removeFriend})(Friends);

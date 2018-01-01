@@ -10,7 +10,7 @@ describe('Run tests on FormInput component', () => {
         touched = false;
         error = null;
         handleSubmit = () => {
-        }
+        };
     });
 
     const buildSubject = () => {
@@ -32,7 +32,7 @@ describe('Run tests on FormInput component', () => {
             },
             handleSubmit
         };
-        return shallow(<FormInput {...props}/>)
+        return shallow(<FormInput {...props}/>);
     };
 
     it('renders input correctly', () => {
@@ -77,8 +77,9 @@ describe('Render Field', () => {
             const element = renderField({ input, label, meta });
             subject = shallow(element);
             const errorBlock = subject.find('.errorText').first();
+
             expect(errorBlock.text()).toBe('');
-        })
+        });
     });
 
     context('when in an error state', () => {
@@ -89,8 +90,9 @@ describe('Render Field', () => {
             const element = renderField({ input, label, meta });
             subject = shallow(element);
             const errorBlock = subject.find('.errorText').first();
+
             expect(meta.error).toContain('Required');
             expect(errorBlock.text()).toContain('Required');
-        })
-    })
+        });
+    });
 });

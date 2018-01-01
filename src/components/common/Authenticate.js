@@ -27,11 +27,13 @@ export default function (ComposedComponent) {
         }
     }
 
+    // Define prop types
     Authenticate.propTypes = {
         loggedIn: PropTypes.bool.isRequired,
         history: PropTypes.object.isRequired
     };
 
+    // Map store state to component props
     function mapStateToProps(state) {
         return {
             loggedIn: state.auth.loggedIn

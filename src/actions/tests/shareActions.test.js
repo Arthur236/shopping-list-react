@@ -37,7 +37,7 @@ describe('Tests For Share List Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of SHARE_LIST_REQUEST', function() {
@@ -101,7 +101,7 @@ describe('Tests For Get Shared Lists Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_SHARED_LISTS_REQUEST', function() {
@@ -164,11 +164,10 @@ describe('Tests For Get Shared List Items Actions', () => {
         return store.dispatch(shareActions.getSharedListItems(1, 1, 10)).then(() => {
 
             const dispatchedActions = store.getActions();
-            console.log('>>>>>>>>>>>>>>>>>>', dispatchedActions);
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_SHARED_LIST_ITEMS_REQUEST', function() {
@@ -218,7 +217,7 @@ describe('Tests For Remove Shared Lists Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of REMOVE_SHARED_LIST_REQUEST', function() {

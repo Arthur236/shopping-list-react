@@ -42,7 +42,7 @@ describe('Tests For Register Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of REGISTER_REQUEST', function () {
@@ -92,7 +92,7 @@ describe('Tests For Log In Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of LOGIN_REQUEST', function () {

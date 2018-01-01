@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Navigation from "../common/Navigation";
-import * as itemActions from "../../actions/listItemActions";
+import {createItem} from "../../actions/listItemActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
@@ -19,7 +18,7 @@ export class CreateItem extends Component {
     onSubmit(values) {
         const id = this.props.match.params.id;
 
-        this.props.actions.createItem(id, values, () => {
+        this.props.createItem(id, values, () => {
             this.context.router.history.push('/shopping_lists/'+ id +'/items');
         });
     }
@@ -81,24 +80,22 @@ CreateItem.contextTypes = {
     router: PropTypes.object
 };
 
+// Define prop types
 CreateItem.propTypes = {
     match: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
+    createItem: PropTypes.func,
     handleSubmit: PropTypes.func,
     loading: PropTypes.bool.isRequired
 };
 
-function mapStateToProps(state) {
-    return { loading: state.listItems.loading };
-}
-
-function mapDispatchToProps(dispatch) {
+// Map store state to component props
+export function mapStateToProps(state) {
     return {
-        actions: bindActionCreators(itemActions, dispatch)
+        loading: state.listItems.loading
     };
 }
 
 export default reduxForm({
     validate,
     form: 'CreateItemForm'
-})(connect(mapStateToProps, mapDispatchToProps)(CreateItem));
+})(connect(mapStateToProps, { createItem })(CreateItem));

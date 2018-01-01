@@ -34,6 +34,7 @@ describe('Test Cases For FriendList', () => {
         const wrapper = setup();
         expect(wrapper.find('CardGroup').length).toBe(1);
     });
+
     it('renders a card div correctly', () => {
         const wrapper = setup();
         expect(wrapper.dive().find('.cards').length).toBe(1);

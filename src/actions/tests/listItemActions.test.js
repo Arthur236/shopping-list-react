@@ -53,7 +53,7 @@ describe('Tests For Get List Items Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_ITEMS_REQUEST', function() {
@@ -107,7 +107,7 @@ describe('Tests For Get Single List Item Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_SINGLE_ITEM_REQUEST', function() {
@@ -161,7 +161,7 @@ describe('Tests For List Item Creation Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of CREATE_ITEM_REQUEST', function() {
@@ -215,7 +215,7 @@ describe('Tests For List Item Edit Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of EDIT_ITEM_REQUEST', function() {
@@ -266,7 +266,7 @@ describe('Tests For List Item Deletion Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of DELETE_ITEM_REQUEST', function() {

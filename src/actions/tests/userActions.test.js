@@ -1,6 +1,7 @@
 import expect from 'expect';
 import React from 'react';
-import thunk from 'redux-thunk';import axios from 'axios';
+import thunk from 'redux-thunk';
+import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
 import * as userActions from '../userActions';
@@ -40,7 +41,7 @@ describe('Tests For Search User Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of SEARCH_USER_REQUEST', function() {

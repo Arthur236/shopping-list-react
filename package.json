@@ -9,9 +9,8 @@
     "eject": "react-scripts eject",
     "lint": "node_modules/.bin/esw src tools",
     "lint:watch": "npm run lint -- --watch",
-    "test": "mocha tools/testSetup.js \"src/**/*.test.js\"",
+    "test": "nyc mocha tools/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
-    "coverage": "nyc npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {

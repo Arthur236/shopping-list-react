@@ -5,7 +5,7 @@ import {Card, Image} from 'semantic-ui-react';
 
 const RequestList = ({requests, acceptFriend}) => {
     return (
-        <Card.Group itemsPerRow={3}>
+        <Card.Group itemsPerRow={2}>
             {_.map(requests.friend_requests, user =>
                 <Card color="purple" key={user.id}>
                     <Card.Content>
@@ -31,6 +31,7 @@ const RequestList = ({requests, acceptFriend}) => {
     );
 };
 
+// Define prop types
 RequestList.propTypes = {
     requests: PropTypes.object.isRequired,
     acceptFriend: PropTypes.func.isRequired

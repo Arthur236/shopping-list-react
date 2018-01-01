@@ -19,6 +19,7 @@ class Search extends Component {
     }
 }
 
+// Define prop types
 Search.propTypes = {
     onInputChange: PropTypes.func
 };

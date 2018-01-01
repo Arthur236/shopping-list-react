@@ -69,7 +69,7 @@ Navigation.propTypes = {
     logout: PropTypes.func.isRequired
 };
 
-// Map props to component state
+// // Map store state to component props
 export function mapStateToProps(state) {
     return {loggedIn: state.auth.loggedIn};
 }

@@ -18,6 +18,7 @@ export class AddFriend extends Component {
         this.handleAdd = this.handleAdd.bind(this);
     }
 
+    // Search for users
     searchUserOnChange(username) {
         this.props.searchUser(username);
     }
@@ -29,6 +30,7 @@ export class AddFriend extends Component {
         _.delay(() => this.searchUserOnChange(username), 1000);
     }
 
+    // Send friend requests
     handleAdd(e) {
         e.preventDefault();
 
@@ -65,11 +67,15 @@ export class AddFriend extends Component {
     }
 }
 
+// Define prop types
 AddFriend.propTypes = {
     users: PropTypes.object,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    searchUser: PropTypes.func,
+    sendRequest: PropTypes.func
 };
 
+// Map store state to component props
 export function mapStateToProps(state) {
     return {users: state.users, loading: state.users.loading};
 }

@@ -25,6 +25,7 @@ const UserList = ({ users, handleAdd }) => {
     );
 };
 
+// Define prop types
 UserList.propTypes = {
     users: PropTypes.object.isRequired,
     handleAdd: PropTypes.func.isRequired

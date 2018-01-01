@@ -24,6 +24,7 @@ const FriendList = ({ friends, removeFriend }) => {
     );
 };
 
+// Define prop types
 FriendList.propTypes = {
     friends: PropTypes.object.isRequired,
     removeFriend: PropTypes.func.isRequired

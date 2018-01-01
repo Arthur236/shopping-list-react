@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Container, Segment } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as friendActions from '../../actions/friendActions';
+import {Container, Segment} from 'semantic-ui-react';
+import {connect} from 'react-redux';
+import {getFriendRequests, acceptRequest} from '../../actions/friendActions';
 import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import RequestList from './RequestList';
@@ -22,21 +21,21 @@ export class ViewRequests extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.getFriendRequests(this.state.activePage, this.state.limit);
+        this.props.getFriendRequests(this.state.activePage, this.state.limit);
     }
 
     acceptFriend(id) {
-        this.props.actions.acceptRequest(id, () => {
-            this.props.actions.getFriendRequests(this.state.activePage, this.state.limit);
+        this.props.acceptRequest(id, () => {
+            this.props.getFriendRequests(this.state.activePage, this.state.limit);
         });
     }
 
     render() {
-        const { friendRequests, loading } = this.props;
+        const {friendRequests, loading} = this.props;
 
         if (!friendRequests || loading) {
-            return(
-                <PreLoader />
+            return (
+                <PreLoader/>
             );
         }
 
@@ -47,14 +46,14 @@ export class ViewRequests extends Component {
             requestList = <RequestList requests={friendRequests} acceptFriend={this.acceptFriend}/>;
         }
 
-        return(
+        return (
             <div className="content">
                 <Container>
-                    <Navigation />
+                    <Navigation/>
 
                     <Segment basic>
                         <h1>Your Friend Requests</h1>
-                        { requestList }
+                        {requestList}
                     </Segment>
                 </Container>
             </div>
@@ -62,20 +61,20 @@ export class ViewRequests extends Component {
     }
 }
 
+// Define prop types
 ViewRequests.propTypes = {
     friendRequests: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    actions: PropTypes.object
+    getFriendRequests: PropTypes.func,
+    acceptRequest: PropTypes.func
 };
 
-function mapStateToProps(state) {
-    return { friendRequests: state.friends.friendRequests, loading: state.friends.loading };
-}
-
-function mapDispatchToProps(dispatch) {
+// Map store state to component props
+export function mapStateToProps(state) {
     return {
-        actions: bindActionCreators(friendActions, dispatch)
+        friendRequests: state.friends.friendRequests,
+        loading: state.friends.loading
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewRequests);
+export default connect(mapStateToProps, {getFriendRequests, acceptRequest})(ViewRequests);

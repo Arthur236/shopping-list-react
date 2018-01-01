@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Item, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import DeleteList from "./DeleteList";
 
@@ -9,26 +9,31 @@ const List = ({ shoppingLists, handleDelete }) => {
     const { shopping_lists } = shoppingLists;
 
     return (
-        <Card.Group itemsPerRow={3}>
+        <Item.Group>
             { _.map(shopping_lists, shoppingList =>
-                <Card color="purple" key={shoppingList.id}>
-                    <Link to={`/shopping_lists/${shoppingList.id}/items`}>
-                        <Image src={process.env.PUBLIC_URL + '/img/thumb.png'} />
-                    </Link>
+                <Item>
+                    <Item.Image size="small" src={process.env.PUBLIC_URL + '/img/thumb.png'} />
 
-                    <Card.Content>
-                        <Card.Header>{shoppingList.name}</Card.Header>
-                        <Card.Meta>Created on: {shoppingList.date_created}</Card.Meta>
-                        <Card.Description>{shoppingList.description ? shoppingList.description : 'No description added'}</Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                        <Link to={`/shopping_lists/edit/${shoppingList.id}`}><Icon name="edit" className="orange"/>Edit</Link>
-                        <Link to={`/shopping_lists/share/${shoppingList.id}`}><Icon name="share" className="blue" style={{marginLeft: '15px'}}/>Share</Link>
-                        <DeleteList shoppingList={shoppingList} handleDelete={handleDelete} />
-                    </Card.Content>
-                </Card>
+                    <Item.Content>
+                        <Item.Header>
+                            <Link to={`/shopping_lists/${shoppingList.id}/items`}>{shoppingList.name}</Link>
+                        </Item.Header>
+
+                        <Item.Meta>Created on: {shoppingList.date_created}</Item.Meta>
+
+                        <Item.Description>
+                            {shoppingList.description ? shoppingList.description : "No description added"}
+                        </Item.Description>
+
+                        <Item.Extra>
+                            <Link to={`/shopping_lists/edit/${shoppingList.id}`}><Icon name="edit" className="orange"/>Edit</Link>
+                            <Link to={`/shopping_lists/share/${shoppingList.id}`}><Icon name="share" className="blue" style={{marginLeft: '15px'}}/>Share</Link>
+                            <DeleteList shoppingList={shoppingList} handleDelete={handleDelete} />
+                        </Item.Extra>
+                    </Item.Content>
+                </Item>
             ) }
-        </Card.Group>
+        </Item.Group>
     );
 };
 

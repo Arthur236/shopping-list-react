@@ -1,6 +1,7 @@
 import expect from 'expect';
 import React from 'react';
-import thunk from 'redux-thunk';import axios from 'axios';
+import thunk from 'redux-thunk';
+import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
 import * as listActions from '../shoppingListActions';
@@ -50,7 +51,7 @@ describe('Tests For Get Shopping Lists Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_LISTS_REQUEST', function() {
@@ -102,7 +103,7 @@ describe('Tests For Get Single List Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_SINGLE_LIST_REQUEST', function() {
@@ -154,7 +155,7 @@ describe('Tests For List Creation Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of CREATE_LIST_REQUEST', function() {
@@ -206,7 +207,7 @@ describe('Tests For List Edit Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of EDIT_LIST_REQUEST', function() {
@@ -256,7 +257,7 @@ describe('Tests For List Deletion Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of DELETE_LIST_REQUEST', function() {

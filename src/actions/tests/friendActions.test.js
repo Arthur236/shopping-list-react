@@ -49,7 +49,7 @@ describe('Tests For Get Friends Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_FRIENDS_REQUEST', function() {
@@ -111,7 +111,7 @@ describe('Tests For Get Friend Requests Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of GET_FRIEND_REQUESTS_REQUEST', function() {
@@ -159,7 +159,7 @@ describe('Tests For Send Friend Request Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of REQUEST_FRIEND_REQUEST', function() {
@@ -207,7 +207,7 @@ describe('Tests For Accept Friend Request Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of ACCEPT_FRIEND_REQUEST_REQUEST', function() {
@@ -255,7 +255,7 @@ describe('Tests For Remove Friend Actions', () => {
             const actionTypes = dispatchedActions.map(action => action.type);
 
             expect(actionTypes).toEqual(expectedActions);
-        }).catch(() => {})
+        }).catch(() => {});
     });
 
     it('returns an object with the type of DELETE_FRIEND_REQUEST', function() {

@@ -82,7 +82,7 @@ describe('Test Cases For Friends Reducer', () => {
         let state = reducer(initialState, action);
 
         expect(state.loading).toBe(false);
-        expect(state.friendRequests.friend_requests[1].username).toEqual("User 9")
+        expect(state.friendRequests.friend_requests[1].username).toEqual("User 9");
     });
 
     it('should handle GET_FRIEND_REQUESTS_FAIL', () => {
