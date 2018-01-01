@@ -27,7 +27,7 @@ describe('Test Cases For DeleteItem', () => {
     it('calls handleDelete', () => {
         const wrapper = setup();
         wrapper.find('.right').simulate('click');
-        
+
         expect(handleDeleteCalled).toBe(true);
     });
 });

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
+import {Container, Button, Header, Form, Grid} from 'semantic-ui-react';
+import {reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
 import Navigation from "../common/Navigation";
 import {createItem} from "../../actions/listItemActions";
 import FormInput from '../common/FormInput';
@@ -19,12 +19,12 @@ export class CreateItem extends Component {
         const id = this.props.match.params.id;
 
         this.props.createItem(id, values, () => {
-            this.context.router.history.push('/shopping_lists/'+ id +'/items');
+            this.context.router.history.push('/shopping_lists/' + id + '/items');
         });
     }
 
     render() {
-        const { handleSubmit, loading } = this.props;
+        const {handleSubmit, loading} = this.props;
 
         let button = '';
 
@@ -34,12 +34,12 @@ export class CreateItem extends Component {
             button = <Button type="submit" color="purple" className="fluid">Create</Button>;
         }
 
-        return(
+        return (
             <div className="content">
                 <Container className="ui center aligned">
                     <Navigation header="Add List Item"/>
 
-                    <Header as="h1" content="Add List Item" />
+                    <Header as="h1" content="Add List Item"/>
 
                     <Grid centered columns="2">
                         <Grid.Column>
@@ -65,7 +65,7 @@ export class CreateItem extends Component {
                                     required="required"
                                     icon="money"/>
 
-                                { button }
+                                {button}
                             </Form>
                         </Grid.Column>
                     </Grid>
@@ -98,4 +98,4 @@ export function mapStateToProps(state) {
 export default reduxForm({
     validate,
     form: 'CreateItemForm'
-})(connect(mapStateToProps, { createItem })(CreateItem));
+})(connect(mapStateToProps, {createItem})(CreateItem));
