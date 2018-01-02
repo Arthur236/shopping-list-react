@@ -3,6 +3,9 @@ import {shallow} from 'enzyme';
 import React from 'react';
 import * as sinon from "sinon";
 import {Items} from '../Items';
+import {mapStateToProps} from "../Items";
+
+let getListItemsCalled, deleteItemCalled = false;
 
 describe('Test Cases For Items', () => {
     function setupEmptyItemsList(loading) {
@@ -16,11 +19,9 @@ describe('Test Cases For Items', () => {
                 listItems: {}
             },
             loading: loading,
-            actions: {
-                getListItems: sinon.spy(),
-                deleteItem: sinon.spy()
-            },
-            match: { params: { id: 1 } }
+            getListItems: () => { getListItemsCalled = true; },
+            deleteItem: () => { deleteItemCalled = true; },
+            match: {params: {id: 1}}
         };
 
         return shallow(<Items {...props} />);
@@ -51,11 +52,9 @@ describe('Test Cases For Items', () => {
                 }
             },
             loading: loading,
-            actions: {
-                getListItems: sinon.spy(),
-                deleteItem: sinon.spy()
-            },
-            match: { params: { id: 1 } }
+            getListItems: () => { getListItemsCalled = true; },
+            deleteItem: () => { deleteItemCalled = true; },
+            match: {params: {id: 1}}
         };
 
         return shallow(<Items {...props} />);
@@ -65,12 +64,47 @@ describe('Test Cases For Items', () => {
         const wrapper = setupEmptyItemsList(true);
         expect(wrapper.find('PreLoader').length).toBe(1);
     });
+
     it('renders a wrapper div', () => {
         const wrapper = setupEmptyItemsList(false);
         expect(wrapper.find('.content').length).toBe(1);
     });
+
     it('renders item list correctly', () => {
         const wrapper = setupItemsList(false);
         expect(wrapper.find('ItemList').length).toBe(1);
+    });
+
+    it('can delete an item', () => {
+        const wrapper = setupItemsList(false);
+        const btn = wrapper.find('ItemList').dive()
+            .find('DeleteItem').dive()
+            .find('.right');
+
+        btn.simulate('click');
+
+        expect(deleteItemCalled).toBe(true);
+    });
+
+    it('correctly maps state to props', () => {
+        const state = {
+            shoppingLists: {
+                activeList: {}
+            },
+            listItems: {
+                loading: false,
+                listItems: {}
+            }
+        };
+        const expected = {
+            activeList: {},
+            loading: false,
+            listItems: {
+                loading: false,
+                listItems: {}
+            }
+        };
+
+        expect(mapStateToProps(state)).toEqual(expected);
     });
 });

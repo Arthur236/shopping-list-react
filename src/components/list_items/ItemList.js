@@ -7,7 +7,7 @@ import DeleteItem from './DeleteItem';
 const ItemList = ({ id, listItems, handleDelete }) => {
     let items = '';
 
-    if (!_.isEmpty(listItems)) {
+    if (!_.isEmpty(listItems.shopping_list_items)) {
         items = _.map(listItems.shopping_list_items, listItem =>
             <tr key={listItem.id}>
                 <td>{ listItem.name }</td>
