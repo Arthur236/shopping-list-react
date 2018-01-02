@@ -4,7 +4,6 @@ import {Container, Button, Header, Form, Grid} from 'semantic-ui-react';
 import {reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {getSingleItem, editItem} from "../../actions/listItemActions";
-import Navigation from "../common/Navigation";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
@@ -45,7 +44,7 @@ export class EditItem extends Component {
     }
 
     render() {
-        const {handleSubmit, activeItem, loading} = this.props;
+        const {handleSubmit, loading} = this.props;
 
         let button = '';
 
@@ -58,8 +57,6 @@ export class EditItem extends Component {
         return (
             <div className="content">
                 <Container className="ui center aligned">
-                    <Navigation header={`Edit ${activeItem.name}`}/>
-
                     <Header as="h1" content="Edit List Item"/>
 
                     <Grid centered columns="2">
@@ -126,4 +123,4 @@ export default reduxForm({
     validate,
     form: 'EditItemForm',
     enableReinitialize: true
-})(connect(mapStateToProps, { getSingleItem, editItem })(EditItem));
+})(connect(mapStateToProps, {getSingleItem, editItem})(EditItem));

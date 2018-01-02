@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as shareActions from '../../actions/shareActions';
 import * as friendActions from '../../actions/friendActions';
-import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import FriendList from './FriendList';
 
@@ -58,8 +57,6 @@ export class ShareList extends Component {
         return(
             <div className="content">
                 <Container>
-                    <Navigation />
-
                     <Segment basic>
                         <h1>Select Friends To Share With</h1>
 

@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { showToast } from "../../utils/helpers";
+import {connect} from 'react-redux';
+import Navigation from "./Navigation";
+import {showToast} from "../../utils/helpers";
+import {logout} from "../../actions/authActions";
 
 export default function (ComposedComponent) {
 
     class Authenticate extends Component {
+        constructor(props) {
+            super(props);
+
+            this.logout = this.logout.bind(this);
+        }
+
         componentDidMount() {
             if (!this.props.loggedIn) {
                 showToast('error', 'You need to be logged in to access that page');
@@ -20,9 +28,18 @@ export default function (ComposedComponent) {
             }
         }
 
+        logout(e) {
+            // Log out a user
+            e.preventDefault();
+            this.props.logout();
+        }
+
         render() {
             return (
-                <ComposedComponent {...this.props} />
+                <div>
+                    <Navigation logout={this.logout} />
+                    <ComposedComponent {...this.props} />
+                </div>
             );
         }
     }
@@ -30,7 +47,8 @@ export default function (ComposedComponent) {
     // Define prop types
     Authenticate.propTypes = {
         loggedIn: PropTypes.bool.isRequired,
-        history: PropTypes.object.isRequired
+        history: PropTypes.object.isRequired,
+        logout: PropTypes.func.isRequired
     };
 
     // Map store state to component props
@@ -40,5 +58,5 @@ export default function (ComposedComponent) {
         };
     }
 
-    return connect(mapStateToProps)(Authenticate);
+    return connect(mapStateToProps, {logout})(Authenticate);
 }

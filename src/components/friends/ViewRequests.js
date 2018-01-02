@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {Container, Segment} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {getFriendRequests, acceptRequest} from '../../actions/friendActions';
-import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import RequestList from './RequestList';
 
@@ -49,8 +48,6 @@ export class ViewRequests extends Component {
         return (
             <div className="content">
                 <Container>
-                    <Navigation/>
-
                     <Segment basic>
                         <h1>Your Friend Requests</h1>
                         {requestList}

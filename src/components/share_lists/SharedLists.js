@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import jwt from 'jsonwebtoken';
 import * as shareActions from '../../actions/shareActions';
-import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import SharedList from "./SharedList";
 
@@ -54,8 +53,6 @@ export class SharedLists extends Component {
         return(
             <div className="content">
                 <Container>
-                    <Navigation />
-
                     <Segment basic>
                         <h1>Shared Shopping Lists</h1>
                         { sharedLists }

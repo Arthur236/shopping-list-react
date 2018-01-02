@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import * as shoppingListActions from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
-import Navigation from '../common/Navigation';
 
 export class CreateList extends Component {
     constructor(props) {
@@ -39,8 +38,6 @@ export class CreateList extends Component {
                 <Notifications />
 
                 <Container className="ui center aligned">
-                    <Navigation header="Create Shopping List"/>
-
                     <Header as="h1" content="Create Shopping List" />
 
                     <Grid centered columns="2">

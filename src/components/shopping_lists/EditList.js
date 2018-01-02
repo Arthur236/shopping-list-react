@@ -5,7 +5,6 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as shoppingListActions from '../../actions/shoppingListActions';
-import Navigation from "../common/Navigation";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
@@ -43,7 +42,7 @@ export class EditList extends Component {
     }
 
     render() {
-        const { handleSubmit, activeList, loading } = this.props;
+        const { handleSubmit, loading } = this.props;
 
         let button = '';
 
@@ -56,8 +55,6 @@ export class EditList extends Component {
         return(
             <div className="content">
                 <Container className="ui center aligned">
-                    <Navigation header={`Edit ${activeList.name}`} />
-
                     <Header as="h1" content="Edit Shopping List" />
 
                     <Grid centered columns="2">

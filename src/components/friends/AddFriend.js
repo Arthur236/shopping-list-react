@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import {searchUser} from "../../actions/userActions";
 import {sendRequest} from "../../actions/friendActions";
 import Search from "../common/Search";
-import Navigation from '../common/Navigation';
 import UserList from "./UserList";
 
 export class AddFriend extends Component {
@@ -53,8 +52,6 @@ export class AddFriend extends Component {
         return (
             <div className="content">
                 <Container>
-                    <Navigation/>
-
                     <Segment basic>
                         <h1>Send Friend Requests</h1>
                         <Search onInputChange={this.onInputChange}/>

@@ -5,7 +5,6 @@ import {Container, Segment} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getFriends, removeFriend} from '../../actions/friendActions';
-import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 import FriendList from './FriendList';
 
@@ -50,8 +49,6 @@ export class Friends extends Component {
         return (
             <div className="content">
                 <Container>
-                    <Navigation/>
-
                     <Segment basic>
                         <h1>Your Friends</h1>
                         <Link to="/friends/add" className="ui button purple fluid">Add Friend</Link>

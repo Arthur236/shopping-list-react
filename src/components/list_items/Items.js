@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as listItemActions from '../../actions/listItemActions';
 import ItemList from "./ItemList";
-import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 
 export class Items extends Component {
@@ -44,8 +43,6 @@ export class Items extends Component {
         return(
             <div className="content">
                 <Container>
-                    <Navigation />
-
                     <Segment basic>
                         <Link to={`/shopping_lists/${activeList.id}/items/create`} className="ui button purple fluid">Create Item</Link>
 

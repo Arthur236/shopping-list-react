@@ -11,7 +11,7 @@ const SharedList = ({ sharedLists, handleRemove }) => {
     return (
         <Item.Group>
             { _.map(shared_lists, sharedList =>
-                <Item>
+                <Item key={sharedList.id}>
                     <Item.Image size="small" src={process.env.PUBLIC_URL + '/img/thumb.png'} />
 
                     <Item.Content>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {Container, Button, Header, Form, Grid} from 'semantic-ui-react';
 import {reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import Navigation from "../common/Navigation";
 import {createItem} from "../../actions/listItemActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
@@ -37,8 +36,6 @@ export class CreateItem extends Component {
         return (
             <div className="content">
                 <Container className="ui center aligned">
-                    <Navigation header="Add List Item"/>
-
                     <Header as="h1" content="Add List Item"/>
 
                     <Grid centered columns="2">

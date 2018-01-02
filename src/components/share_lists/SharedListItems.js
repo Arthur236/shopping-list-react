@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as shareActions from "../../actions/shareActions";
 import ItemList from "./ItemList";
-import Navigation from "../common/Navigation";
 import PreLoader from '../common/PreLoader';
 
 export class SharedListItems extends Component {
@@ -36,8 +35,6 @@ export class SharedListItems extends Component {
         return(
             <div className="content">
                 <Container>
-                    <Navigation />
-
                     <Segment basic>
                         <h3>{ activeList.name }</h3>
                         <p>{ activeList.description ? activeList.description : "No description added" }</p>
