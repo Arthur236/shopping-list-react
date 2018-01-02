@@ -4,8 +4,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as authActions from "../../actions/authActions";
+import {login} from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
@@ -93,26 +92,20 @@ LoginForm.contextTypes = {
 };
 
 LoginForm.propTypes = {
-    actions: PropTypes.object.isRequired,
+    login: PropTypes.func,
     loading: PropTypes.bool.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
     return {
         loading: state.auth.loading,
         loggedIn: state.auth.loggedIn
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(authActions, dispatch)
-    };
-}
-
 export default reduxForm({
     validate,
     form: 'SignInForm'
-})(connect(mapStateToProps, mapDispatchToProps)(LoginForm));
+})(connect(mapStateToProps, {login})(LoginForm));
