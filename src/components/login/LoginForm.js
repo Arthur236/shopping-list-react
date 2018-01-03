@@ -23,7 +23,7 @@ export class LoginForm extends Component {
     }
 
     onSubmit(values) {
-        this.props.actions.login(values)
+        this.props.login(values)
             .then(() => {
                 if(this.props.loggedIn) {
                     this.context.router.history.push('/dashboard');
@@ -91,6 +91,7 @@ LoginForm.contextTypes = {
     router: PropTypes.object
 };
 
+// Define prop types
 LoginForm.propTypes = {
     login: PropTypes.func,
     loading: PropTypes.bool.isRequired,
@@ -98,6 +99,7 @@ LoginForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired
 };
 
+// Map store state to component props
 export function mapStateToProps(state) {
     return {
         loading: state.auth.loading,

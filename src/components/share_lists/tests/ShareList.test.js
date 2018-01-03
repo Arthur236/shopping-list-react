@@ -1,8 +1,9 @@
 import expect from 'expect';
 import {shallow} from 'enzyme';
 import React from 'react';
-import * as sinon from "sinon";
-import {ShareList} from '../ShareList';
+import {ShareList, mapStateToProps} from '../ShareList';
+
+let shareListCalled, getFriendsCalled = false;
 
 describe('Test Cases For ShareList', () => {
     function setupWithFriends(loading) {
@@ -27,9 +28,13 @@ describe('Test Cases For ShareList', () => {
                 }
             },
             loading: loading,
-            shareActions: { shareList: sinon.spy() },
-            friendActions: { getFriends: sinon.spy() },
-            match: { params: { id: 1} }
+            shareList: () => {
+                shareListCalled = true;
+            },
+            getFriends: () => {
+                getFriendsCalled = true;
+            },
+            match: {params: {id: 1}}
         };
 
         return shallow(<ShareList {...props} />);
@@ -46,9 +51,13 @@ describe('Test Cases For ShareList', () => {
                 }
             },
             loading: loading,
-            shareActions: { shareList: sinon.spy() },
-            friendActions: { getFriends: sinon.spy() },
-            match: { params: { id: 1} }
+            shareList: () => {
+                shareListCalled = true;
+            },
+            getFriends: () => {
+                getFriendsCalled = true;
+            },
+            match: {params: {id: 1}}
         };
 
         return shallow(<ShareList {...props} />);
@@ -58,16 +67,49 @@ describe('Test Cases For ShareList', () => {
         const wrapper = setupWithFriends(true);
         expect(wrapper.find('PreLoader').length).toBe(1);
     });
+
     it('renders wrapper div correctly', () => {
         const wrapper = setupWithFriends(false);
         expect(wrapper.find('.content').length).toBe(1);
     });
+
     it('renders friend list correctly', () => {
         const wrapper = setupWithFriends(false);
         expect(wrapper.find('FriendList').length).toBe(1);
     });
+
     it('handles empty friend list', () => {
         const wrapper = setupWithNoFriends(false);
         expect(wrapper.find('p').html()).toContain('You currently');
+    });
+
+    it('can share a list', () => {
+        const wrapper = setupWithFriends(false);
+        const form = wrapper.find('FriendList').dive()
+            .find('CardGroup').dive()
+            .find('form').first();
+        const input = form.find('input').props();
+
+        form.simulate('submit', { target: { friend_id: input }, preventDefault() {} });
+
+        expect(shareListCalled).toBe(true);
+    });
+
+    it('correctly maps state to props', () => {
+        const state = {
+            friends: {
+                loading: false,
+                friends: {}
+            }
+        };
+        const expected = {
+            friends: {
+                friends: {},
+                loading: false
+            },
+            loading: false
+        };
+
+        expect(mapStateToProps(state)).toEqual(expected);
     });
 });

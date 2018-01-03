@@ -4,8 +4,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as authActions from "../../actions/authActions";
+import {register} from "../../actions/authActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
@@ -18,7 +17,7 @@ export class RegistrationForm extends Component {
     }
 
     onSubmit(values) {
-        this.props.actions.register(values)
+        this.props.register(values)
             .then(() => {
                 if (this.props.registered) {
                     this.context.router.history.push('/login');
@@ -93,6 +92,7 @@ RegistrationForm.contextTypes = {
     router: PropTypes.object
 };
 
+// Define prop types
 RegistrationForm.propTypes = {
     loading: PropTypes.bool.isRequired,
     registered: PropTypes.bool.isRequired,
@@ -100,20 +100,15 @@ RegistrationForm.propTypes = {
     actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+// Map store state to component props
+export function mapStateToProps(state) {
     return {
         loading: state.auth.loading,
         registered: state.auth.registered
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(authActions, dispatch)
-    };
-}
-
 export default reduxForm({
     validate,
     form: 'SignUpForm'
-})(connect(mapStateToProps, mapDispatchToProps)(RegistrationForm));
+})(connect(mapStateToProps, {register})(RegistrationForm));

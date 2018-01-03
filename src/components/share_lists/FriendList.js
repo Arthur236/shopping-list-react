@@ -26,6 +26,7 @@ const FriendList = ({ friends, shareList }) => {
     );
 };
 
+// Define prop types
 FriendList.propTypes = {
     friends: PropTypes.object.isRequired,
     shareList: PropTypes.func.isRequired

@@ -23,6 +23,7 @@ const DeleteSharedList = ({ sharedList, handleRemove }) => {
     );
 };
 
+// Define prop types
 DeleteSharedList.propTypes = {
     sharedList: PropTypes.object.isRequired,
     handleRemove: PropTypes.func.isRequired

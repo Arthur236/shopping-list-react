@@ -2,7 +2,9 @@ import expect from 'expect';
 import {shallow} from 'enzyme';
 import React from 'react';
 import * as sinon from "sinon";
-import {SharedListItems} from '../SharedListItems';
+import {SharedListItems, mapStateToProps} from '../SharedListItems';
+
+let getSharedListItemsCalled = false;
 
 describe('Test Cases For SharedListItems', () => {
     function setupEmptyItemsList(loading) {
@@ -16,9 +18,7 @@ describe('Test Cases For SharedListItems', () => {
                 listItems: {}
             },
             loading: loading,
-            actions: {
-                getSharedListItems: sinon.spy()
-            },
+            getSharedListItems: () => { getSharedListItemsCalled = true; },
             match: { params: { id: 1 } }
         };
 
@@ -30,7 +30,7 @@ describe('Test Cases For SharedListItems', () => {
             activeList: {
                 id: 1,
                 name: "List 1",
-                description: "Some text"
+                description: ""
             },
             listItems: {
                 listItems: {
@@ -50,9 +50,7 @@ describe('Test Cases For SharedListItems', () => {
                 }
             },
             loading: loading,
-            actions: {
-                getSharedListItems: sinon.spy()
-            },
+            getSharedListItems: () => { getSharedListItemsCalled = true; },
             match: { params: { id: 1 } }
         };
 
@@ -63,12 +61,38 @@ describe('Test Cases For SharedListItems', () => {
         const wrapper = setupEmptyItemsList(true);
         expect(wrapper.find('PreLoader').length).toBe(1);
     });
+
     it('renders a wrapper div', () => {
         const wrapper = setupEmptyItemsList(false);
         expect(wrapper.find('.content').length).toBe(1);
     });
+
+    it('handles empty description', () => {
+        const wrapper = setupItemsList(false);
+        expect(wrapper.find('p').html()).toContain('No description');
+    });
+
     it('renders item list correctly', () => {
         const wrapper = setupItemsList(false);
         expect(wrapper.find('ItemList').length).toBe(1);
+    });
+
+    it('correctly maps state to props', () => {
+        const state = {
+            shoppingLists: {
+                activeList: {}
+            },
+            share: {
+                loading: false,
+                listItems: {}
+            }
+        };
+        const expected = {
+            loading: false,
+            listItems: {},
+            activeList: {}
+        };
+
+        expect(mapStateToProps(state)).toEqual(expected);
     });
 });

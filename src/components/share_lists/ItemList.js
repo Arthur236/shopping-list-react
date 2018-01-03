@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const ItemList = ({ listItems }) => {
     let items = '';
 
-    if(listItems) {
+    if(!_.isEmpty(listItems.shared_list_items)) {
         items = _.map(listItems.shared_list_items, listItem =>
             <tr key={listItem.id}>
                 <td>{ listItem.name }</td>
@@ -38,6 +38,7 @@ const ItemList = ({ listItems }) => {
     );
 };
 
+// Define prop types
 ItemList.propTypes = {
     listItems: PropTypes.object.isRequired
 };

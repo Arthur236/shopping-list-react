@@ -1,7 +1,6 @@
 import expect from 'expect';
 import {shallow} from 'enzyme';
 import React from 'react';
-import * as sinon from "sinon";
 import SharedList from '../SharedList';
 
 describe('Test Cases For SharedList', () => {
@@ -26,7 +25,7 @@ describe('Test Cases For SharedList', () => {
                     ],
                 }
             },
-            handleRemove: sinon.spy()
+            handleRemove: () => {}
         };
 
         return shallow(<SharedList {...props} />);

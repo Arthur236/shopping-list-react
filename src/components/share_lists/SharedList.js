@@ -35,6 +35,7 @@ const SharedList = ({ sharedLists, handleRemove }) => {
     );
 };
 
+// Define prop types
 SharedList.propTypes = {
     sharedLists: PropTypes.object.isRequired,
     handleRemove: PropTypes.func.isRequired

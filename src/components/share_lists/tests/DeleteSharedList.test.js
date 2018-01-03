@@ -1,8 +1,9 @@
 import expect from 'expect';
 import {shallow} from 'enzyme';
 import React from 'react';
-import * as sinon from "sinon";
 import DeleteSharedList from '../DeleteSharedList';
+
+let handleRemoveCalled = false;
 
 describe('Test Cases For DeleteSharedList', () => {
     function setup() {
@@ -12,7 +13,7 @@ describe('Test Cases For DeleteSharedList', () => {
                 name: "Item 1",
                 description: "Some text"
             },
-            handleRemove: sinon.spy()
+            handleRemove: () => { handleRemoveCalled = true; }
         };
 
         return shallow(<DeleteSharedList {...props} />);
@@ -21,5 +22,12 @@ describe('Test Cases For DeleteSharedList', () => {
     it('renders modal div correctly', () => {
         const wrapper = setup();
         expect(wrapper.find('Modal').length).toBe(1);
+    });
+
+    it('calls handle remove', () => {
+        const wrapper = setup();
+        wrapper.find('Button').last().simulate('click');
+
+        expect(handleRemoveCalled).toBe(true);
     });
 });

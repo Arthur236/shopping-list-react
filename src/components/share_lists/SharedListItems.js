@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as shareActions from "../../actions/shareActions";
+import {getSharedListItems} from "../../actions/shareActions";
 import ItemList from "./ItemList";
 import PreLoader from '../common/PreLoader';
 
@@ -13,14 +12,14 @@ export class SharedListItems extends Component {
 
         this.state = {
             activePage: 1,
-            limit: 20,
+            limit: 10,
             total_items: null
         };
     }
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        this.props.actions.getSharedListItems(id, this.state.activePage, this.state.limit);
+        this.props.getSharedListItems(id, this.state.activePage, this.state.limit);
     }
 
     render() {
@@ -49,15 +48,17 @@ export class SharedListItems extends Component {
     }
 }
 
+// Define prop types
 SharedListItems.propTypes = {
     activeList: PropTypes.object.isRequired,
     listItems: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    actions: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    getSharedListItems: PropTypes.func
 };
 
-function mapStateToProps(state) {
+// Map store state to component props
+export function mapStateToProps(state) {
     return {
         activeList: state.shoppingLists.activeList,
         listItems: state.share.listItems,
@@ -65,10 +66,4 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(shareActions, dispatch)
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SharedListItems);
+export default connect(mapStateToProps, {getSharedListItems})(SharedListItems);

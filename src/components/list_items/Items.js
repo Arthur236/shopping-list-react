@@ -59,6 +59,7 @@ export class Items extends Component {
     }
 }
 
+// Define prop types
 Items.propTypes = {
     activeList: PropTypes.object.isRequired,
     listItems: PropTypes.object.isRequired,
@@ -68,6 +69,7 @@ Items.propTypes = {
     deleteItem: PropTypes.func
 };
 
+// Map store state to component props
 export function mapStateToProps(state) {
     return {
         activeList: state.shoppingLists.activeList,

@@ -28,12 +28,32 @@ describe('Test Cases For ItemList', () => {
         return shallow(<ItemList {...props} />);
     }
 
+    function setupEmpty() {
+        const props = {
+            listItems: {
+                "total": 1,
+                "next_page": "None",
+                "previous_page": "None",
+                "shared_list_items": []
+            },
+            handleDelete: sinon.spy()
+        };
+
+        return shallow(<ItemList {...props} />);
+    }
+
     it('renders tr correctly', () => {
         const wrapper = setup();
         expect(wrapper.find('tr').length).toBe(2);
     });
+
     it('renders td correctly', () => {
         const wrapper = setup();
         expect(wrapper.find('td').length).toBe(4);
+    });
+
+    it('handles empty list items', () => {
+        const wrapper = setupEmpty();
+        expect(wrapper.find('td').html()).toContain('This list has no items');
     });
 });
