@@ -17,7 +17,7 @@ describe('Test Cases For List', () => {
                         "date_modified": "Tue, 19 Dec 2017 09:38:11 GMT",
                         "id": 1,
                         "name": "Item 1",
-                        "description": "Some text"
+                        "description": ""
                     }
                 ]
             },
@@ -35,5 +35,10 @@ describe('Test Cases For List', () => {
     it('renders an item div correctly', () => {
         const wrapper = setup();
         expect(wrapper.dive().find('Item').length).toBe(1);
+    });
+
+    it('handles empty description', () => {
+        const wrapper = setup();
+        expect(wrapper.dive().find('ItemDescription').html()).toContain('No description');
     });
 });

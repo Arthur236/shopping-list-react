@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as shoppingListActions from '../../actions/shoppingListActions';
+import {getSingleList, editList} from '../../actions/shoppingListActions';
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
@@ -17,7 +16,7 @@ export class EditList extends Component {
 
     componentWillMount() {
         const id = this.props.match.params.id;
-        this.props.actions.getSingleList(id);
+        this.props.getSingleList(id);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -36,7 +35,7 @@ export class EditList extends Component {
     onSubmit(values) {
         const id = this.props.match.params.id;
 
-        this.props.actions.editList(id, values, () => {
+        this.props.editList(id, values, () => {
             this.context.router.history.push('/dashboard');
         });
     }
@@ -88,9 +87,11 @@ EditList.contextTypes = {
     router: PropTypes.object
 };
 
+// Define prop types
 EditList.propTypes = {
     activeList: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
+    getSingleList: PropTypes.func,
+    editList: PropTypes.func,
     match: PropTypes.object.isRequired,
     change: PropTypes.func.isRequired,
     initialValues: PropTypes.object.isRequired,
@@ -98,7 +99,8 @@ EditList.propTypes = {
     loading: PropTypes.bool.isRequired,
 };
 
-function mapStateToProps(state) {
+// Map store state to component props
+export function mapStateToProps(state) {
     return {
         activeList: state.shoppingLists.activeList,
         loading: state.shoppingLists.loading,
@@ -106,14 +108,8 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(shoppingListActions, dispatch)
-    };
-}
-
 export default reduxForm({
     validate,
     form: 'EditListForm',
     enableReinitialize : true
-})(connect(mapStateToProps, mapDispatchToProps)(EditList));
+})(connect(mapStateToProps, {getSingleList, editList})(EditList));

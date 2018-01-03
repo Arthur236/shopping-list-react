@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as shoppingListActions from '../../actions/shoppingListActions';
+import {getLists, deleteList} from '../../actions/shoppingListActions';
 import List from "./List";
 import PreLoader from '../common/PreLoader';
 import Pagination from "react-js-pagination";
@@ -24,27 +23,27 @@ export class ShoppingLists extends Component {
     }
 
     componentDidMount() {
-        const { actions } = this.props;
+        const { getLists } = this.props;
         const { activePage, limit } = this.state;
 
-        actions.getLists(activePage, limit);
+        getLists(activePage, limit);
     }
 
     handleDelete(id) {
-        const { actions } = this.props;
+        const { getLists, deleteList } = this.props;
         const { activePage, limit } = this.state;
 
-        actions.deleteList(id, () => {
-            actions.getLists(activePage, limit);
+        deleteList(id, () => {
+            getLists(activePage, limit);
         });
     }
 
     handlePageChange(pageNumber) {
-        const { actions } = this.props;
+        const { getLists } = this.props;
         const { limit } = this.state;
 
         this.setState({ activePage: pageNumber });
-        actions.getLists(pageNumber, limit);
+        getLists(pageNumber, limit);
     }
 
     render() {
@@ -96,13 +95,16 @@ export class ShoppingLists extends Component {
     }
 }
 
+// Define prop types
 ShoppingLists.propTypes = {
     shoppingLists: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
-    actions: PropTypes.object.isRequired
+    getLists: PropTypes.func,
+    deleteList: PropTypes.func
 };
 
-function mapStateToProps(state) {
+// Map store state to component props
+export function mapStateToProps(state) {
     const { shoppingLists } = state;
 
     return {
@@ -111,10 +113,4 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(shoppingListActions, dispatch)
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingLists);
+export default connect(mapStateToProps, {getLists, deleteList})(ShoppingLists);

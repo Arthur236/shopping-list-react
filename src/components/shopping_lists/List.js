@@ -37,6 +37,7 @@ const List = ({ shoppingLists, handleDelete }) => {
     );
 };
 
+// Define prop types
 List.propTypes = {
     shoppingLists: PropTypes.object.isRequired,
     handleDelete: PropTypes.func.isRequired

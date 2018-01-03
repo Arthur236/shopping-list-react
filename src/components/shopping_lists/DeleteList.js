@@ -23,6 +23,7 @@ const DeleteList = ({ shoppingList, handleDelete }) => {
     );
 };
 
+// Define prop types
 DeleteList.propTypes = {
     shoppingList: PropTypes.object.isRequired,
     handleDelete: PropTypes.func.isRequired

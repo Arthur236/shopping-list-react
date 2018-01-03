@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Container, Button, Header, Form, Grid } from 'semantic-ui-react';
+import {Container, Button, Header, Form, Grid} from 'semantic-ui-react';
 import Notifications from 'react-notify-toast';
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as shoppingListActions from "../../actions/shoppingListActions";
+import {reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
+import {createList} from "../../actions/shoppingListActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 
@@ -17,13 +16,13 @@ export class CreateList extends Component {
     }
 
     onSubmit(values) {
-        this.props.actions.createList(values, () => {
+        this.props.createList(values, () => {
             this.props.history.push('/dashboard');
         });
     }
 
     render() {
-        const { handleSubmit, loading } = this.props;
+        const {handleSubmit, loading} = this.props;
 
         let button = '';
 
@@ -33,12 +32,12 @@ export class CreateList extends Component {
             button = <Button type="submit" color="purple" className="fluid">Create</Button>;
         }
 
-        return(
+        return (
             <div className="content">
-                <Notifications />
+                <Notifications/>
 
                 <Container className="ui center aligned">
-                    <Header as="h1" content="Create Shopping List" />
+                    <Header as="h1" content="Create Shopping List"/>
 
                     <Grid centered columns="2">
                         <Grid.Column>
@@ -56,7 +55,7 @@ export class CreateList extends Component {
                                     name="description"
                                     icon="align left"/>
 
-                                { button }
+                                {button}
                             </Form>
                         </Grid.Column>
                     </Grid>
@@ -66,6 +65,7 @@ export class CreateList extends Component {
     }
 }
 
+// Define prop types
 CreateList.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -73,17 +73,14 @@ CreateList.propTypes = {
     actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
-    return { loading: state.shoppingLists.loading };
-}
-
-function mapDispatchToProps(dispatch) {
+// Map store state to component props
+export function mapStateToProps(state) {
     return {
-        actions: bindActionCreators(shoppingListActions, dispatch)
+        loading: state.shoppingLists.loading
     };
 }
 
 export default reduxForm({
     validate,
     form: 'CreateListForm'
-})(connect(mapStateToProps, mapDispatchToProps)(CreateList));
+})(connect(mapStateToProps, {createList})(CreateList));
