@@ -7,11 +7,14 @@ import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store/configureStore';
 import routes from './routes';
 import {setAuthorizationToken} from "./utils/helpers";
+import {loginSuccess} from "./actions/authActions";
+import jwt from 'jsonwebtoken';
 
 const store = configureStore();
 
 if (localStorage.token) {
     setAuthorizationToken(localStorage.token);
+    store.dispatch(loginSuccess(jwt.decode(localStorage.token)));
 }
 
 ReactDOM.render(

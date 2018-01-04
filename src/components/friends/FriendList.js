@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Image } from 'semantic-ui-react';
+import { Item } from 'semantic-ui-react';
 import _ from 'lodash';
 import RemoveFriend from "./RemoveFriend";
 
 const FriendList = ({ friends, removeFriend }) => {
     return(
-        <Card.Group itemsPerRow={3}>
+        <Item.Group>
             { _.map(friends.friends.friends, friend =>
-                <Card color="purple" key={friend.id}>
-                    <Image src={process.env.PUBLIC_URL + '/img/thumb.png'} />
+                <Item key={friend.id}>
+                    <Item.Image size="small" src={process.env.PUBLIC_URL + '/img/avatar2.png'} />
 
-                    <Card.Content>
-                        <Card.Header>{friend.username}</Card.Header>
-                    </Card.Content>
+                    <Item.Content>
+                        <Item.Header>{friend.username}</Item.Header>
 
-                    <Card.Content extra>
-                        <RemoveFriend friend={friend} removeFriend={removeFriend} />
-                    </Card.Content>
-                </Card>
+                        <Item.Extra>
+                            <RemoveFriend friend={friend} removeFriend={removeFriend} />
+                        </Item.Extra>
+                    </Item.Content>
+                </Item>
             )}
-        </Card.Group>
+        </Item.Group>
     );
 };
 

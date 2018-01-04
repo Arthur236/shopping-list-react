@@ -70,7 +70,7 @@ CreateList.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    createList: PropTypes.func
 };
 
 // Map store state to component props

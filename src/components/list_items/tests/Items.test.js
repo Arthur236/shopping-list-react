@@ -1,9 +1,7 @@
 import expect from 'expect';
 import {shallow} from 'enzyme';
 import React from 'react';
-import * as sinon from "sinon";
-import {Items} from '../Items';
-import {mapStateToProps} from "../Items";
+import {Items, mapStateToProps} from '../Items';
 
 let getListItemsCalled, deleteItemCalled = false;
 

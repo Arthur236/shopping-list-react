@@ -66,7 +66,7 @@ describe('Test Cases For Friends', () => {
     it('can remove a friend', () => {
         const wrapper = setupFriendList(false);
         const btn = wrapper.find('FriendList').dive()
-            .find('CardGroup').dive()
+            .find('ItemGroup').dive()
             .find('RemoveFriend').dive()
             .find('.right');
 

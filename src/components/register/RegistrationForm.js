@@ -97,7 +97,7 @@ RegistrationForm.propTypes = {
     loading: PropTypes.bool.isRequired,
     registered: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    actions: PropTypes.object.isRequired
+    register: PropTypes.func
 };
 
 // Map store state to component props

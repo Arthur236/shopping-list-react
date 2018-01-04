@@ -4,7 +4,7 @@ import { Modal, Header, Icon, Button } from 'semantic-ui-react';
 
 const RemoveFriend = ({ friend, removeFriend }) => {
     return (
-        <Modal trigger={<button className="ui button red fluid">Remove Friend</button>} basic size="small">
+        <Modal trigger={<button className="ui button red">Remove Friend</button>} basic size="small">
             <Header content={`Remove ${ friend.username }`} />
 
             <Modal.Content>

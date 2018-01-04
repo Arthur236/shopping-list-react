@@ -1,17 +1,15 @@
 import expect from 'expect';
 import {shallow} from 'enzyme';
 import React from 'react';
-import * as sinon from "sinon";
-import {LoginForm} from '../LoginForm';
-import {mapStateToProps} from "../LoginForm";
+import {LoginForm, mapStateToProps} from '../LoginForm';
 
 describe('Test Cases For LoginForm', () => {
     function setup(loading) {
         const props = {
-            actions: { login: sinon.spy() },
+            login: () => {},
             loading: loading,
             loggedIn: false,
-            handleSubmit: sinon.spy()
+            handleSubmit: () => {}
         };
 
         return shallow(<LoginForm {...props} />);
