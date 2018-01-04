@@ -47,3 +47,47 @@ export function sendResetRequestFail(response) {
         response
     };
 }
+
+export function passwordReset(values, token) {
+    return function (dispatch) {
+        dispatch(passwordResetRequest());
+
+        return axios({
+            method: "put",
+            url: helpers.ROOT_URL + "/auth/password/" + token,
+            data: values
+        }).then(response => {
+            if (response.status === 200) {
+
+                helpers.showToast("success", response.data.message);
+                dispatch(passwordResetSuccess(response));
+            } else {
+
+                dispatch(passwordResetFail(response));
+            }
+        }).catch(error => {
+            dispatch(passwordResetFail(error));
+            errorHandling.catchError(error);
+        });
+    };
+}
+
+export function passwordResetRequest() {
+    return {
+        type: actionTypes.PASSWORD_RESET_REQUEST
+    };
+}
+
+export function passwordResetSuccess(response) {
+    return {
+        type: actionTypes.PASSWORD_RESET_SUCCESS,
+        response
+    };
+}
+
+export function passwordResetFail(response) {
+    return {
+        type: actionTypes.PASSWORD_RESET_FAIL,
+        response
+    };
+}

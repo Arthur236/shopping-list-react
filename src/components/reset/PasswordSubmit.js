@@ -41,11 +41,11 @@ export class PasswordSubmit extends Component {
                             <h1 className="ui inverted header">Send Request</h1>
 
                             <FormInput
-                                type="email"
-                                placeholder="Email"
-                                name="email"
+                                type="password"
+                                placeholder="Password"
+                                name="password"
                                 required="required"
-                                icon="mail"/>
+                                icon="key"/>
 
                             {button}
                         </Form>

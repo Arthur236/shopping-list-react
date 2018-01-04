@@ -12,7 +12,7 @@ const mockAxios = new MockAdapter(axios);
 const mockStore = configureMockStore(middleware);
 const emptyResponse = {};
 
-describe('Tests For Password Reset Actions', () => {
+describe('Tests For Send Reset Actions', () => {
     afterEach(() => {
         mockAxios.reset();
     });
@@ -53,6 +53,51 @@ describe('Tests For Password Reset Actions', () => {
     it('returns an object with the type of SEND_RESET_REQUEST_FAIL', function () {
         expect(resetActions.sendResetRequestFail(emptyResponse)).toEqual({
             type: types.SEND_RESET_REQUEST_FAIL,
+            response: emptyResponse
+        });
+    });
+});
+
+describe('Tests For Password Reset Actions', () => {
+    afterEach(() => {
+        mockAxios.reset();
+    });
+
+    it('should reset password successfully', () => {
+        mockAxios.onPut('/auth/password/some_long_token').reply(200, {password: 'new_password'});
+
+        const expectedActions = [
+            {type: types.PASSWORD_RESET_REQUEST},
+            {type: types.PASSWORD_RESET_SUCCESS},
+        ];
+
+        const store = mockStore();
+
+        return store.dispatch(resetActions.passwordReset({password: 'new_password'})).then(() => {
+
+            const dispatchedActions = store.getActions();
+            const actionTypes = dispatchedActions.map(action => action.type);
+
+            expect(actionTypes).toEqual(expectedActions);
+        }).catch(() => {});
+    });
+
+    it('returns an object with the type of PASSWORD_RESET_REQUEST', function () {
+        expect(resetActions.passwordResetRequest()).toEqual({
+            type: types.PASSWORD_RESET_REQUEST
+        });
+    });
+
+    it('returns an object with the type of PASSWORD_RESET_SUCCESS', function () {
+        expect(resetActions.passwordResetSuccess(emptyResponse)).toEqual({
+            type: types.PASSWORD_RESET_SUCCESS,
+            response: emptyResponse
+        });
+    });
+
+    it('returns an object with the type of PASSWORD_RESET_FAIL', function () {
+        expect(resetActions.passwordResetFail(emptyResponse)).toEqual({
+            type: types.PASSWORD_RESET_FAIL,
             response: emptyResponse
         });
     });
