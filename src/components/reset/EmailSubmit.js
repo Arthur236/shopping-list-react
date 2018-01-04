@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Form} from 'semantic-ui-react';
 import {reduxForm} from 'redux-form';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {sendResetRequest} from "../../actions/resetActions";
 import FormInput from '../common/FormInput';
@@ -25,9 +24,9 @@ export class EmailSubmit extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Reset Password</Button>;
+            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Send Request</Button>;
         } else {
-            button = <Button type="submit" inverted color="purple" className="fluid">Reset Password</Button>;
+            button = <Button type="submit" inverted color="purple" className="fluid">Send Request</Button>;
         }
 
         return (
@@ -38,7 +37,7 @@ export class EmailSubmit extends Component {
                 <div className="ui inverted center aligned grid">
                     <div className="ui inverted container formContainer">
                         <Form onSubmit={handleSubmit(this.onSubmit)} onChange={this.onChange}>
-                            <h1 className="ui inverted header">Enter Your New Password</h1>
+                            <h1 className="ui inverted header">Send Request</h1>
 
                             <FormInput
                                 type="email"
@@ -57,11 +56,6 @@ export class EmailSubmit extends Component {
         );
     }
 }
-
-// Pull in the React Router context so router is available on this.context.router.
-EmailSubmit.contextTypes = {
-    router: PropTypes.object
-};
 
 // Define prop types
 EmailSubmit.propTypes = {

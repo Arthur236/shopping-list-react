@@ -8,7 +8,8 @@ describe('Test Cases For PasswordSubmit', () => {
         const props = {
             passwordReset: () => {},
             loading: loading,
-            handleSubmit: () => {}
+            handleSubmit: () => {},
+            match: { params: { token: "some_long_string" } }
         };
 
         return shallow(<PasswordSubmit {...props} />);

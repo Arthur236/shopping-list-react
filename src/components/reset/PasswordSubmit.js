@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Form} from 'semantic-ui-react';
 import {reduxForm} from 'redux-form';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {passwordReset} from "../../actions/resetActions";
 import FormInput from '../common/FormInput';
@@ -17,7 +16,12 @@ export class PasswordSubmit extends Component {
     }
 
     onSubmit(values) {
-        this.props.passwordReset(values);
+        const token = this.props.match.params.token;
+
+        this.props.passwordReset(values, token)
+            .then(() => {
+                this.context.router.history.push('/login');
+            });
     }
 
     render() {
@@ -38,7 +42,7 @@ export class PasswordSubmit extends Component {
                 <div className="ui inverted center aligned grid">
                     <div className="ui inverted container formContainer">
                         <Form onSubmit={handleSubmit(this.onSubmit)} onChange={this.onChange}>
-                            <h1 className="ui inverted header">Send Request</h1>
+                            <h1 className="ui inverted header">Enter New Password</h1>
 
                             <FormInput
                                 type="password"
@@ -67,7 +71,8 @@ PasswordSubmit.contextTypes = {
 PasswordSubmit.propTypes = {
     passwordReset: PropTypes.func,
     loading: PropTypes.bool.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    match: PropTypes.object
 };
 
 // Map store state to component props
