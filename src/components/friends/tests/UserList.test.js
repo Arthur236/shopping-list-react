@@ -30,13 +30,13 @@ describe('Test Cases For UserList', () => {
         return shallow(<UserList {...props} />);
     }
 
-    it('renders card group div correctly', () => {
+    it('renders item group div correctly', () => {
         const wrapper = setup();
-        expect(wrapper.find('CardGroup').length).toBe(1);
+        expect(wrapper.find('ItemGroup').length).toBe(1);
     });
     
-    it('renders a card div correctly', () => {
+    it('renders an item div correctly', () => {
         const wrapper = setup();
-        expect(wrapper.dive().find('.cards').length).toBe(1);
+        expect(wrapper.dive().find('.items').length).toBe(1);
     });
 });
