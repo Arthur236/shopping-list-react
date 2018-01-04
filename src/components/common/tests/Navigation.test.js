@@ -1,13 +1,12 @@
 import expect from 'expect';
 import {shallow} from 'enzyme';
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {Navigation} from '../Navigation';
 
 describe('Test Cases For Navigation', () => {
-    function setup(links) {
+    function setup() {
         const props = {
-            links: links
+            logout: () => {}
         };
 
         return shallow(<Navigation {...props} />);

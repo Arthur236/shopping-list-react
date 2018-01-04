@@ -4,12 +4,12 @@ import {Button, Form} from 'semantic-ui-react';
 import {reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {sendResetRequest} from "../../actions/resetActions";
+import {passwordReset} from "../../actions/resetActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
 
-export class EmailSubmit extends Component {
+export class PasswordSubmit extends Component {
     constructor(props) {
         super(props);
 
@@ -17,7 +17,7 @@ export class EmailSubmit extends Component {
     }
 
     onSubmit(values) {
-        this.props.sendResetRequest(values);
+        this.props.passwordReset(values);
     }
 
     render() {
@@ -25,9 +25,9 @@ export class EmailSubmit extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Reset Password</Button>;
+            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Send Request</Button>;
         } else {
-            button = <Button type="submit" inverted color="purple" className="fluid">Reset Password</Button>;
+            button = <Button type="submit" inverted color="purple" className="fluid">Send Request</Button>;
         }
 
         return (
@@ -38,14 +38,14 @@ export class EmailSubmit extends Component {
                 <div className="ui inverted center aligned grid">
                     <div className="ui inverted container formContainer">
                         <Form onSubmit={handleSubmit(this.onSubmit)} onChange={this.onChange}>
-                            <h1 className="ui inverted header">Enter Your New Password</h1>
+                            <h1 className="ui inverted header">Send Request</h1>
 
                             <FormInput
-                                type="password"
-                                placeholder="Password"
-                                name="password"
+                                type="email"
+                                placeholder="Email"
+                                name="email"
                                 required="required"
-                                icon="key"/>
+                                icon="mail"/>
 
                             {button}
                         </Form>
@@ -59,13 +59,13 @@ export class EmailSubmit extends Component {
 }
 
 // Pull in the React Router context so router is available on this.context.router.
-EmailSubmit.contextTypes = {
+PasswordSubmit.contextTypes = {
     router: PropTypes.object
 };
 
 // Define prop types
-EmailSubmit.propTypes = {
-    sendResetRequest: PropTypes.func,
+PasswordSubmit.propTypes = {
+    passwordReset: PropTypes.func,
     loading: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired
 };
@@ -80,4 +80,4 @@ export function mapStateToProps(state) {
 export default reduxForm({
     validate,
     form: 'EmailSubmitForm'
-})(connect(mapStateToProps, {sendResetRequest})(EmailSubmit));
+})(connect(mapStateToProps, {passwordReset})(PasswordSubmit));
