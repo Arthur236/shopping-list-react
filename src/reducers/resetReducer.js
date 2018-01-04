@@ -9,13 +9,31 @@ export default function(state = initialState, action) {
                 loading: true
             };
 
-            case actionTypes.SEND_RESET_REQUEST_SUCCESS:
+        case actionTypes.SEND_RESET_REQUEST_SUCCESS:
             return {
                 ...state,
                 loading: false
             };
 
-            case actionTypes.SEND_RESET_REQUEST_FAIL:
+        case actionTypes.SEND_RESET_REQUEST_FAIL:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.PASSWORD_RESET_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.PASSWORD_RESET_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            };
+
+        case actionTypes.PASSWORD_RESET_FAIL:
             return {
                 ...state,
                 loading: false

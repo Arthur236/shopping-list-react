@@ -36,4 +36,28 @@ describe('Test Cases For Reset Reducer', () => {
 
         expect(state.loading).toBe(false);
     });
+
+    it('should handle PASSWORD_RESET_REQUEST', () => {
+        action.type = types.PASSWORD_RESET_REQUEST;
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(true);
+    });
+
+    it('should handle PASSWORD_RESET_SUCCESS', () => {
+        action.type = types.PASSWORD_RESET_SUCCESS;
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(false);
+    });
+
+    it('should handle PASSWORD_RESET_FAIL', () => {
+        action.type = types.PASSWORD_RESET_FAIL;
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(false);
+    });
 });
