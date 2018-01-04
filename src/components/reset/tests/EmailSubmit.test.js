@@ -31,7 +31,7 @@ describe('Test Cases For EmailSubmit', () => {
 
     it('correctly maps state to props', () => {
         const state = {
-            auth: {
+            reset: {
                 loading: false
             }
         };

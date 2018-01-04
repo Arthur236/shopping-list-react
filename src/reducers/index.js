@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import auth from './authReducer';
+import reset from'./resetReducer';
 import shoppingLists from './shoppingListsReducer';
 import listItems from './listItemsReducer';
 import friends from './friendsReducer';
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     listItems,
     friends,
     users,
-    share
+    share,
+    reset
 });
 
 export default rootReducer;

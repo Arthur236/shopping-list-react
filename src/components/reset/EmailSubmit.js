@@ -4,7 +4,7 @@ import {Button, Form} from 'semantic-ui-react';
 import {reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {login} from "../../actions/authActions";
+import {sendResetRequest} from "../../actions/resetActions";
 import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
@@ -17,7 +17,7 @@ export class EmailSubmit extends Component {
     }
 
     onSubmit(values) {
-
+        this.props.sendResetRequest(values);
     }
 
     render() {
@@ -73,11 +73,11 @@ EmailSubmit.propTypes = {
 // Map store state to component props
 export function mapStateToProps(state) {
     return {
-        loading: state.auth.loading
+        loading: state.reset.loading
     };
 }
 
 export default reduxForm({
     validate,
     form: 'EmailSubmitForm'
-})(connect(mapStateToProps, {login})(EmailSubmit));
+})(connect(mapStateToProps, {sendResetRequest})(EmailSubmit));

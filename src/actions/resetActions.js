@@ -14,7 +14,7 @@ export function sendResetRequest(email) {
         }).then(response => {
             if (response.status === 200) {
 
-                helpers.showToast('success', response.data.message);
+                helpers.showToast("success", "Request sent successfully.");
                 dispatch(sendResetRequestSuccess(response));
             } else {
 
