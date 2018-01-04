@@ -9,32 +9,15 @@ import FormInput from '../common/FormInput';
 import validate from '../../utils/formValidator';
 import Footer from '../common/Footer';
 
-export class LoginForm extends Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.state = {
-            email: '',
-            password: ''
-        };
+export class EmailSubmit extends Component {
+    constructor(props) {
+        super(props);
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
     }
 
     onSubmit(values) {
-        this.props.login(values)
-            .then(() => {
-                if (this.props.loggedIn) {
-                    this.context.router.history.push('/dashboard');
-                }
-            });
-    }
 
-    onChange(event) {
-        let fields = {};
-        fields[event.target.name] = event.target.value;
-        this.setState(fields);
     }
 
     render() {
@@ -42,9 +25,9 @@ export class LoginForm extends Component {
         let button = '';
 
         if (loading) {
-            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Register</Button>;
+            button = <Button type="submit" inverted disabled loading color="purple" className="fluid">Send Request</Button>;
         } else {
-            button = <Button type="submit" inverted color="purple" className="fluid">Login</Button>;
+            button = <Button type="submit" inverted color="purple" className="fluid">Send Request</Button>;
         }
 
         return (
@@ -55,7 +38,7 @@ export class LoginForm extends Component {
                 <div className="ui inverted center aligned grid">
                     <div className="ui inverted container formContainer">
                         <Form onSubmit={handleSubmit(this.onSubmit)} onChange={this.onChange}>
-                            <h1 className="ui inverted header">Log In</h1>
+                            <h1 className="ui inverted header">Send Request</h1>
 
                             <FormInput
                                 type="email"
@@ -64,23 +47,8 @@ export class LoginForm extends Component {
                                 required="required"
                                 icon="mail"/>
 
-                            <FormInput
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                required="required"
-                                icon="key"/>
-
                             {button}
                         </Form>
-
-                        <br/>
-                        <p className="ui inverted">
-                            Already have an account? <Link to="/register" className="formLink">Sign Up</Link>
-                        </p>
-                        <p className="ui inverted">
-                            Forgot password? <Link to="/reset" className="formLink">Reset Password</Link>
-                        </p>
                     </div>
                 </div>
 
@@ -91,27 +59,25 @@ export class LoginForm extends Component {
 }
 
 // Pull in the React Router context so router is available on this.context.router.
-LoginForm.contextTypes = {
+EmailSubmit.contextTypes = {
     router: PropTypes.object
 };
 
 // Define prop types
-LoginForm.propTypes = {
-    login: PropTypes.func,
+EmailSubmit.propTypes = {
+    sendResetRequest: PropTypes.func,
     loading: PropTypes.bool.isRequired,
-    loggedIn: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired
 };
 
 // Map store state to component props
 export function mapStateToProps(state) {
     return {
-        loading: state.auth.loading,
-        loggedIn: state.auth.loggedIn
+        loading: state.auth.loading
     };
 }
 
 export default reduxForm({
     validate,
-    form: 'SignInForm'
-})(connect(mapStateToProps, {login})(LoginForm));
+    form: 'EmailSubmitForm'
+})(connect(mapStateToProps, {login})(EmailSubmit));

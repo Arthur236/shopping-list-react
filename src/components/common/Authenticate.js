@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Navigation from "./Navigation";
 import {showToast} from "../../utils/helpers";
+import {logout} from "../../actions/authActions";
 
 export default function (ComposedComponent) {
 
@@ -30,7 +31,7 @@ export default function (ComposedComponent) {
         logout(e) {
             // Log out a user
             e.preventDefault();
-            localStorage.removeItem("token");
+            this.props.logout();
         }
 
         render() {
@@ -57,5 +58,5 @@ export default function (ComposedComponent) {
         };
     }
 
-    return connect(mapStateToProps, null)(Authenticate);
+    return connect(mapStateToProps, {logout})(Authenticate);
 }

@@ -75,8 +75,12 @@ export class RegistrationForm extends Component {
                             { button }
                         </Form>
 
+                        <br/>
                         <p className="ui inverted">
                             Already have an account? <Link to="/login" className="formLink">Sign In</Link>
+                        </p>
+                        <p className="ui inverted">
+                            Forgot password? <Link to="/reset" className="formLink">Reset Password</Link>
                         </p>
                     </div>
                 </div>
