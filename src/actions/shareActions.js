@@ -5,7 +5,6 @@ import * as errorHandling from '../utils/errorHandling';
 import { getSingleList } from "./shoppingListActions";
 
 // Share a list
-
 export function shareList(values) {
     return function (dispatch) {
         dispatch(shareListRequest());
@@ -29,12 +28,14 @@ export function shareList(values) {
     };
 }
 
+// Initiate request to share a list
 export function shareListRequest() {
     return {
         type: actionTypes.SHARE_LIST_REQUEST,
     };
 }
 
+// Handle successful sharing of a list
 export function shareListSuccess(response) {
     return {
         type: actionTypes.SHARE_LIST_SUCCESS,
@@ -42,6 +43,7 @@ export function shareListSuccess(response) {
     };
 }
 
+// Handle failure to share a list
 export function shareListFail(response) {
     return {
         type: actionTypes.SHARE_LIST_FAIL,
@@ -50,7 +52,6 @@ export function shareListFail(response) {
 }
 
 // Fetch all shared lists
-
 export function getSharedLists(page, limit) {
     return function (dispatch) {
         dispatch(getSharedListsRequest());
@@ -71,12 +72,14 @@ export function getSharedLists(page, limit) {
     };
 }
 
+// Initiate request to get shared lists
 export function getSharedListsRequest() {
     return {
         type: actionTypes.GET_SHARED_LISTS_REQUEST,
     };
 }
 
+// Handle successful fetching of shared lists
 export function getSharedListsSuccess(response) {
     return {
         type: actionTypes.GET_SHARED_LISTS_SUCCESS,
@@ -84,6 +87,7 @@ export function getSharedListsSuccess(response) {
     };
 }
 
+// Handle failure to fetch shared lists
 export function getSharedListsFail(response) {
     return {
         type: actionTypes.GET_SHARED_LISTS_FAIL,
@@ -92,7 +96,6 @@ export function getSharedListsFail(response) {
 }
 
 // Fetch all shared shopping list items
-
 export function getSharedListItems(id, page, limit) {
     return function (dispatch) {
         dispatch(getSingleList(id));
@@ -114,12 +117,14 @@ export function getSharedListItems(id, page, limit) {
     };
 }
 
+// Initiate request to fetch items in a shared list
 export function getSharedListItemsRequest() {
     return {
         type: actionTypes.GET_SHARED_LIST_ITEMS_REQUEST
     };
 }
 
+// Handle successful fetching of items
 export function getSharedListItemsSuccess(response) {
     return {
         type: actionTypes.GET_SHARED_LIST_ITEMS_SUCCESS,
@@ -127,6 +132,7 @@ export function getSharedListItemsSuccess(response) {
     };
 }
 
+// Handle failure to fetch items
 export function getSharedListItemsFail(response) {
     return {
         type: actionTypes.GET_SHARED_LIST_ITEMS_FAIL,
@@ -135,7 +141,6 @@ export function getSharedListItemsFail(response) {
 }
 
 // Remove shared list
-
 export function removeSharedList(user_id, list_id, callback) {
     return function (dispatch) {
         dispatch(removeSharedListRequest());
@@ -160,12 +165,14 @@ export function removeSharedList(user_id, list_id, callback) {
     };
 }
 
+// Initiate request to remove a shared list
 export function removeSharedListRequest() {
     return {
         type: actionTypes.REMOVE_SHARED_LIST_REQUEST,
     };
 }
 
+// Handle successful removal of a shared list
 export function removeSharedListSuccess(response, id) {
     return {
         type: actionTypes.REMOVE_SHARED_LIST_SUCCESS,
@@ -174,6 +181,7 @@ export function removeSharedListSuccess(response, id) {
     };
 }
 
+// Handle failure to remove a shared list
 export function removeSharedListFail(response) {
     return {
         type: actionTypes.REMOVE_SHARED_LIST_FAIL,

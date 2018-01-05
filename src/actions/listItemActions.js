@@ -5,7 +5,6 @@ import * as errorHandling from '../utils/errorHandling';
 import { getSingleList } from "./shoppingListActions";
 
 // Fetch all shopping list items
-
 export function getListItems(id, page, limit) {
     return function (dispatch) {
         dispatch(getSingleList(id));
@@ -27,12 +26,14 @@ export function getListItems(id, page, limit) {
     };
 }
 
+// Initiate request to get items
 export function getItemsRequest() {
     return {
         type: actionTypes.GET_ITEMS_REQUEST
     };
 }
 
+// Handle successful fetching of items
 export function getItemsSuccess(response) {
     return {
         type: actionTypes.GET_ITEMS_SUCCESS,
@@ -40,6 +41,7 @@ export function getItemsSuccess(response) {
     };
 }
 
+// Handle failure to fetch items
 export function getItemsFail(response) {
     return {
         type: actionTypes.GET_ITEMS_FAIL,
@@ -48,7 +50,6 @@ export function getItemsFail(response) {
 }
 
 // Fetch a single shopping list item
-
 export function getSingleItem(id, item_id) {
     return function (dispatch) {
         dispatch(getSingleItemRequest());
@@ -69,12 +70,14 @@ export function getSingleItem(id, item_id) {
     };
 }
 
+// Initiate request to fetch a single item
 export function getSingleItemRequest() {
     return {
         type: actionTypes.GET_SINGLE_ITEM_REQUEST,
     };
 }
 
+// Handle successful fetching of item
 export function getSingleItemSuccess(response) {
     return {
         type: actionTypes.GET_SINGLE_ITEM_SUCCESS,
@@ -82,6 +85,7 @@ export function getSingleItemSuccess(response) {
     };
 }
 
+// Handle failure to fetch item
 export function getSingleItemFail(response) {
     return {
         type: actionTypes.GET_SINGLE_ITEM_FAIL,
@@ -90,7 +94,6 @@ export function getSingleItemFail(response) {
 }
 
 // Shopping list item creation
-
 export function createItem(id, values, callback) {
     return function (dispatch) {
         dispatch(createItemRequest());
@@ -116,12 +119,14 @@ export function createItem(id, values, callback) {
     };
 }
 
+// Initiate request to create an item
 export function createItemRequest() {
     return {
         type: actionTypes.CREATE_ITEM_REQUEST,
     };
 }
 
+// Handle successful creation of an item
 export function createItemSuccess(response) {
     return {
         type: actionTypes.CREATE_ITEM_SUCCESS,
@@ -129,6 +134,7 @@ export function createItemSuccess(response) {
     };
 }
 
+// Handle failure to create an item
 export function createItemFail(response) {
     return {
         type: actionTypes.CREATE_ITEM_FAIL,
@@ -137,7 +143,6 @@ export function createItemFail(response) {
 }
 
 // Shopping list item edit
-
 export function editItem(id, item_id, values, callback) {
     return function (dispatch) {
         dispatch(editItemRequest());
@@ -163,12 +168,14 @@ export function editItem(id, item_id, values, callback) {
     };
 }
 
+// Initiate request to edit an item
 export function editItemRequest() {
     return {
         type: actionTypes.EDIT_ITEM_REQUEST,
     };
 }
 
+// Handle successful editing of an item
 export function editItemSuccess(response) {
     return {
         type: actionTypes.EDIT_ITEM_SUCCESS,
@@ -176,6 +183,7 @@ export function editItemSuccess(response) {
     };
 }
 
+// Handle failure to edit an item
 export function editItemFail(response) {
     return {
         type: actionTypes.EDIT_ITEM_FAIL,
@@ -184,7 +192,6 @@ export function editItemFail(response) {
 }
 
 // Delete item
-
 export function deleteItem(id, item_id, callback) {
     return function (dispatch) {
         dispatch(deleteItemRequest());
@@ -208,12 +215,14 @@ export function deleteItem(id, item_id, callback) {
     };
 }
 
+// Initiate request to delete an item
 export function deleteItemRequest() {
     return {
         type: actionTypes.DELETE_ITEM_REQUEST,
     };
 }
 
+// Handle successful deletion of an item
 export function deleteItemSuccess(response) {
     return {
         type: actionTypes.DELETE_ITEM_SUCCESS,
@@ -221,6 +230,7 @@ export function deleteItemSuccess(response) {
     };
 }
 
+// Handle failure to delete an item
 export function deleteItemFail(response) {
     return {
         type: actionTypes.DELETE_ITEM_FAIL,

@@ -3,6 +3,7 @@ import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
+// Send a request to reset password to server
 export function sendResetRequest(email) {
     return function (dispatch) {
         dispatch(sendResetRequestRequest(email));
@@ -27,6 +28,7 @@ export function sendResetRequest(email) {
     };
 }
 
+// Initiate request to send password reset request
 export function sendResetRequestRequest(email) {
     return {
         type: actionTypes.SEND_RESET_REQUEST_REQUEST,
@@ -34,6 +36,7 @@ export function sendResetRequestRequest(email) {
     };
 }
 
+// Handle successful sending of request
 export function sendResetRequestSuccess(response) {
     return {
         type: actionTypes.SEND_RESET_REQUEST_SUCCESS,
@@ -41,6 +44,7 @@ export function sendResetRequestSuccess(response) {
     };
 }
 
+// Handle failure to send request
 export function sendResetRequestFail(response) {
     return {
         type: actionTypes.SEND_RESET_REQUEST_FAIL,
@@ -48,6 +52,7 @@ export function sendResetRequestFail(response) {
     };
 }
 
+// Reset user account password
 export function passwordReset(values, token) {
     return function (dispatch) {
         dispatch(passwordResetRequest());
@@ -72,12 +77,14 @@ export function passwordReset(values, token) {
     };
 }
 
+// Initiate request to reset password
 export function passwordResetRequest() {
     return {
         type: actionTypes.PASSWORD_RESET_REQUEST
     };
 }
 
+// Handle successful resetting of user password
 export function passwordResetSuccess(response) {
     return {
         type: actionTypes.PASSWORD_RESET_SUCCESS,
@@ -85,6 +92,7 @@ export function passwordResetSuccess(response) {
     };
 }
 
+// Handle failure to reset password
 export function passwordResetFail(response) {
     return {
         type: actionTypes.PASSWORD_RESET_FAIL,

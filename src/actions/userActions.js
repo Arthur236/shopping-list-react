@@ -4,7 +4,6 @@ import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
 // Search for user
-
 export function searchUser(term) {
     return function (dispatch) {
         dispatch(searchUserRequest());
@@ -25,12 +24,14 @@ export function searchUser(term) {
     };
 }
 
+// Initiate request to search for a user
 export function searchUserRequest() {
     return {
         type: actionTypes.SEARCH_USER_REQUEST,
     };
 }
 
+// Handle successful search for a user
 export function searchUserSuccess(response) {
     return {
         type: actionTypes.SEARCH_USER_SUCCESS,
@@ -38,6 +39,7 @@ export function searchUserSuccess(response) {
     };
 }
 
+// Handle failure to search for a user
 export function searchUserFail(response) {
     return {
         type: actionTypes.SEARCH_USER_FAIL,
@@ -45,6 +47,7 @@ export function searchUserFail(response) {
     };
 }
 
+// Get profile details of a user
 export function getProfile(id) {
     return function (dispatch) {
         dispatch(getProfileRequest());
@@ -65,12 +68,14 @@ export function getProfile(id) {
     };
 }
 
+// Initiate request to fetch profile details
 export function getProfileRequest() {
     return {
         type: actionTypes.GET_PROFILE_REQUEST,
     };
 }
 
+// Handle successful fetching of profile details
 export function getProfileSuccess(response) {
     return {
         type: actionTypes.GET_PROFILE_SUCCESS,
@@ -78,6 +83,7 @@ export function getProfileSuccess(response) {
     };
 }
 
+// Handle failure to fetch profile details
 export function getProfileFail(response) {
     return {
         type: actionTypes.GET_PROFILE_FAIL,
@@ -85,6 +91,7 @@ export function getProfileFail(response) {
     };
 }
 
+// Update a user's profile details
 export function updateProfile(id, values) {
     return function (dispatch) {
         dispatch(updateProfileRequest());
@@ -107,12 +114,14 @@ export function updateProfile(id, values) {
     };
 }
 
+// Initiate request to update profile details
 export function updateProfileRequest() {
     return {
         type: actionTypes.UPDATE_PROFILE_REQUEST,
     };
 }
 
+// Handle successful update of profile details
 export function updateProfileSuccess(response) {
     return {
         type: actionTypes.UPDATE_PROFILE_SUCCESS,
@@ -120,6 +129,7 @@ export function updateProfileSuccess(response) {
     };
 }
 
+// Handle failure to update profile details
 export function updateProfileFail(response) {
     return {
         type: actionTypes.UPDATE_PROFILE_FAIL,
