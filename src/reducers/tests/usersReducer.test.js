@@ -44,4 +44,64 @@ describe('Test Cases For Users Reducer', () => {
 
         expect(state.loading).toBe(false);
     });
+
+    it('should handle GET_PROFILE_REQUEST', () => {
+        action.type = types.GET_PROFILE_REQUEST;
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(true);
+    });
+
+    it('should handle GET_PROFILE_SUCCESS', () => {
+        action.type = types.GET_PROFILE_SUCCESS;
+        action.response.data = {
+            "id": 1,
+            "username": "User 1",
+            "email": "user1@gmail.com",
+        };
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(false);
+        expect(state.activeUser.username).toEqual("User 1");
+    });
+
+    it('should handle GET_PROFILE_FAIL', () => {
+        action.type = types.GET_PROFILE_FAIL;
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(false);
+    });
+
+    it('should handle UPDATE_PROFILE_REQUEST', () => {
+        action.type = types.UPDATE_PROFILE_REQUEST;
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(true);
+    });
+
+    it('should handle UPDATE_PROFILE_SUCCESS', () => {
+        action.type = types.UPDATE_PROFILE_SUCCESS;
+        action.response.data = {
+            "id": 1,
+            "username": "User 1",
+            "email": "user1@gmail.com",
+        };
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(false);
+        expect(state.activeUser.username).toEqual("User 1");
+    });
+
+    it('should handle UPDATE_PROFILE_FAIL', () => {
+        action.type = types.UPDATE_PROFILE_FAIL;
+
+        let state = reducer(initialState, action);
+
+        expect(state.loading).toBe(false);
+    });
 });

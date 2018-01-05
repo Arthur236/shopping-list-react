@@ -4,7 +4,6 @@ import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
 // Fetch all friends
-
 export function getFriends(page, limit) {
     return function (dispatch) {
         dispatch(getFriendsRequest());
@@ -25,12 +24,14 @@ export function getFriends(page, limit) {
     };
 }
 
+// Initiate request to get friends
 export function getFriendsRequest() {
     return {
         type: actionTypes.GET_FRIENDS_REQUEST,
     };
 }
 
+// Handle successful fetching of friends
 export function getFriendsSuccess(response) {
     return {
         type: actionTypes.GET_FRIENDS_SUCCESS,
@@ -38,6 +39,7 @@ export function getFriendsSuccess(response) {
     };
 }
 
+// Handle fetch failure
 export function getFriendsFail(response) {
     return {
         type: actionTypes.GET_FRIENDS_FAIL,
@@ -46,7 +48,6 @@ export function getFriendsFail(response) {
 }
 
 // Fetch all friend requests
-
 export function getFriendRequests(page, limit) {
     return function (dispatch) {
         dispatch(getFriendRequestsRequest());
@@ -67,12 +68,14 @@ export function getFriendRequests(page, limit) {
     };
 }
 
+// Initiate request to fetch friend requests
 export function getFriendRequestsRequest() {
     return {
         type: actionTypes.GET_FRIEND_REQUESTS_REQUEST,
     };
 }
 
+// Handle fetch success
 export function getFriendRequestsSuccess(response) {
     return {
         type: actionTypes.GET_FRIEND_REQUESTS_SUCCESS,
@@ -80,6 +83,7 @@ export function getFriendRequestsSuccess(response) {
     };
 }
 
+// Handle fetch failure
 export function getFriendRequestsFail(response) {
     return {
         type: actionTypes.GET_FRIEND_REQUESTS_FAIL,
@@ -88,7 +92,6 @@ export function getFriendRequestsFail(response) {
 }
 
 // Send friend request
-
 export function sendRequest(values) {
     return function (dispatch) {
         dispatch(sendRequestRequest());
@@ -112,12 +115,14 @@ export function sendRequest(values) {
     };
 }
 
+// Initiate request to send friend request
 export function sendRequestRequest() {
     return {
         type: actionTypes.REQUEST_FRIEND_REQUEST,
     };
 }
 
+// Handle successful sending of request
 export function sendRequestSuccess(response) {
     return {
         type: actionTypes.REQUEST_FRIEND_SUCCESS,
@@ -125,6 +130,7 @@ export function sendRequestSuccess(response) {
     };
 }
 
+// Handle failure to send request
 export function sendRequestFail(response) {
     return {
         type: actionTypes.REQUEST_FRIEND_FAIL,
@@ -133,7 +139,6 @@ export function sendRequestFail(response) {
 }
 
 // Accept friend request
-
 export function acceptRequest(id, callback) {
     return function (dispatch) {
         dispatch(acceptRequestRequest());
@@ -157,12 +162,14 @@ export function acceptRequest(id, callback) {
     };
 }
 
+// Initiate request to accept friend request
 export function acceptRequestRequest() {
     return {
         type: actionTypes.ACCEPT_FRIEND_REQUEST_REQUEST,
     };
 }
 
+// Handle successful acceptance
 export function acceptRequestSuccess(response) {
     return {
         type: actionTypes.ACCEPT_FRIEND_REQUEST_SUCCESS,
@@ -170,6 +177,7 @@ export function acceptRequestSuccess(response) {
     };
 }
 
+// Handle failure to accept
 export function acceptRequestFail(response) {
     return {
         type: actionTypes.ACCEPT_FRIEND_REQUEST_FAIL,
@@ -178,7 +186,6 @@ export function acceptRequestFail(response) {
 }
 
 // Remove friend
-
 export function removeFriend(id, callback) {
     return function (dispatch) {
         dispatch(removeFriendRequest());
@@ -202,12 +209,14 @@ export function removeFriend(id, callback) {
     };
 }
 
+// Initiate request to remove friend
 export function removeFriendRequest() {
     return {
         type: actionTypes.DELETE_FRIEND_REQUEST,
     };
 }
 
+// Handle successful removal of friend
 export function removeFriendSuccess(response) {
     return {
         type: actionTypes.DELETE_FRIEND_SUCCESS,
@@ -215,6 +224,7 @@ export function removeFriendSuccess(response) {
     };
 }
 
+// Handle failure to remove friend
 export function removeFriendFail(response) {
     return {
         type: actionTypes.DELETE_FRIEND_FAIL,

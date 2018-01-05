@@ -4,6 +4,7 @@ import Authenticate from './components/common/Authenticate';
 import App from './components/App';
 import LoginForm from "./components/login/LoginForm";
 import RegistrationForm from "./components/register/RegistrationForm";
+import Profile from "./components/profile/Profile";
 import EmailSubmit from "./components/reset/EmailSubmit";
 import PasswordSubmit from "./components/reset/PasswordSubmit";
 import ShoppingLists from "./components/shopping_lists/ShoppingLists";
@@ -26,6 +27,7 @@ export default (
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/reset" component={EmailSubmit} />
         <Route exact path="/auth/password/:token" component={PasswordSubmit} />
+        <Route exact path="/profile" component={Authenticate(Profile)} />
         <Route exact path="/dashboard" component={Authenticate(ShoppingLists)} />
         <Route exact path="/shopping_lists/create" component={Authenticate(CreateList)} />
         <Route exact path="/shopping_lists/edit/:id" component={Authenticate(EditList)} />

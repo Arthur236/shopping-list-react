@@ -3,6 +3,7 @@ import * as helpers from '../utils/helpers';
 import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
+// Register a new user
 export function register(values) {
     return function (dispatch) {
         dispatch(registerRequest(values));
@@ -27,6 +28,7 @@ export function register(values) {
     };
 }
 
+// Initiate a register request
 export function registerRequest(user) {
     return {
         type: actionTypes.REGISTER_REQUEST,
@@ -34,6 +36,7 @@ export function registerRequest(user) {
     };
 }
 
+// Handle successful registration
 export function registerSuccess(response) {
     return {
         type: actionTypes.REGISTER_SUCCESS,
@@ -41,6 +44,7 @@ export function registerSuccess(response) {
     };
 }
 
+// Handle registration failure
 export function registerFail(response) {
     return {
         type: actionTypes.REGISTER_FAIL,
@@ -48,6 +52,7 @@ export function registerFail(response) {
     };
 }
 
+// Log in a user
 export function login(values) {
     return function (dispatch) {
         dispatch(loginRequest(values));
@@ -73,6 +78,7 @@ export function login(values) {
     };
 }
 
+// Initiate login request
 export function loginRequest(user) {
     return {
         type: actionTypes.LOGIN_REQUEST,
@@ -80,13 +86,7 @@ export function loginRequest(user) {
     };
 }
 
-export function loginFail(response) {
-    return {
-        type: actionTypes.LOGIN_FAIL,
-        response
-    };
-}
-
+// Handle login success
 export function loginSuccess(response) {
     return {
         type: actionTypes.LOGIN_SUCCESS,
@@ -94,6 +94,15 @@ export function loginSuccess(response) {
     };
 }
 
+// Handle login failure
+export function loginFail(response) {
+    return {
+        type: actionTypes.LOGIN_FAIL,
+        response
+    };
+}
+
+// Log out a user
 export function logout() {
     return function (dispatch) {
         localStorage.removeItem("token");
@@ -101,6 +110,7 @@ export function logout() {
     };
 }
 
+// Handle log out request
 export function logoutRequest() {
     return {
         type: actionTypes.LOGOUT_REQUEST
