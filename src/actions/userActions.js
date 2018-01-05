@@ -44,3 +44,85 @@ export function searchUserFail(response) {
         response
     };
 }
+
+export function getProfile(id) {
+    return function (dispatch) {
+        dispatch(getProfileRequest());
+
+        return axios({
+            method: "get",
+            url: helpers.ROOT_URL + "/users/" + id
+        }).then(response => {
+            if (response.status === 200) {
+                dispatch(getProfileSuccess(response));
+            } else {
+                dispatch(getProfileFail(response));
+            }
+        }).catch(error => {
+            dispatch(getProfileFail(error));
+            errorHandling.catchError(error);
+        });
+    };
+}
+
+export function getProfileRequest() {
+    return {
+        type: actionTypes.GET_PROFILE_REQUEST,
+    };
+}
+
+export function getProfileSuccess(response) {
+    return {
+        type: actionTypes.GET_PROFILE_SUCCESS,
+        response
+    };
+}
+
+export function getProfileFail(response) {
+    return {
+        type: actionTypes.GET_PROFILE_FAIL,
+        response
+    };
+}
+
+export function updateProfile(id, values) {
+    return function (dispatch) {
+        dispatch(updateProfileRequest());
+
+        return axios({
+            method: "put",
+            url: helpers.ROOT_URL + "/users/" + id,
+            data: values
+        }).then(response => {
+            if (response.status === 200) {
+                helpers.showToast('success', "Credentials successfully updated");
+                dispatch(updateProfileSuccess(response));
+            } else {
+                dispatch(getProfileFail(response));
+            }
+        }).catch(error => {
+            dispatch(updateProfileFail(error));
+            errorHandling.catchError(error);
+        });
+    };
+}
+
+export function updateProfileRequest() {
+    return {
+        type: actionTypes.UPDATE_PROFILE_REQUEST,
+    };
+}
+
+export function updateProfileSuccess(response) {
+    return {
+        type: actionTypes.UPDATE_PROFILE_SUCCESS,
+        response
+    };
+}
+
+export function updateProfileFail(response) {
+    return {
+        type: actionTypes.UPDATE_PROFILE_FAIL,
+        response
+    };
+}
