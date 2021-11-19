@@ -4,6 +4,8 @@
 
 A simple application to help you keep track of your shopping lists. It has been developed using React and consumes the Shopping List Api that can be found [here.](https://shoppinglistapi4.docs.apiary.io)
 
+![Landing Page](https://user-images.githubusercontent.com/31339738/34605404-8f727784-f21c-11e7-8b40-fea99cb0f011.png)
+
 ## Features
 
 * Registration and login of users
