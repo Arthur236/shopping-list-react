@@ -22,7 +22,7 @@ export const Navigation = ({logout}) => {
                     <img className="ui avatar image" src={process.env.PUBLIC_URL + '/img/avatar.png'} alt="avatar"/>
                     <i className="dropdown icon"/>
                     <div className="menu">
-                        <Link id="profile" to="/dashboard" className="item">Profile</Link>
+                        <Link id="profile" to="/profile" className="item">Profile</Link>
                         <div className="divider"/>
                         <a id="logout" onClick={logout} className="item">Sign Out</a>
                     </div>

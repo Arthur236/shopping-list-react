@@ -4,7 +4,6 @@ import * as actionTypes from './actionTypes';
 import * as errorHandling from '../utils/errorHandling';
 
 // Fetch all shopping lists
-
 export function getLists(page, limit) {
     return function (dispatch) {
         dispatch(getListsRequest());
@@ -25,12 +24,14 @@ export function getLists(page, limit) {
     };
 }
 
+// Initiate request to fetch all lists
 export function getListsRequest() {
     return {
         type: actionTypes.GET_LISTS_REQUEST,
     };
 }
 
+// Handle successful fetching of lists
 export function getListsSuccess(response) {
     return {
         type: actionTypes.GET_LISTS_SUCCESS,
@@ -38,6 +39,7 @@ export function getListsSuccess(response) {
     };
 }
 
+// Handle failure to fetch lists
 export function getListsFail(response) {
     return {
         type: actionTypes.GET_LISTS_FAIL,
@@ -46,7 +48,6 @@ export function getListsFail(response) {
 }
 
 // Fetch a single shopping list
-
 export function getSingleList(id) {
     return function (dispatch) {
         dispatch(getSingleListRequest());
@@ -67,12 +68,14 @@ export function getSingleList(id) {
     };
 }
 
+// Initiate request to fetch a single list
 export function getSingleListRequest() {
     return {
         type: actionTypes.GET_SINGLE_LIST_REQUEST,
     };
 }
 
+// Handle successful fetching of a list
 export function getSingleListSuccess(response) {
     return {
         type: actionTypes.GET_SINGLE_LIST_SUCCESS,
@@ -80,6 +83,7 @@ export function getSingleListSuccess(response) {
     };
 }
 
+// Handle failure to fetch a list
 export function getSingleListFail(response) {
     return {
         type: actionTypes.GET_SINGLE_LIST_FAIL,
@@ -88,7 +92,6 @@ export function getSingleListFail(response) {
 }
 
 // Shopping list creation
-
 export function createList(values, callback) {
     return function (dispatch) {
         dispatch(createListRequest());
@@ -114,12 +117,14 @@ export function createList(values, callback) {
     };
 }
 
+// Initiate request to create a list
 export function createListRequest() {
     return {
         type: actionTypes.CREATE_LIST_REQUEST,
     };
 }
 
+// Handle successful creation of a list
 export function createListSuccess(response) {
     return {
         type: actionTypes.CREATE_LIST_SUCCESS,
@@ -127,6 +132,7 @@ export function createListSuccess(response) {
     };
 }
 
+// Handle failure to create a list
 export function createListFail(response) {
     return {
         type: actionTypes.CREATE_LIST_FAIL,
@@ -135,7 +141,6 @@ export function createListFail(response) {
 }
 
 // Shopping list edit
-
 export function editList(id, values, callback) {
     return function (dispatch) {
         dispatch(editListRequest());
@@ -161,12 +166,14 @@ export function editList(id, values, callback) {
     };
 }
 
+// Initiate request to edit a list
 export function editListRequest() {
     return {
         type: actionTypes.EDIT_LIST_REQUEST,
     };
 }
 
+// Handle successful editing of a list
 export function editListSuccess(response) {
     return {
         type: actionTypes.EDIT_LIST_SUCCESS,
@@ -174,6 +181,7 @@ export function editListSuccess(response) {
     };
 }
 
+// Handle failure to edit a list
 export function editListFail(response) {
     return {
         type: actionTypes.EDIT_LIST_FAIL,
@@ -182,7 +190,6 @@ export function editListFail(response) {
 }
 
 // Delete list
-
 export function deleteList(id, callback) {
     return function (dispatch) {
         dispatch(deleteListRequest());
@@ -206,12 +213,14 @@ export function deleteList(id, callback) {
     };
 }
 
+// Initiate request to delete a list
 export function deleteListRequest() {
     return {
         type: actionTypes.DELETE_LIST_REQUEST,
     };
 }
 
+// Handle successful deletion of a list
 export function deleteListSuccess(response, id) {
     return {
         type: actionTypes.DELETE_LIST_SUCCESS,
@@ -220,6 +229,7 @@ export function deleteListSuccess(response, id) {
     };
 }
 
+// Handle failure to delete a list
 export function deleteListFail(response) {
     return {
         type: actionTypes.DELETE_LIST_FAIL,

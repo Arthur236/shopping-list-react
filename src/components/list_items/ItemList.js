@@ -48,6 +48,7 @@ const ItemList = ({ id, listItems, handleDelete }) => {
     );
 };
 
+// Define prop types
 ItemList.propTypes = {
     listItems: PropTypes.object.isRequired,
     handleDelete: PropTypes.func.isRequired,
